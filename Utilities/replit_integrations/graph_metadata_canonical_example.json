@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "milestone": "database_bound_unambiguous_slots",
+  "synced_at": "2026-06-05T20:15:00Z",
+  "nodes": [
+    {
+      "_id": "manufacturing_graph_node/PAYABLE:entity:structural:system:none:none",
+      "_key": "PAYABLE:entity:structural:system:none:none",
+      "node_type": "table",
+      "table_name": "PAYABLE"
+    },
+    {
+      "_id": "manufacturing_graph_node/PAYABLE:INVOICE_ID:structural:system:none:none",
+      "_key": "PAYABLE:INVOICE_ID:structural:system:none:none",
+      "node_type": "column",
+      "column_name": "INVOICE_ID"
+    }
+  ],
+  "edges": [
+    {
+      "_id": "manufacturing_graph_edge/PAYABLE:INVOICE_ID:structural:system:has_column:SYS_HAS_PAY_INV_001",
+      "_key": "PAYABLE:INVOICE_ID:structural:system:has_column:SYS_HAS_PAY_INV_001",
+      "_from": "manufacturing_graph_node/PAYABLE:entity:structural:system:none:none",
+      "_to": "manufacturing_graph_node/PAYABLE:INVOICE_ID:structural:system:none:none",
+      "edge_family": "structural",
+      "edge_type": "has_column",
+      "perspective": "system",
+      "unique_id": "SYS_HAS_PAY_INV_001"
+    },
+    {
+      "_id": "manufacturing_graph_edge/PAYABLE:INVOICE_ID:semantic:Payables:resolves_to:PAY_RES_PAY_INV_001",
+      "_key": "PAYABLE:INVOICE_ID:semantic:Payables:resolves_to:PAY_RES_PAY_INV_001",
+      "_from": "manufacturing_graph_node/PAYABLE:INVOICE_ID:structural:system:none:none",
+      "_to": "manufacturing_graph_node/PAYABLE:INVOICE_ID:structural:system:none:none",
+      "edge_family": "semantic",
+      "edge_type": "resolves_to",
+      "perspective": "Payables",
+      "unique_id": "PAY_RES_PAY_INV_001",
+      "field_component": 1
+    },
+    {
+      "//": "--- PHYSICAL references EDGE (collision _001) ---",
+      "//uniqifier": "customer_order.site_id and customer_order_line.site_id BOTH abbreviate to SYS_REF_CUS_SIT; sorted order assigns _001 to customer_order.site_id and _002 to customer_order_line.site_id. This is exactly why the uniqifier slot exists.",
+      "_id": "manufacturing_graph_edge/customer_order:site_id:structural:system:references:SYS_REF_CUS_SIT_001",
+      "_key": "customer_order:site_id:structural:system:references:SYS_REF_CUS_SIT_001",
+
+      // 🚀 Declaring Column Node (Child Source)
+      "_from": "manufacturing_graph_node/customer_order:site_id:structural:system:none:none",
+
+      // 🎯 Referenced Column Node (Parent Target)
+      "_to": "manufacturing_graph_node/site:site_id:structural:system:none:none",
+
+      "edge_family": "structural",
+      "edge_type": "references",
+      "perspective": "system",
+      "unique_id": "SYS_REF_CUS_SIT_001"
+    },
+    {
+      "//": "--- PHYSICAL references EDGE (collision _002) ---",
+      "_id": "manufacturing_graph_edge/customer_order_line:site_id:structural:system:references:SYS_REF_CUS_SIT_002",
+      "_key": "customer_order_line:site_id:structural:system:references:SYS_REF_CUS_SIT_002",
+
+      // 🚀 Declaring Column Node (Child Source)
+      "_from": "manufacturing_graph_node/customer_order_line:site_id:structural:system:none:none",
+
+      // 🎯 Referenced Column Node (Parent Target)
+      "_to": "manufacturing_graph_node/site:site_id:structural:system:none:none",
+
+      "edge_family": "structural",
+      "edge_type": "references",
+      "perspective": "system",
+      "unique_id": "SYS_REF_CUS_SIT_002"
+    }
+
+  ]
+}

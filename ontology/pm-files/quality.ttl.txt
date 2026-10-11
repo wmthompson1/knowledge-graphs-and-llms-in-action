@@ -1,0 +1,107 @@
+@prefix mfgq: <https://example.com/mfgq/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+
+mfgq: a owl:Ontology ;
+  rdfs:label "MFGQ Manufacturing Quality Ontology"@en ;
+  rdfs:comment "Quality and nonconformance extension layer intended to attach to an existing SAP operational/business context graph."@en .
+
+# Core quality classes
+mfgq:Nonconformance a owl:Class ; rdfs:subClassOf prov:Activity .
+mfgq:Nonconformity a owl:Class .
+mfgq:Defect a owl:Class .
+mfgq:Requirement a owl:Class .
+mfgq:Specification a owl:Class ; rdfs:subClassOf mfgq:Requirement .
+mfgq:Characteristic a owl:Class .
+mfgq:Tolerance a owl:Class .
+mfgq:Inspection a owl:Class ; rdfs:subClassOf prov:Activity .
+mfgq:Measurement a owl:Class ; rdfs:subClassOf prov:Entity .
+mfgq:InspectionResult a owl:Class .
+mfgq:Disposition a owl:Class .
+mfgq:Rework a owl:Class ; rdfs:subClassOf mfgq:Disposition .
+mfgq:Repair a owl:Class ; rdfs:subClassOf mfgq:Disposition .
+mfgq:Scrap a owl:Class ; rdfs:subClassOf mfgq:Disposition .
+mfgq:UseAsIs a owl:Class ; rdfs:subClassOf mfgq:Disposition .
+mfgq:ReturnToSupplier a owl:Class ; rdfs:subClassOf mfgq:Disposition .
+mfgq:ContainmentAction a owl:Class ; rdfs:subClassOf prov:Activity .
+mfgq:CorrectiveAction a owl:Class ; rdfs:subClassOf prov:Activity .
+mfgq:RootCause a owl:Class .
+mfgq:Instrument a owl:Class .
+mfgq:Severity a owl:Class .
+mfgq:Status a owl:Class .
+
+# Controlled-value individuals
+mfgq:Critical a mfgq:Severity .
+mfgq:Major a mfgq:Severity .
+mfgq:Minor a mfgq:Severity .
+mfgq:Open a mfgq:Status .
+mfgq:Closed a mfgq:Status .
+mfgq:UnderInvestigation a mfgq:Status .
+mfgq:Fail a mfgq:InspectionResult .
+mfgq:Pass a mfgq:InspectionResult .
+
+# Quality relationships
+mfgq:affectedPart a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance .
+mfgq:affectedMaterial a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance .
+mfgq:affectedBatch a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance .
+mfgq:occurredAtPlant a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance .
+mfgq:associatedWithOrder a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance .
+mfgq:associatedWithOperation a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance .
+mfgq:associatedWithWorkCenter a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance .
+mfgq:associatedWithEquipment a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance .
+mfgq:associatedWithSupplier a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance .
+
+mfgq:hasNonconformity a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformance ; rdfs:range mfgq:Nonconformity .
+mfgq:hasDefect a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformance ; rdfs:range mfgq:Defect .
+mfgq:detectedBy a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformance ; rdfs:range mfgq:Inspection .
+mfgq:violates a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformity ; rdfs:range mfgq:Requirement .
+mfgq:concernsCharacteristic a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformity ; rdfs:range mfgq:Characteristic .
+mfgq:specifies a owl:ObjectProperty ;
+  rdfs:domain mfgq:Specification ; rdfs:range mfgq:Characteristic .
+mfgq:producesMeasurement a owl:ObjectProperty ;
+  rdfs:domain mfgq:Inspection ; rdfs:range mfgq:Measurement .
+mfgq:measuresCharacteristic a owl:ObjectProperty ;
+  rdfs:domain mfgq:Measurement ; rdfs:range mfgq:Characteristic .
+mfgq:hasDisposition a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformance ; rdfs:range mfgq:Disposition .
+mfgq:hasContainmentAction a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformance ; rdfs:range mfgq:ContainmentAction .
+mfgq:hasCorrectiveAction a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformance ; rdfs:range mfgq:CorrectiveAction .
+mfgq:hasRootCause a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformance ; rdfs:range mfgq:RootCause .
+mfgq:causedBy a owl:ObjectProperty ;
+  rdfs:domain mfgq:Nonconformance .
+mfgq:usesInstrument a owl:ObjectProperty ;
+  rdfs:domain mfgq:Inspection ; rdfs:range mfgq:Instrument .
+mfgq:evaluation a owl:ObjectProperty ;
+  rdfs:domain mfgq:Measurement ; rdfs:range mfgq:InspectionResult .
+
+# Data properties
+mfgq:identifier a owl:DatatypeProperty ; rdfs:range xsd:string .
+mfgq:code a owl:DatatypeProperty ; rdfs:range xsd:string .
+mfgq:value a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+mfgq:nominalValue a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+mfgq:lowerLimit a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+mfgq:upperLimit a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+mfgq:unitCode a owl:DatatypeProperty ; rdfs:range xsd:string .
+mfgq:severity a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance ; rdfs:range mfgq:Severity .
+mfgq:status a owl:ObjectProperty ; rdfs:domain mfgq:Nonconformance ; rdfs:range mfgq:Status .
+mfgq:detectedAt a owl:DatatypeProperty ; rdfs:range xsd:dateTime .
+mfgq:closedAt a owl:DatatypeProperty ; rdfs:range xsd:dateTime .
+mfgq:quantityAffected a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+mfgq:description a owl:DatatypeProperty ; rdfs:range xsd:string .
+
+# Identity/provenance guidance
+mfgq:sourceSystem a owl:DatatypeProperty ; rdfs:domain mfgq:Nonconformance ; rdfs:range xsd:string .
+mfgq:sourceId a owl:DatatypeProperty ; rdfs:domain mfgq:Nonconformance ; rdfs:range xsd:string .
+mfgq:sourceRecord a owl:DatatypeProperty ; rdfs:domain mfgq:Nonconformance ; rdfs:range xsd:string .

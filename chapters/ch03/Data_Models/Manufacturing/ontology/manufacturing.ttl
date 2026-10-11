@@ -1,0 +1,138 @@
+@prefix vmfg: <http://enterprise.org/manufacturing/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+vmfg: a owl:Ontology ;
+    rdfs:label "Infor Visual manufacturing ontology" ;
+    rdfs:comment "Semantic contract for SQLMesh manufacturing facts and Neo4j relationships." .
+
+### Core classes
+
+vmfg:Part a owl:Class ; rdfs:label "Part" .
+vmfg:WorkOrder a owl:Class ; rdfs:label "Work order" .
+vmfg:Operation a owl:Class ; rdfs:label "Operation" .
+vmfg:Requirement a owl:Class ;
+    rdfs:label "Material requirement" ;
+    rdfs:comment "A component requirement at a work-order operation and piece number." .
+vmfg:ShopResource a owl:Class ;
+    rdfs:label "Shop resource" ;
+    rdfs:comment "Resource represented by Live.dbo.SHOP_RESOURCE." .
+vmfg:ResourceCapacity a owl:Class ;
+    rdfs:label "Resource capacity" ;
+    rdfs:comment "Site-scoped capacity from SHOP_RESOURCE_SITE or default capacity from SHOP_RESOURCE." .
+vmfg:UserDefinedField a owl:Class ;
+    rdfs:label "User-defined field value" ;
+    rdfs:comment "A typed USER_DEF_FIELDS row attached through its polymorphic document key." .
+vmfg:UserDefinedFieldDefinition a owl:Class ;
+    rdfs:label "User-defined field definition" ;
+    rdfs:comment "Program-scoped USER_DEF_FIELDS metadata row with no document key." .
+vmfg:Document a owl:Class ; rdfs:label "External document" .
+vmfg:AgentRun a owl:Class ; rdfs:label "Agent run" .
+
+### Object properties
+
+vmfg:producesPart a owl:ObjectProperty ; rdfs:domain vmfg:WorkOrder ; rdfs:range vmfg:Part .
+vmfg:hasOperation a owl:ObjectProperty ;
+    rdfs:domain vmfg:WorkOrder ; rdfs:range vmfg:Operation ; owl:inverseOf vmfg:operationOf .
+vmfg:operationOf a owl:ObjectProperty ; rdfs:domain vmfg:Operation ; rdfs:range vmfg:WorkOrder .
+vmfg:hasRequirement a owl:ObjectProperty ; rdfs:domain vmfg:WorkOrder ; rdfs:range vmfg:Requirement .
+vmfg:requiredAtOperation a owl:ObjectProperty ; rdfs:domain vmfg:Requirement ; rdfs:range vmfg:Operation .
+vmfg:requiresPart a owl:ObjectProperty ; rdfs:domain vmfg:Requirement ; rdfs:range vmfg:Part .
+vmfg:fulfilledBySubordinateWorkOrder a owl:ObjectProperty ;
+    rdfs:domain vmfg:Requirement ; rdfs:range vmfg:WorkOrder .
+vmfg:hasBomComponent a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:domain vmfg:Part ; rdfs:range vmfg:Part ;
+    rdfs:comment "Derived transitive component relation produced by BOM explosion." .
+vmfg:usesResource a owl:ObjectProperty ; rdfs:domain vmfg:Operation ; rdfs:range vmfg:ShopResource .
+vmfg:hasCapacity a owl:ObjectProperty ; rdfs:domain vmfg:ShopResource ; rdfs:range vmfg:ResourceCapacity .
+vmfg:hasUDF a owl:ObjectProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (vmfg:WorkOrder vmfg:Part vmfg:Operation vmfg:Requirement) ] ;
+    rdfs:range vmfg:UserDefinedField .
+vmfg:hasDefinition a owl:ObjectProperty ;
+    rdfs:domain vmfg:UserDefinedField ; rdfs:range vmfg:UserDefinedFieldDefinition .
+vmfg:hasDocument a owl:ObjectProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (vmfg:WorkOrder vmfg:Part vmfg:Operation) ] ;
+    rdfs:range vmfg:Document .
+vmfg:usedContext a owl:ObjectProperty ; rdfs:domain vmfg:AgentRun ; rdfs:range owl:Thing .
+vmfg:producedDocument a owl:ObjectProperty ; rdfs:domain vmfg:AgentRun ; rdfs:range vmfg:Document .
+
+### Identity and shared data properties
+
+vmfg:sourceKey a owl:DatatypeProperty ; rdfs:range xsd:string .
+vmfg:sourceSystem a owl:DatatypeProperty ; rdfs:range xsd:string .
+vmfg:siteId a owl:DatatypeProperty ; rdfs:range xsd:string .
+vmfg:partId a owl:DatatypeProperty ; rdfs:range xsd:string .
+vmfg:description a owl:DatatypeProperty ; rdfs:range xsd:string .
+vmfg:status a owl:DatatypeProperty ; rdfs:range xsd:string .
+
+### Work-order data properties
+
+vmfg:workOrderType a owl:DatatypeProperty ; rdfs:domain vmfg:WorkOrder ; rdfs:range xsd:string .
+vmfg:baseId a owl:DatatypeProperty ; rdfs:domain vmfg:WorkOrder ; rdfs:range xsd:string .
+vmfg:lotId a owl:DatatypeProperty ; rdfs:domain vmfg:WorkOrder ; rdfs:range xsd:string .
+vmfg:splitId a owl:DatatypeProperty ; rdfs:domain vmfg:WorkOrder ; rdfs:range xsd:string .
+vmfg:subId a owl:DatatypeProperty ; rdfs:domain vmfg:WorkOrder ; rdfs:range xsd:string .
+vmfg:desiredQuantity a owl:DatatypeProperty ; rdfs:domain vmfg:WorkOrder ; rdfs:range xsd:decimal .
+vmfg:desiredReleaseDate a owl:DatatypeProperty ; rdfs:domain vmfg:WorkOrder ; rdfs:range xsd:dateTime .
+
+### Operation and requirement data properties
+
+vmfg:sequenceNumber a owl:DatatypeProperty ; rdfs:domain vmfg:Operation ; rdfs:range xsd:integer .
+vmfg:operationType a owl:DatatypeProperty ; rdfs:domain vmfg:Operation ; rdfs:range xsd:string .
+vmfg:setupHours a owl:DatatypeProperty ; rdfs:domain vmfg:Operation ; rdfs:range xsd:decimal .
+vmfg:runHours a owl:DatatypeProperty ; rdfs:domain vmfg:Operation ; rdfs:range xsd:decimal .
+vmfg:actualSetupHours a owl:DatatypeProperty ; rdfs:domain vmfg:Operation ; rdfs:range xsd:decimal .
+vmfg:actualRunHours a owl:DatatypeProperty ; rdfs:domain vmfg:Operation ; rdfs:range xsd:decimal .
+vmfg:operationSequenceNumber a owl:DatatypeProperty ; rdfs:domain vmfg:Requirement ; rdfs:range xsd:integer .
+vmfg:pieceNumber a owl:DatatypeProperty ; rdfs:domain vmfg:Requirement ; rdfs:range xsd:integer .
+vmfg:quantityPer a owl:DatatypeProperty ; rdfs:domain vmfg:Requirement ; rdfs:range xsd:decimal .
+vmfg:fixedQuantity a owl:DatatypeProperty ; rdfs:domain vmfg:Requirement ; rdfs:range xsd:decimal .
+vmfg:calculatedQuantity a owl:DatatypeProperty ; rdfs:domain vmfg:Requirement ; rdfs:range xsd:decimal .
+vmfg:usageUnitOfMeasure a owl:DatatypeProperty ; rdfs:domain vmfg:Requirement ; rdfs:range xsd:string .
+vmfg:bomDepth a owl:DatatypeProperty ; rdfs:range xsd:integer .
+vmfg:bomPath a owl:DatatypeProperty ; rdfs:range xsd:string .
+
+### Resource and capacity data properties
+
+vmfg:resourceId a owl:DatatypeProperty ; rdfs:domain vmfg:ShopResource ; rdfs:range xsd:string .
+vmfg:resourceType a owl:DatatypeProperty ; rdfs:domain vmfg:ShopResource ; rdfs:range xsd:string .
+vmfg:shift1CapacityHours a owl:DatatypeProperty ; rdfs:domain vmfg:ResourceCapacity ; rdfs:range xsd:decimal .
+vmfg:shift2CapacityHours a owl:DatatypeProperty ; rdfs:domain vmfg:ResourceCapacity ; rdfs:range xsd:decimal .
+vmfg:shift3CapacityHours a owl:DatatypeProperty ; rdfs:domain vmfg:ResourceCapacity ; rdfs:range xsd:decimal .
+vmfg:efficiencyFactor a owl:DatatypeProperty ; rdfs:domain vmfg:ResourceCapacity ; rdfs:range xsd:decimal .
+vmfg:monitorLoad a owl:DatatypeProperty ; rdfs:domain vmfg:ResourceCapacity ; rdfs:range xsd:boolean .
+
+### Typed UDF data properties
+
+vmfg:programId a owl:DatatypeProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (vmfg:UserDefinedField vmfg:UserDefinedFieldDefinition) ] ;
+    rdfs:range xsd:string .
+vmfg:fieldId a owl:DatatypeProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (vmfg:UserDefinedField vmfg:UserDefinedFieldDefinition) ] ;
+    rdfs:range xsd:string .
+vmfg:documentKey a owl:DatatypeProperty ; rdfs:domain vmfg:UserDefinedField ; rdfs:range xsd:string .
+vmfg:fieldName a owl:DatatypeProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (vmfg:UserDefinedField vmfg:UserDefinedFieldDefinition) ] ;
+    rdfs:range xsd:string .
+vmfg:dataTypeCode a owl:DatatypeProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (vmfg:UserDefinedField vmfg:UserDefinedFieldDefinition) ] ;
+    rdfs:range xsd:integer .
+vmfg:isRequired a owl:DatatypeProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (vmfg:UserDefinedField vmfg:UserDefinedFieldDefinition) ] ;
+    rdfs:range xsd:boolean .
+vmfg:stringValue a owl:DatatypeProperty ; rdfs:domain vmfg:UserDefinedField ; rdfs:range xsd:string .
+vmfg:numberValue a owl:DatatypeProperty ; rdfs:domain vmfg:UserDefinedField ; rdfs:range xsd:decimal .
+vmfg:booleanValue a owl:DatatypeProperty ; rdfs:domain vmfg:UserDefinedField ; rdfs:range xsd:boolean .
+vmfg:dateValue a owl:DatatypeProperty ; rdfs:domain vmfg:UserDefinedField ; rdfs:range xsd:dateTime .
+vmfg:displayFormat a owl:DatatypeProperty ;
+    rdfs:domain vmfg:UserDefinedFieldDefinition ; rdfs:range xsd:string .
+
+### External context and provenance data properties
+
+vmfg:externalDocumentId a owl:DatatypeProperty ; rdfs:domain vmfg:Document ; rdfs:range xsd:string .
+vmfg:documentUri a owl:DatatypeProperty ; rdfs:domain vmfg:Document ; rdfs:range xsd:anyURI .
+vmfg:contentHash a owl:DatatypeProperty ; rdfs:domain vmfg:Document ; rdfs:range xsd:string .
+vmfg:startedAt a owl:DatatypeProperty ; rdfs:domain vmfg:AgentRun ; rdfs:range xsd:dateTime .
+vmfg:agentName a owl:DatatypeProperty ; rdfs:domain vmfg:AgentRun ; rdfs:range xsd:string .

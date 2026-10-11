@@ -1,0 +1,2 @@
+trace_id,part_id,lot_id,serial_id,in_qty,out_qty,production_date,expiration_date,site_id,created_at
+3,P-10012,LOT-WO-00005,SN-WO-00005-24,2.0,0.0,2026-01-21,2028-01-21,SITE-1,2026-07-05 10:36:28

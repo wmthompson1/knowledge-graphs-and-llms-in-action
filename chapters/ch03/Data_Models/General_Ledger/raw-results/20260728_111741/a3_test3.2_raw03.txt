@@ -1,0 +1,14 @@
+/* FILE: a3_test3.2_raw03.sql */
+/* SERVER: Crunch2018  DATABASE: Crunch0626 */
+/* EXIT CODE: 0 */
+
+
+(1 rows affected)
+
+(5 rows affected)
+
+(4 rows affected)
+WORKORDER_TYPE WORKORDER_BASE_ID              WORKORDER_LOT_ID WORKORDER_SPLIT_ID WORKORDER_SUB_ID material_delta                           labor_delta                              burden_delta                             service_delta                            labor_delta_in_issue_detail              burden_delta_in_issue_detail            
+-------------- ------------------------------ ---------------- ------------------ ---------------- ---------------------------------------- ---------------------------------------- ---------------------------------------- ---------------------------------------- ---------------------------------------- ----------------------------------------
+
+(0 rows affected)

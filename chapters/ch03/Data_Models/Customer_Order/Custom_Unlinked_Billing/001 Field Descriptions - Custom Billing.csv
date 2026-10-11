@@ -1,0 +1,9 @@
+Field Descriptions for Query,Descriptions,Comment
+Customer_Order,,Alias of CUSTOMER_ORDER.ID
+BASE_ID,FROM WORK_ORDER wo,
+Buyer_ID,See Schema Guide,
+ORDER_DATE,FROM CUSTOMER_ORDER,
+DUE_DATE,From WO.DESIRED_WANT_DATE,Local Term
+CHANGES,FROM HISTORY_DATA WHERE ACTION = 'UPDATE',Integer - the number of times the work order was updated.
+SHIPPED_DATE,The actual shipped date.,Compare and contrast with Desired ship date. MAX(SHIPPED_DATE) SHIPPER table
+Changes_Detail,FROM HISTORY_DATA TABLE - Audit Of History,

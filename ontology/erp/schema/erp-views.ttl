@@ -1,0 +1,1207 @@
+@prefix erp: <http://example.com/erp#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Inferred from query SQL (not DDL): classes and the columns the queries reference.
+
+erp:inferredFromQuery a owl:AnnotationProperty .
+
+erp:VqNonconformance a owl:Class ;
+  rdfs:label "VqNonconformance" ;
+  rdfs:comment "Referenced in query SQL (32 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_accepted a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_accepted" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_closedDate a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_closedDate" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_dispDate a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_dispDate" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_dispositionType a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_dispositionType" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_dueDate a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_dueDate" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_lotSize a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_lotSize" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_madeByEmpRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_madeByEmpRecId" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_ncmDate a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_ncmDate" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_ncmId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_ncmId" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_ncmType a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_ncmType" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_operationRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_operationRecId" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_poNumber a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_poNumber" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_prodOrderRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_prodOrderRecId" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_productRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_productRecId" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_reference10 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_reference10" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_reference6 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_reference6" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_reference7 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_reference7" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_reference8 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_reference8" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_reference9 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_reference9" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_rejected a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_rejected" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_reportedBySuppRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_reportedBySuppRecId" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_skFinNcmProcess a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_skFinNcmProcess" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_skFinNcmSubprocess a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_skFinNcmSubprocess" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_skMfgNcmProcess a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_skMfgNcmProcess" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_skMfgNcmSubprocess a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_skMfgNcmSubprocess" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_status a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_status" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_userDefined1 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_userDefined1" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_userDefined2 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_userDefined2" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_userDefined3 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_userDefined3" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_userDefined4 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_userDefined4" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_userDefined5 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_userDefined5" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_userDefined6 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_userDefined6" ;
+  erp:inferredFromQuery true .
+
+erp:vqNonconformance_userDefined7 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqNonconformance ;
+  rdfs:label "vqNonconformance_userDefined7" ;
+  erp:inferredFromQuery true .
+
+erp:Nonconformance a owl:Class ;
+  rdfs:label "Nonconformance" ;
+  rdfs:comment "Referenced in query SQL (26 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_accepted a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_accepted" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_asIsDimension a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_asIsDimension" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_assignedToEmployeeId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_assignedToEmployeeId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_baseId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_baseId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_businessUnitId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_businessUnitId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_defectId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_defectId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_dispDate a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_dispDate" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_disposition a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_disposition" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_dispositionAssignedToEmployeeId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_dispositionAssignedToEmployeeId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_dispositionByEmployeeId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_dispositionByEmployeeId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_dispositionDate a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_dispositionDate" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_dispositionNotes a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_dispositionNotes" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_dispositionType a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_dispositionType" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_dispositionTypeCode a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_dispositionTypeCode" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_dueDate a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_dueDate" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_lotId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_lotId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_lotSize a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_lotSize" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_madeByEmpRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_madeByEmpRecId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_madeByEmployeeId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_madeByEmployeeId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_ncmDate a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_ncmDate" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_ncmNumber a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_ncmNumber" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_ncmType a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_ncmType" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_ncmTypeCode a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_ncmTypeCode" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_operationId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_operationId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_operationRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_operationRecId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_overageQty a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_overageQty" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_partId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_partId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_poNumber a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_poNumber" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_processId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_processId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_prodOrderRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_prodOrderRecId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_productRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_productRecId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reference1 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reference1" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reference10 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reference10" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reference2 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reference2" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reference3 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reference3" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reference4 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reference4" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reference6 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reference6" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reference7 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reference7" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reference8 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reference8" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reference9 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reference9" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_rejected a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_rejected" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reportedBySuppRecId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reportedBySuppRecId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_returnQty a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_returnQty" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_reworkQty a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_reworkQty" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_scrapQty a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_scrapQty" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_shouldBeDimension a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_shouldBeDimension" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_skFinNcmProcess a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_skFinNcmProcess" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_skFinNcmSubprocess a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_skFinNcmSubprocess" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_skMfgNcmProcess a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_skMfgNcmProcess" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_skMfgNcmSubprocess a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_skMfgNcmSubprocess" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_splitId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_splitId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_subId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_subId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_subprocessId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_subprocessId" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_supplierpo a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_supplierpo" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_supplierpoLine a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_supplierpoLine" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_tagArea a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_tagArea" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_userDefined3 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_userDefined3" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_userDefined4 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_userDefined4" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_userDefined7 a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_userDefined7" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_vendorPoNumber a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_vendorPoNumber" ;
+  erp:inferredFromQuery true .
+
+erp:nonconformance_verifiedByEmployeeId a owl:DatatypeProperty ;
+  rdfs:domain erp:Nonconformance ;
+  rdfs:label "nonconformance_verifiedByEmployeeId" ;
+  erp:inferredFromQuery true .
+
+erp:VqProductionOrder a owl:Class ;
+  rdfs:label "VqProductionOrder" ;
+  rdfs:comment "Referenced in query SQL (24 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_altId1 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_altId1" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_altId2 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_altId2" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_altId3 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_altId3" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_altId4 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_altId4" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_altId5 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_altId5" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_desiredRecvDate a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_desiredRecvDate" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_displayId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_displayId" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_id a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_id" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_orderDate a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_orderDate" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_recordId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_recordId" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_status a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_status" ;
+  erp:inferredFromQuery true .
+
+erp:vqProductionOrder_vendorId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProductionOrder ;
+  rdfs:label "vqProductionOrder_vendorId" ;
+  erp:inferredFromQuery true .
+
+erp:BoeBillingCharges a owl:Class ;
+  rdfs:label "BoeBillingCharges" ;
+  rdfs:comment "Referenced in query SQL (23 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:VqOperation a owl:Class ;
+  rdfs:label "VqOperation" ;
+  rdfs:comment "Referenced in query SQL (21 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:vqOperation_altId1 a owl:DatatypeProperty ;
+  rdfs:domain erp:VqOperation ;
+  rdfs:label "vqOperation_altId1" ;
+  erp:inferredFromQuery true .
+
+erp:vqOperation_constResourceId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqOperation ;
+  rdfs:label "vqOperation_constResourceId" ;
+  erp:inferredFromQuery true .
+
+erp:vqOperation_displayId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqOperation ;
+  rdfs:label "vqOperation_displayId" ;
+  erp:inferredFromQuery true .
+
+erp:vqOperation_id a owl:DatatypeProperty ;
+  rdfs:domain erp:VqOperation ;
+  rdfs:label "vqOperation_id" ;
+  erp:inferredFromQuery true .
+
+erp:vqOperation_recordId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqOperation ;
+  rdfs:label "vqOperation_recordId" ;
+  erp:inferredFromQuery true .
+
+erp:VqProduct a owl:Class ;
+  rdfs:label "VqProduct" ;
+  rdfs:comment "Referenced in query SQL (20 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:vqProduct_productId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProduct ;
+  rdfs:label "vqProduct_productId" ;
+  erp:inferredFromQuery true .
+
+erp:vqProduct_recordId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqProduct ;
+  rdfs:label "vqProduct_recordId" ;
+  erp:inferredFromQuery true .
+
+erp:PartSiteView a owl:Class ;
+  rdfs:label "PartSiteView" ;
+  rdfs:comment "Referenced in query SQL (13 uses; Customer_Order;Payables;Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:ShopResourceSiteView a owl:Class ;
+  rdfs:label "ShopResourceSiteView" ;
+  rdfs:comment "Referenced in query SQL (13 uses; Quality;Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:PlantShipmentForecast a owl:Class ;
+  rdfs:label "PlantShipmentForecast" ;
+  rdfs:comment "Referenced in query SQL (12 uses; Customer_Order;Receivables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:plantShipmentForecast_busstream a owl:DatatypeProperty ;
+  rdfs:domain erp:PlantShipmentForecast ;
+  rdfs:label "plantShipmentForecast_busstream" ;
+  erp:inferredFromQuery true .
+
+erp:plantShipmentForecast_date a owl:DatatypeProperty ;
+  rdfs:domain erp:PlantShipmentForecast ;
+  rdfs:label "plantShipmentForecast_date" ;
+  erp:inferredFromQuery true .
+
+erp:plantShipmentForecast_target a owl:DatatypeProperty ;
+  rdfs:domain erp:PlantShipmentForecast ;
+  rdfs:label "plantShipmentForecast_target" ;
+  erp:inferredFromQuery true .
+
+erp:BuyerAssn a owl:Class ;
+  rdfs:label "BuyerAssn" ;
+  rdfs:comment "Referenced in query SQL (10 uses; Customer_Order;Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:WodsOutputEtl a owl:Class ;
+  rdfs:label "WodsOutputEtl" ;
+  rdfs:comment "Referenced in query SQL (10 uses; Engineering;Payables;Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:wodsOutputEtl_baseId a owl:DatatypeProperty ;
+  rdfs:domain erp:WodsOutputEtl ;
+  rdfs:label "wodsOutputEtl_baseId" ;
+  erp:inferredFromQuery true .
+
+erp:wodsOutputEtl_lotId a owl:DatatypeProperty ;
+  rdfs:domain erp:WodsOutputEtl ;
+  rdfs:label "wodsOutputEtl_lotId" ;
+  erp:inferredFromQuery true .
+
+erp:wodsOutputEtl_rmReady a owl:DatatypeProperty ;
+  rdfs:domain erp:WodsOutputEtl ;
+  rdfs:label "wodsOutputEtl_rmReady" ;
+  erp:inferredFromQuery true .
+
+erp:wodsOutputEtl_splitId a owl:DatatypeProperty ;
+  rdfs:domain erp:WodsOutputEtl ;
+  rdfs:label "wodsOutputEtl_splitId" ;
+  erp:inferredFromQuery true .
+
+erp:wodsOutputEtl_status a owl:DatatypeProperty ;
+  rdfs:domain erp:WodsOutputEtl ;
+  rdfs:label "wodsOutputEtl_status" ;
+  erp:inferredFromQuery true .
+
+erp:wodsOutputEtl_subId a owl:DatatypeProperty ;
+  rdfs:domain erp:WodsOutputEtl ;
+  rdfs:label "wodsOutputEtl_subId" ;
+  erp:inferredFromQuery true .
+
+erp:wodsOutputEtl_type a owl:DatatypeProperty ;
+  rdfs:domain erp:WodsOutputEtl ;
+  rdfs:label "wodsOutputEtl_type" ;
+  erp:inferredFromQuery true .
+
+erp:BurdenAccounts a owl:Class ;
+  rdfs:label "BurdenAccounts" ;
+  rdfs:comment "Referenced in query SQL (10 uses; General_Ledger); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:burdenAccounts_id a owl:DatatypeProperty ;
+  rdfs:domain erp:BurdenAccounts ;
+  rdfs:label "burdenAccounts_id" ;
+  erp:inferredFromQuery true .
+
+erp:LaborAccounts a owl:Class ;
+  rdfs:label "LaborAccounts" ;
+  rdfs:comment "Referenced in query SQL (10 uses; General_Ledger); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:laborAccounts_id a owl:DatatypeProperty ;
+  rdfs:domain erp:LaborAccounts ;
+  rdfs:label "laborAccounts_id" ;
+  erp:inferredFromQuery true .
+
+erp:ReportsettingsPartid a owl:Class ;
+  rdfs:label "ReportsettingsPartid" ;
+  rdfs:comment "Referenced in query SQL (9 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:BoeStanchionCargoBay a owl:Class ;
+  rdfs:label "BoeStanchionCargoBay" ;
+  rdfs:comment "Referenced in query SQL (9 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:PbiCustomerShipmentsComplement a owl:Class ;
+  rdfs:label "PbiCustomerShipmentsComplement" ;
+  rdfs:comment "Referenced in query SQL (8 uses; Customer_Order;Receivables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:pbiCustomerShipmentsComplement_colLineNo a owl:DatatypeProperty ;
+  rdfs:domain erp:PbiCustomerShipmentsComplement ;
+  rdfs:label "pbiCustomerShipmentsComplement_colLineNo" ;
+  erp:inferredFromQuery true .
+
+erp:pbiCustomerShipmentsComplement_custOrderId a owl:DatatypeProperty ;
+  rdfs:domain erp:PbiCustomerShipmentsComplement ;
+  rdfs:label "pbiCustomerShipmentsComplement_custOrderId" ;
+  erp:inferredFromQuery true .
+
+erp:pbiCustomerShipmentsComplement_packlistId a owl:DatatypeProperty ;
+  rdfs:domain erp:PbiCustomerShipmentsComplement ;
+  rdfs:label "pbiCustomerShipmentsComplement_packlistId" ;
+  erp:inferredFromQuery true .
+
+erp:PbiCustomerShipmentsComplementOt a owl:Class ;
+  rdfs:label "PbiCustomerShipmentsComplementOt" ;
+  rdfs:comment "Referenced in query SQL (7 uses; Customer_Order;Receivables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Feed02CoreBoeBilling a owl:Class ;
+  rdfs:label "Feed02CoreBoeBilling" ;
+  rdfs:comment "Referenced in query SQL (7 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:XpReaderrorlog a owl:Class ;
+  rdfs:label "XpReaderrorlog" ;
+  rdfs:comment "Referenced in query SQL (7 uses; Manufacturing); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:EmployeeLookup a owl:Class ;
+  rdfs:label "EmployeeLookup" ;
+  rdfs:comment "Referenced in query SQL (7 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:employeeLookup_employeeId a owl:DatatypeProperty ;
+  rdfs:domain erp:EmployeeLookup ;
+  rdfs:label "employeeLookup_employeeId" ;
+  erp:inferredFromQuery true .
+
+erp:employeeLookup_firstName a owl:DatatypeProperty ;
+  rdfs:domain erp:EmployeeLookup ;
+  rdfs:label "employeeLookup_firstName" ;
+  erp:inferredFromQuery true .
+
+erp:employeeLookup_lastName a owl:DatatypeProperty ;
+  rdfs:domain erp:EmployeeLookup ;
+  rdfs:label "employeeLookup_lastName" ;
+  erp:inferredFromQuery true .
+
+erp:employeeLookup_recordId a owl:DatatypeProperty ;
+  rdfs:domain erp:EmployeeLookup ;
+  rdfs:label "employeeLookup_recordId" ;
+  erp:inferredFromQuery true .
+
+erp:DispositionType a owl:Class ;
+  rdfs:label "DispositionType" ;
+  rdfs:comment "Referenced in query SQL (7 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:dispositionType_description a owl:DatatypeProperty ;
+  rdfs:domain erp:DispositionType ;
+  rdfs:label "dispositionType_description" ;
+  erp:inferredFromQuery true .
+
+erp:dispositionType_dispositionType a owl:DatatypeProperty ;
+  rdfs:domain erp:DispositionType ;
+  rdfs:label "dispositionType_dispositionType" ;
+  erp:inferredFromQuery true .
+
+erp:dispositionType_dispositionTypeCode a owl:DatatypeProperty ;
+  rdfs:domain erp:DispositionType ;
+  rdfs:label "dispositionType_dispositionTypeCode" ;
+  erp:inferredFromQuery true .
+
+erp:ReportsettingsResourceid a owl:Class ;
+  rdfs:label "ReportsettingsResourceid" ;
+  rdfs:comment "Referenced in query SQL (7 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:AdpEmp a owl:Class ;
+  rdfs:label "AdpEmp" ;
+  rdfs:comment "Referenced in query SQL (6 uses; Administrative); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_assignedShiftCode a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_assignedShiftCode" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_fileNumber a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_fileNumber" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_firstName a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_firstName" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_homeDepartmentCode a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_homeDepartmentCode" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_homeDepartmentDescription a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_homeDepartmentDescription" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_jobTitleDescription a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_jobTitleDescription" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_lastName a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_lastName" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_locationCode a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_locationCode" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_positionStatus a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_positionStatus" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_preferredName a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_preferredName" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_reportsToName a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_reportsToName" ;
+  erp:inferredFromQuery true .
+
+erp:adpEmp_workContactWorkEmail a owl:DatatypeProperty ;
+  rdfs:domain erp:AdpEmp ;
+  rdfs:label "adpEmp_workContactWorkEmail" ;
+  erp:inferredFromQuery true .
+
+erp:BatchMasterWorkOrderLink2ship a owl:Class ;
+  rdfs:label "BatchMasterWorkOrderLink2ship" ;
+  rdfs:comment "Referenced in query SQL (6 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:SkCustSpecificParts a owl:Class ;
+  rdfs:label "SkCustSpecificParts" ;
+  rdfs:comment "Referenced in query SQL (6 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:EmeBillingParts a owl:Class ;
+  rdfs:label "EmeBillingParts" ;
+  rdfs:comment "Referenced in query SQL (5 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:MyWorkOrderLink2ship a owl:Class ;
+  rdfs:label "MyWorkOrderLink2ship" ;
+  rdfs:comment "Referenced in query SQL (5 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:An a owl:Class ;
+  rdfs:label "An" ;
+  rdfs:comment "Referenced in query SQL (5 uses; Payables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:A a owl:Class ;
+  rdfs:label "A" ;
+  rdfs:comment "Referenced in query SQL (5 uses; Payables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:VqSupplier a owl:Class ;
+  rdfs:label "VqSupplier" ;
+  rdfs:comment "Referenced in query SQL (5 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:vqSupplier_recordId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqSupplier ;
+  rdfs:label "vqSupplier_recordId" ;
+  erp:inferredFromQuery true .
+
+erp:MyLaborTicket a owl:Class ;
+  rdfs:label "MyLaborTicket" ;
+  rdfs:comment "Referenced in query SQL (4 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:myLaborTicket_transactionId a owl:DatatypeProperty ;
+  rdfs:domain erp:MyLaborTicket ;
+  rdfs:label "myLaborTicket_transactionId" ;
+  erp:inferredFromQuery true .
+
+erp:MyWorkOrder a owl:Class ;
+  rdfs:label "MyWorkOrder" ;
+  rdfs:comment "Referenced in query SQL (4 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:myWorkOrder_baseId a owl:DatatypeProperty ;
+  rdfs:domain erp:MyWorkOrder ;
+  rdfs:label "myWorkOrder_baseId" ;
+  erp:inferredFromQuery true .
+
+erp:Buyer a owl:Class ;
+  rdfs:label "Buyer" ;
+  rdfs:comment "Referenced in query SQL (4 uses; Payables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:BoeBilling5axis a owl:Class ;
+  rdfs:label "BoeBilling5axis" ;
+  rdfs:comment "Referenced in query SQL (3 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:MyTableUpdates a owl:Class ;
+  rdfs:label "MyTableUpdates" ;
+  rdfs:comment "Referenced in query SQL (3 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:BatchMaster a owl:Class ;
+  rdfs:label "BatchMaster" ;
+  rdfs:comment "Referenced in query SQL (3 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:BatchMasterLaborTicket a owl:Class ;
+  rdfs:label "BatchMasterLaborTicket" ;
+  rdfs:comment "Referenced in query SQL (3 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Boeing a owl:Class ;
+  rdfs:label "Boeing" ;
+  rdfs:comment "Referenced in query SQL (3 uses; Payables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:VqDispositionType a owl:Class ;
+  rdfs:label "VqDispositionType" ;
+  rdfs:comment "Referenced in query SQL (3 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:vqDispositionType_description a owl:DatatypeProperty ;
+  rdfs:domain erp:VqDispositionType ;
+  rdfs:label "vqDispositionType_description" ;
+  erp:inferredFromQuery true .
+
+erp:vqDispositionType_dispositionType a owl:DatatypeProperty ;
+  rdfs:domain erp:VqDispositionType ;
+  rdfs:label "vqDispositionType_dispositionType" ;
+  erp:inferredFromQuery true .
+
+erp:WodsCompTest223 a owl:Class ;
+  rdfs:label "WodsCompTest223" ;
+  rdfs:comment "Referenced in query SQL (3 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Targettable a owl:Class ;
+  rdfs:label "Targettable" ;
+  rdfs:comment "Referenced in query SQL (3 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Feed01CoreIntermediateComplementOt a owl:Class ;
+  rdfs:label "Feed01CoreIntermediateComplementOt" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:PbiCustomerShipmentsComplementC01 a owl:Class ;
+  rdfs:label "PbiCustomerShipmentsComplementC01" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:PbiCustomerShipmentsNewC01 a owl:Class ;
+  rdfs:label "PbiCustomerShipmentsNewC01" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:PbiCustomerShipmentsNew a owl:Class ;
+  rdfs:label "PbiCustomerShipmentsNew" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Customer_Order;Receivables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:UpdateCursor a owl:Class ;
+  rdfs:label "UpdateCursor" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:MyCustomerOrder a owl:Class ;
+  rdfs:label "MyCustomerOrder" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:myCustomerOrder_id a owl:DatatypeProperty ;
+  rdfs:domain erp:MyCustomerOrder ;
+  rdfs:label "myCustomerOrder_id" ;
+  erp:inferredFromQuery true .
+
+erp:ServiceAccounts a owl:Class ;
+  rdfs:label "ServiceAccounts" ;
+  rdfs:comment "Referenced in query SQL (2 uses; General_Ledger); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:serviceAccounts_id a owl:DatatypeProperty ;
+  rdfs:domain erp:ServiceAccounts ;
+  rdfs:label "serviceAccounts_id" ;
+  erp:inferredFromQuery true .
+
+erp:Triggerdebug a owl:Class ;
+  rdfs:label "Triggerdebug" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Manufacturing); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Tblpo a owl:Class ;
+  rdfs:label "Tblpo" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Payables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Tblfiles a owl:Class ;
+  rdfs:label "Tblfiles" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Payables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Tblinvoice a owl:Class ;
+  rdfs:label "Tblinvoice" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Payables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:VqEmployee a owl:Class ;
+  rdfs:label "VqEmployee" ;
+  rdfs:comment "Referenced in query SQL (2 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:vqEmployee_employeeId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqEmployee ;
+  rdfs:label "vqEmployee_employeeId" ;
+  erp:inferredFromQuery true .
+
+erp:vqEmployee_firstName a owl:DatatypeProperty ;
+  rdfs:domain erp:VqEmployee ;
+  rdfs:label "vqEmployee_firstName" ;
+  erp:inferredFromQuery true .
+
+erp:vqEmployee_lastName a owl:DatatypeProperty ;
+  rdfs:domain erp:VqEmployee ;
+  rdfs:label "vqEmployee_lastName" ;
+  erp:inferredFromQuery true .
+
+erp:vqEmployee_recordId a owl:DatatypeProperty ;
+  rdfs:domain erp:VqEmployee ;
+  rdfs:label "vqEmployee_recordId" ;
+  erp:inferredFromQuery true .
+
+erp:SpCustomerOrderMaster a owl:Class ;
+  rdfs:label "SpCustomerOrderMaster" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:LiveDboSpWodsLight a owl:Class ;
+  rdfs:label "LiveDboSpWodsLight" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:StagingDboSpMergeWodsLight a owl:Class ;
+  rdfs:label "StagingDboSpMergeWodsLight" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:SkillsPartUdf a owl:Class ;
+  rdfs:label "SkillsPartUdf" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:skillsPartUdf_materialType a owl:DatatypeProperty ;
+  rdfs:domain erp:SkillsPartUdf ;
+  rdfs:label "skillsPartUdf_materialType" ;
+  erp:inferredFromQuery true .
+
+erp:skillsPartUdf_partId a owl:DatatypeProperty ;
+  rdfs:domain erp:SkillsPartUdf ;
+  rdfs:label "skillsPartUdf_partId" ;
+  erp:inferredFromQuery true .
+
+erp:Nvarchar a owl:Class ;
+  rdfs:label "Nvarchar" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:PbiCustomerShipmentsComplementOt01 a owl:Class ;
+  rdfs:label "PbiCustomerShipmentsComplementOt01" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:PlannerUserIdReportsettings a owl:Class ;
+  rdfs:label "PlannerUserIdReportsettings" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:SkillsPartLocList2 a owl:Class ;
+  rdfs:label "SkillsPartLocList2" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Customer_Order); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:KatiesOpTypes a owl:Class ;
+  rdfs:label "KatiesOpTypes" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:SkillsWoOpsFirstLastLoc a owl:Class ;
+  rdfs:label "SkillsWoOpsFirstLastLoc" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:WorkOrders a owl:Class ;
+  rdfs:label "WorkOrders" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:MyTableInserts a owl:Class ;
+  rdfs:label "MyTableInserts" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:T a owl:Class ;
+  rdfs:label "T" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Engineering); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:SpEnumerrorlogs a owl:Class ;
+  rdfs:label "SpEnumerrorlogs" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Manufacturing); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:VendorSpec a owl:Class ;
+  rdfs:label "VendorSpec" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Payables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Openquery a owl:Class ;
+  rdfs:label "Openquery" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:NcmReworkStep a owl:Class ;
+  rdfs:label "NcmReworkStep" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Quality); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:PbiCustomerShipmentsArc a owl:Class ;
+  rdfs:label "PbiCustomerShipmentsArc" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Receivables); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Keys a owl:Class ;
+  rdfs:label "Keys" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:keys_colname a owl:DatatypeProperty ;
+  rdfs:domain erp:Keys ;
+  rdfs:label "keys_colname" ;
+  erp:inferredFromQuery true .
+
+erp:CreateSchemaDbo a owl:Class ;
+  rdfs:label "CreateSchemaDbo" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Src a owl:Class ;
+  rdfs:label "Src" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:The a owl:Class ;
+  rdfs:label "The" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:WodsOutput01Etl a owl:Class ;
+  rdfs:label "WodsOutput01Etl" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:Sfnwonumformat a owl:Class ;
+  rdfs:label "Sfnwonumformat" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:SfnCurrentOperation a owl:Class ;
+  rdfs:label "SfnCurrentOperation" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .
+
+erp:SfnGetlastopcompleted a owl:Class ;
+  rdfs:label "SfnGetlastopcompleted" ;
+  rdfs:comment "Referenced in query SQL (1 uses; Work_Orders); no DDL." ;
+  erp:inferredFromQuery true .

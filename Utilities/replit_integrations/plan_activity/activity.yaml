@@ -1,0 +1,117 @@
+# Folder-agnostic plan activity ledger (append-only).
+#
+# Every event correlates by a logical key, never by file path, so the link
+# survives a plan or snapshot being moved between folders. An event keys on ONE
+# of two spines:
+#   * plan spine      — wave / plan_id / task_id; resolve via
+#                       hf-space-inventory-sqlgen/plans/index.yaml
+#   * milestone spine — version (schema version) and/or milestone (M-series);
+#                       resolve via hf-space-inventory-sqlgen/plans/milestones.yaml
+#
+# Plan tracking started at WAVE 4; earlier waves (1-3) are intentionally not
+# backfilled. Milestone artifact mappings are a SEPARATE spine and may predate
+# wave 4 — the canonical-graph milestones were frozen before tracking began.
+ledger_version: 1
+activity_start_wave: 4
+
+events:
+  - ts: "2026-06-17T00:00:00Z"
+    wave: 4
+    plan_id: plan-008-consumer-delivery-persistence
+    task_id: task-008-010
+    event: tracking_started
+    actor: User
+    to_status: pending
+    artifact:
+      - replit_integrations/graph_metadata_canonical_example.json
+      - replit_integrations/graph_metadata_canonical_example.md
+    note: >
+      Activity tracking anchored at wave 4 (Final Schema Lock & Canonical Edge
+      Generation). task-008-010 carries forward after the completed wave-3 Replit
+      graph-metadata integration.
+
+  - ts: "2026-06-17T00:00:01Z"
+    wave: 4
+    plan_id: plan-8-wave-4-synthetic-erp-expansion
+    task_id: null
+    event: tracking_started
+    actor: User
+    to_status: approved-in-principle
+    artifact:
+      - replit_integrations/plan-8-wave-4-synthetic-erp-expansion.md
+    note: >
+      Wave 4's second strand: synthetic ERP expansion (traceability spine). It
+      lives in a different folder than plan-008 yet shares wave 4 — proof that the
+      correlation is by wave, not by folder.
+
+  - ts: "2026-06-14T00:00:00Z"
+    milestone: M1
+    version: 13
+    event: canonical_artifacts_mapped
+    actor: User
+    artifact:
+      - replit_integrations/graph_metadata_canonical_example.md
+      - replit_integrations/graph_metadata.v13.json
+      - replit_integrations/export_graph_metadata.py
+      - replit_integrations/seed_elevations.py
+      - docs/canonical_graph_construction_concept_as_node.md
+    note: >
+      M1 = concept_nodes_introduced (schema v13). Canonical artifacts: the
+      graph_metadata_canonical_example.md format reference (structural / semantic /
+      concept-node key grammar) and the frozen graph_metadata.v13.json snapshot —
+      33 identity-only concept nodes (concept_name + description, perspective
+      "canonical") added with ZERO new edges (nodes 246 -> 279, edges 279 -> 279;
+      type/domain/synonyms/tags deferred to M3). Produced by
+      export_graph_metadata.py + seed_elevations.py; specified in
+      docs/canonical_graph_construction_concept_as_node.md.
+
+  - ts: "2026-06-14T00:00:01Z"
+    milestone: M2
+    version: 14
+    event: canonical_artifacts_mapped
+    actor: User
+    artifact:
+      - replit_integrations/graph_metadata_canonical_example.md
+      - replit_integrations/graph_metadata.v14.json
+      - replit_integrations/export_graph_metadata.py
+      - replit_integrations/seed_elevations.py
+      - docs/canonical_graph_construction_concept_as_node.md
+    note: >
+      M2 = elevates_repointed_to_concepts (schema v14). The 17 elevates edges are
+      re-pointed so each edge `_to` becomes the concept node (`_from` stays the
+      physical column); concept identity now lives on the node, so the per-edge
+      `concept` string (and the sql_graph_edges.concept column) is DROPPED, and
+      priority_weight is added (binary gate derived: weight = 1 if priority_weight
+      > 0 else 0). The elevates uid is made concept-aware and derived. Counts are
+      UNCHANGED from v13 (nodes 279 -> 279, edges 279 -> 279) — this is a
+      repoint/repayload milestone, not an add. Same canonical anchors as M1: the
+      graph_metadata_canonical_example.md edge-grammar reference, the frozen
+      graph_metadata.v14.json snapshot, export_graph_metadata.py + seed_elevations.py,
+      specified in docs/canonical_graph_construction_concept_as_node.md (M2 section).
+
+  - ts: "2026-06-14T00:00:02Z"
+    milestone: M3
+    version: 15
+    event: canonical_artifacts_mapped
+    actor: User
+    artifact:
+      - replit_integrations/graph_metadata_canonical_example.md
+      - replit_integrations/graph_metadata.v15.json
+      - replit_integrations/export_graph_metadata.py
+      - replit_integrations/seed_elevations.py
+      - docs/canonical_graph_construction_concept_as_node.md
+    note: >
+      M3 = concept_metadata_mrp_seed (schema v15). The concept payload is WIDENED
+      (concept_type, domain, synonyms[], tags[] added to the identity-only
+      name+description from M1) and the MRP / inventory vocabulary is seeded: 10
+      terms added as concept nodes (concepts 33 -> 43) — AllocatedQuantity,
+      AvailableToPromise, EconomicOrderQuantity, LeadTime, LeadTimeDemand,
+      MaximumStockQuantity, MinimumStockQuantity, OnHandQuantity, ReorderPoint,
+      SafetyStock. Of these, 3 resolve to a real physical column via a column ->
+      concept edge (elevates 17 -> 20) and the other 7 are intentional orphan
+      glossary nodes with no edge. Counts: nodes 279 -> 289 (+10), edges 279 ->
+      282 (+3) — an ADD milestone (unlike the M2 repoint). Predicate is still
+      `elevates` at v15 (the resolves_to rename is M16/v16). Same canonical anchors
+      as M1/M2: the graph_metadata_canonical_example.md format reference, the frozen
+      graph_metadata.v15.json snapshot, export_graph_metadata.py + seed_elevations.py,
+      specified in docs/canonical_graph_construction_concept_as_node.md (M3 section).

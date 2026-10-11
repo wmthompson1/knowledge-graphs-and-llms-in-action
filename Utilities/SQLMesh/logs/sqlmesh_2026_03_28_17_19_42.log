@@ -1,0 +1,8 @@
+2026-03-28 17:19:43,135 - MainThread - sqlmesh.core.config.connection - INFO - Creating new DuckDB adapter for data files: {'db.db'} (connection.py:496)
+2026-03-28 17:19:47,734 - MainThread - sqlmesh.core.config.connection - INFO - Creating new DuckDB adapter for in-memory database (connection.py:498)
+2026-03-28 17:19:47,736 - MainThread - sqlmesh.core.config.connection - INFO - Creating new DuckDB adapter for in-memory database (connection.py:498)
+2026-03-28 17:19:47,737 - MainThread - sqlmesh.core.config.connection - INFO - Creating new DuckDB adapter for in-memory database (connection.py:498)
+2026-03-28 17:19:47,739 - MainThread - sqlmesh.core.config.connection - INFO - Creating new DuckDB adapter for in-memory database (connection.py:498)
+2026-03-28 17:19:47,741 - MainThread - sqlmesh.core.config.connection - INFO - Creating new DuckDB adapter for in-memory database (connection.py:498)
+2026-03-28 17:19:47,744 - ThreadPoolExecutor-0_0 - sqlmesh.core.console - WARNING - Model '"db"."sqlmesh_example"."full_model"' was not found at C:\Users\Clovi\source\product-ontime-analysis\Utilities\SQLMesh\tests\test_full_model.yaml (console.py:2335)
+2026-03-28 17:19:49,032 - MainThread - root - INFO - Shutting down the event dispatcher (dispatcher.py:159)

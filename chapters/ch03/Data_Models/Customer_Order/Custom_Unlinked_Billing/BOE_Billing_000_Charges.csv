@@ -1,0 +1,10 @@
+REPORT,DESCRIPTION,CHARGE,SPECIAL,SERVICE,OTHER,NOTES
+usp_BOE_Billing_605,BOE602 & BOE605,109,NULL,NULL,NULL,new CHARGE 69.07 requested by Monica Ticket 268 13-Jan-2025
+usp_BOE_Billing_FINISH,FINISH 609,112.87,NULL,NULL,NULL,"updated from 70 per AnnW on 1/6/2021 | Old value 73.5 Update Jan-03-2024 $85, required in ticket 4481 by Luke, new CHARGE 102.85 requested by Monica Ticket 268 13-Jan-2025"
+usp_BOE_Billing_MFG,MFG 609 NO 5 AXIS,110.96,200,61.72,NULL,"Old rate 68.4 Update 03-Jan-2024 $84, required in ticket 4481 by Luke, new CHARGE 102.48 requested by Monica Ticket 268 13-Jan-2025"
+usp_BOE_Billing_ASSY,ASSY 609,70.52,200,56.9,NULL,"Old rate 55.1 Update 03-Jan-2024 $59.54, required in ticket 4481 by Luke, new CHARGE 69.07 requested by Monica Ticket 268 13-Jan-2025"
+usp_BOE_Billing_5AXIS,MFG 609 5 AXIS,107.28,200,61.72,NULL,"Old rate 68.4 Update 03-Jan-2024 $91.28, required in ticket 4481 by Luke, new CHARGE 105 requested by Monica Ticket 268 13-Jan-2025"
+usp_BOE_Billing_614,BOLTBOARDS,60,NULL,NULL,NULL,PULLS DATA FROM CO NOT TABLE
+usp_BOE_BILLING_TUKWILA,DO NOT USE,75,NULL,NULL,NULL,NULL
+usp_BOE_BILLING_HELENA,DO NOT USE,75,NULL,NULL,NULL,NULL
+usp_BOE_BILLING_EME,BOEEME,109,NULL,NULL,NULL,new CHARGE 69.07 requested by Monica Ticket 268 13-Jan-2025

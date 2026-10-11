@@ -17,9 +17,15 @@ class HPOImporter(BaseImporter):
     def __init__(self, argv):
         super().__init__(command=__file__, argv=argv)
         self._database = "hpo"
-        with self._driver.session() as session:
-            # Listing 16
-            session.run(f"CREATE DATABASE {self._database} IF NOT EXISTS")
+        try:
+            with self._driver.session(database="system") as session:
+                # Listing 16
+                session.run(f"CREATE DATABASE `{self._database}` IF NOT EXISTS")
+        except Neo4jClientError as e:
+            if e.code == "Neo.ClientError.Statement.UnsupportedAdministrationCommand":
+                self._database = self.database or "neo4j"
+            else:
+                raise
 
     def set_constraints(self):
         # Listing 17

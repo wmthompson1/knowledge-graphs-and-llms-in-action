@@ -1,0 +1,137 @@
+note: using para-json here to compare the two JSON files for the shipment core feed field descriptions. 
+The first JSON file contains a list of fields with their descriptions, while the second JSON file includes
+ additional calculation details for some fields.
+{
+  "source_file": "Documentation/Schema/Data_Models/Customer_Order/Shipping/Shipment_Core_Feed_A.sql",
+  "procedure_name": "SP_SK_ETL01_CUST_SHIP",
+  "model_name": "Customer Shipments Feed A",
+  "notes": "Field descriptions are inferred from the shipping ETL logic, the alias definitions in the SQL, and the matching notes under Documentation/Schema/Data_Models/Customer_Order/Shipping.",
+  "fields": [
+    {"field_name": "CUSTOMER_ID", "description": "Customer account identifier from the customer order header used to group shipment activity by customer."},
+    {"field_name": "CUST_ORDER_ID", "description": "Customer order identifier from the sales order header."},
+    {"field_name": "COL_LINE_NO", "description": "Line number on the customer order used to distinguish multiple items on the same order."},
+    {"field_name": "ORDER_DATE", "description": "Date the customer order was placed, derived from CUSTOMER_ORDER.ORDER_DATE."},
+    {"field_name": "CREATE_DATE", "description": "Date the customer order record was created, derived from CUSTOMER_ORDER.CREATE_DATE."},
+    {"field_name": "DESIRED_SHIP_DATE", "description": "Requested ship date for the order line, using the line-level value when available and falling back to the order header value."},
+    {"field_name": "FILTER_CASE", "description": "Business-rule branch used to decide which date should drive the shipment filter logic for the line."},
+    {"field_name": "FILTER_DATE", "description": "Effective date used in the shipment filter, chosen from invoice/shipment dates and desired ship dates based on the FILTER_CASE logic."
+	, "calculation": "
+					CONVERT(DATE, CASE
+				--> tt20210125: handle COL with 0 qty that were not deleted, cancelled, or shipped
+					WHEN COL.ORDER_QTY = 0 THEN COALESCE(S.SHIPPED_DATE, COL.DESIRED_SHIP_DATE, CO.DESIRED_SHIP_DATE)
+					WHEN CO.[STATUS] = 'C' THEN COALESCE(S.SHIPPED_DATE, COL.DESIRED_SHIP_DATE, CO.DESIRED_SHIP_DATE)
+					WHEN COL.ORDER_QTY - COL.TOTAL_SHIPPED_QTY > 0 THEN COALESCE(S.SHIPPED_DATE, COL.DESIRED_SHIP_DATE, CO.DESIRED_SHIP_DATE)
+					WHEN COL.TOTAL_SHIPPED_QTY > 0 THEN COALESCE(S.SHIPPED_DATE, COL.DESIRED_SHIP_DATE, CO.DESIRED_SHIP_DATE)
+					WHEN S.SHIPPED_DATE IS NOT NULL THEN S.SHIPPED_DATE
+					WHEN COALESCE(S.SHIPPED_DATE, COL.DESIRED_SHIP_DATE, CO.DESIRED_SHIP_DATE) <=  GETDATE() THEN GETDATE()
+					ELSE COALESCE(S.SHIPPED_DATE, COL.DESIRED_SHIP_DATE, CO.DESIRED_SHIP_DATE)
+				END) AS FILTER_DATE
+	"
+	
+	},
+    {"field_name": "CO_STATUS", "description": "Status code from CUSTOMER_ORDER, such as active, cancelled, or held states."},
+    {"field_name": "UPDATE_USING_MISC_REF", "description": "Flag that indicates the line was updated or classified from a misc-reference charge description rather than a standard part record."},
+    {"field_name": "SERVICE_CHARGE_ID", "description": "Service charge identifier or charge text extracted from the order line when a charge entry is embedded in MISC_REFERENCE."},
+    {"field_name": "LINE_TYPE", "description": "Classification of the line as a service charge, part processing, or other line type."},
+    {"field_name": "LINE_ITEM", "description": "Resolved item reference for the line, either a service charge ID or the matching part identifier."},
+    {"field_name": "CHARGE_TYPE", "description": "Charge description details extracted from the misc-reference field for service-charge lines."},
+    {"field_name": "CUST_PART_DESC", "description": "Customer-facing description retained when the line is driven by a misc-reference service charge or charge update."},
+    {"field_name": "COL_PARTID", "description": "Original part identifier on the customer order line before any fallback or correction logic."},
+    {"field_name": "P2ID", "description": "Alternate part identifier matched from the misc-reference field when the line was recorded without a normal PART_ID."},
+    {"field_name": "PART_ID", "description": "Final part identifier used for the shipment row, with a fallback to the misc-reference match when necessary."},
+    {"field_name": "DESCRIPTION", "description": "Part description from the PART dimension used in the shipment feed."},
+    {"field_name": "PART_PROD_CODE", "description": "Product code associated with the key part."},
+    {"field_name": "PART_COMM_CODE", "description": "Commodity code associated with the key part."},
+    {"field_name": "PLANNER_USER_ID", "description": "Planner owner assigned to the part, used in business-stream logic."},
+    {"field_name": "BUYER_USER_ID", "description": "Buyer owner assigned to the part, used in business-stream and reasoning logic."},
+    {"field_name": "REASONING", "description": "Derived numeric category that drives the adjusted due-date calculation and downstream business stream logic."
+	,"calculation": "
+				CASE
+				WHEN P.PLANNER_USER_ID = 'FIN' THEN 1
+				WHEN CO.CUSTOMER_ID != 'BOE609' THEN 0
+				WHEN LEFT(P.BUYER_USER_ID,2) = '59' THEN 10
+				WHEN LEFT(P.BUYER_USER_ID,2) = '09' THEN 30
+				WHEN RTRIM(LTRIM(P.PLANNER_USER_ID)) = 'FIN-HOURLY' THEN 10
+				WHEN P.PLANNER_USER_ID LIKE 'MFG-HOURLY%' THEN 30
+				ELSE 0 
+			END AS 'REASONING'
+	"
+	
+	},
+    {"field_name": "SHIP_SHORT", "description": "Customer-order line status flag indicating whether the line is marked as a short-shipment condition."},
+    {"field_name": "ORDER_QTY", "description": "Original ordered quantity on the customer order line."},
+    {"field_name": "TOTAL_SHIPPED_QTY", "description": "Total quantity shipped against the order line."},
+    {"field_name": "REMQTY", "description": "Remaining quantity before applying cancellation or overship adjustments."
+	"calcultion": "
+	COL.ORDER_QTY - COL.TOTAL_SHIPPED_QTY AS REMQTY
+	"
+	
+	},
+    {"field_name": "UNSHIPPEDQTY", "description": "Net quantity remaining to be shipped after accounting for canceled, over-shipped, and closed lines."},
+    {"field_name": "UNIT_PRICE", "description": "Unit price on the customer order line used for amount calculations."},
+    {"field_name": "BUS_STREAM", "description": "Business stream classification for the line, such as CMP-FIN, CMP-MFG, or UNKNOWN based on planner and buyer rules."},
+    {"field_name": "MATERIAL_TYPE", "description": "User-defined material type pulled from the part metadata."},
+    {"field_name": "PACKLIST_ID", "description": "Packlist document identifier associated with the shipment line."},
+    {"field_name": "PACKLIST_LINE_NO", "description": "Line number on the packlist for the shipment detail."},
+    {"field_name": "SHIPPED_QTY", "description": "Quantity actually shipped for the packlist line, excluding manual or special-case invoice entries."},
+    {"field_name": "SHIPPED_DATE", "description": "Actual shipment date taken from the SHIPPER record."},
+    {"field_name": "INVOICE_DATE", "description": "Date on the related receivable invoice record."},
+    {"field_name": "INVOICE_ID", "description": "Receivable invoice identifier associated with the shipment line."},
+    {"field_name": "INVOICE_LINE", "description": "Line number within the invoice record."},
+    {"field_name": "INVOICE_AMT", "description": "Amount for the invoiced line."},
+    {"field_name": "INVOICE_QTY", "description": "Quantity on the invoice line, adjusted to exclude special manual invoice cases."},
+    {"field_name": "SHIPPED_AMOUNT", "description": "Calculated shipped value equal to SHIPPED_QTY multiplied by UNIT_PRICE."},
+    {"field_name": "UNSHIPPED_AMOUNT", "description": "Calculated remaining value equal to UNSHIPPEDQTY multiplied by UNIT_PRICE."
+	 , "calculation": "
+	    			 CASE
+				WHEN COL.LINE_STATUS = 'C' THEN 0
+				WHEN CO.[STATUS] = 'C' THEN 0
+				WHEN COL.ORDER_QTY < COL.TOTAL_SHIPPED_QTY THEN 0
+				ELSE COL.ORDER_QTY - COL.TOTAL_SHIPPED_QTY
+			END AS UNSHIPPEDQTY
+	 "
+	
+	},
+	
+    {"field_name": "ADJUSTED_DUE_DATE", "description": "Desired ship date adjusted by the REASONING day offset to support due-date and delivery analysis."
+	"calculation": "
+	  CONVERT(DATE, DATEADD(DD, REASONING, DESIRED_SHIP_DATE)) AS ADJUSTED_DUE_DATE
+	"
+	
+	},
+    {"field_name": "SUPPLY_TYPE", "description": "Supply linkage type from DEMAND_SUPPLY_LINK, classified as CP or WO."},
+    {"field_name": "BASE_ID", "description": "Work-order base identifier for the linked supply record when the line is tied to a work order."},
+    {"field_name": "LOT_ID", "description": "Work-order lot identifier from the linked supply record."},
+    {"field_name": "SPLIT_ID", "description": "Work-order split identifier from the linked supply record."},
+    {"field_name": "SUB_ID", "description": "Work-order subidentifier from the linked supply record."},
+    {"field_name": "ORDER_STATUS", "description": "Final status for the shipment line, categorized as COMPLETED, INCOMPLETE, CANCELLED, or ON HOLD??? based on shipped quantities and order conditions."}
+  ]
+}
+
+
+--select DISTINCT BUS_STREAM from LIVESupplemental.dbo.PBI_Customer_Shipments_complement where CUST_ORDER_ID = '001976353'
+
+/*  Fix ADJUSTED_DUE_DATE (WO.DESIRED_RLS_DATE + DYS BUST_STREAM) */
+UPDATE A SET A.ADJUSTED_DUE_DATE = 
+		CASE WHEN A.BUS_STREAM = 'CMP-MFG' THEN (dateadd(day, 30, B.DESIRED_RLS_DATE))
+			--WHEN A.BUS_STREAM = 'FIN_MFG' THEN (dateadd(day, 30, A.DESIRED_RLS_DATE))
+			WHEN A.BUS_STREAM = 'MFG' THEN (dateadd(day, 30, B.DESIRED_RLS_DATE))
+			WHEN A.BUS_STREAM = 'CMP-FIN' THEN (dateadd(day, 10, B.DESIRED_RLS_DATE))
+			WHEN A.BUS_STREAM = 'FIN' THEN (dateadd(day, 10, B.DESIRED_RLS_DATE))
+			else (dateadd(day, 30, coalesce(B.DESIRED_RLS_DATE, A.DESIRED_SHIP_DATE)))
+		END
+FROM       LIVESupplemental.dbo.PBI_Customer_Shipments_complement_C01 A WITH (NOLOCK)
+INNER JOIN LIVESupplemental.dbo.PBI_Customer_Shipments_complement_C01 B WITH (NOLOCK) ON A.RowID = B.RowID
+where A.DESIRED_RLS_DATE is not null and a.RowID = b.RowID
+
+
+/*  Complement to OnTime and Late */
+UPDATE A SET A.ON_TIME1 = IIF(A.[FILTER_DATE] <= A.ADJUSTED_DUE_DATE, 1, 0),
+			A.LATE1 =  IIF(A.[FILTER_DATE] <= A.ADJUSTED_DUE_DATE, 0, 1)
+FROM LIVESupplemental.dbo.PBI_Customer_Shipments_complement_C01 A WITH (NOLOCK)
+INNER JOIN LIVESupplemental.dbo.PBI_Customer_Shipments_complement_C01 B WITH (NOLOCK) ON A.RowID = B.RowID
+WHERE A.[ON TIME] is not null and a.RowID = b.RowID
+
+may be easier to create a mini-feed, and just filter on preset cmp use cases
+Sample use cases cn come from gross margin or Custom_Unlinked_Billing
+ - see Data_Models\Customer_Order\Custom_Unlinked_Billing

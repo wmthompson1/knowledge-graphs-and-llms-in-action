@@ -1,0 +1,420 @@
+@prefix cub:  <https://skills.inc/mrp/custom-unlinked-billing#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<https://skills.inc/mrp/custom-unlinked-billing> a owl:Ontology ;
+    rdfs:label "Proposed Custom and Unlinked Billing Ontology" ;
+    rdfs:comment "Isolated proposal for explaining and auditing custom billing evidence, policy, calculation, provenance, and grain. It does not import the existing knowledge-loop ontologies." .
+
+# Core commercial and manufacturing evidence
+
+cub:Customer a owl:Class .
+cub:Part a owl:Class .
+cub:CustomerOrder a owl:Class .
+cub:CustomerOrderLine a owl:Class .
+cub:Shipment a owl:Class .
+cub:ShipmentLine a owl:Class .
+cub:Invoice a owl:Class .
+cub:WorkOrder a owl:Class .
+cub:DemandSupplyAllocation a owl:Class .
+cub:LaborEntry a owl:Class .
+cub:ManufacturingResource a owl:Class .
+cub:ResourceClassification a owl:Class .
+cub:ServiceCostFact a owl:Class .
+
+# Billing policy and results
+
+cub:BillingProgram a owl:Class .
+cub:BillingRun a owl:Class .
+cub:BillingLine a owl:Class .
+cub:BillingCategory a owl:Class .
+cub:BillingMethod a owl:Class .
+cub:RateSchedule a owl:Class .
+cub:Rate a owl:Class .
+cub:RateType a owl:Class .
+cub:FixedHourStandard a owl:Class .
+cub:AllocationMethod a owl:Class .
+cub:BillingRule a owl:Class .
+cub:EligibilityRule a owl:Class ;
+    rdfs:subClassOf cub:BillingRule .
+cub:InclusionRule a owl:Class ;
+    rdfs:subClassOf cub:EligibilityRule .
+cub:ExclusionRule a owl:Class ;
+    rdfs:subClassOf cub:EligibilityRule .
+cub:ExceptionRule a owl:Class ;
+    rdfs:subClassOf cub:EligibilityRule .
+cub:MinimumChargeRule a owl:Class ;
+    rdfs:subClassOf cub:BillingRule .
+cub:SourceCodeAssignment a owl:Class .
+
+# Grain is explicit metadata, not an implicit comment
+
+cub:GrainDefinition a owl:Class .
+cub:GrainKeyComponent a owl:Class .
+
+# Relationships between commercial facts
+
+cub:hasOrderLine a owl:ObjectProperty ;
+    rdfs:domain cub:CustomerOrder ;
+    rdfs:range cub:CustomerOrderLine .
+
+cub:orderedBy a owl:ObjectProperty ;
+    rdfs:domain cub:CustomerOrder ;
+    rdfs:range cub:Customer .
+
+cub:ordersPart a owl:ObjectProperty ;
+    rdfs:domain cub:CustomerOrderLine ;
+    rdfs:range cub:Part .
+
+cub:hasShipmentLine a owl:ObjectProperty ;
+    rdfs:domain cub:Shipment ;
+    rdfs:range cub:ShipmentLine .
+
+cub:shipsOrderLine a owl:ObjectProperty ;
+    rdfs:domain cub:ShipmentLine ;
+    rdfs:range cub:CustomerOrderLine .
+
+cub:appearsOnInvoice a owl:ObjectProperty ;
+    rdfs:domain cub:Shipment ;
+    rdfs:range cub:Invoice .
+
+cub:linksDemandLine a owl:ObjectProperty ;
+    rdfs:domain cub:DemandSupplyAllocation ;
+    rdfs:range cub:CustomerOrderLine .
+
+cub:linksSupplyWorkOrder a owl:ObjectProperty ;
+    rdfs:domain cub:DemandSupplyAllocation ;
+    rdfs:range cub:WorkOrder .
+
+cub:recordsLaborFor a owl:ObjectProperty ;
+    rdfs:domain cub:LaborEntry ;
+    rdfs:range cub:WorkOrder .
+
+cub:usesResource a owl:ObjectProperty ;
+    rdfs:domain cub:LaborEntry ;
+    rdfs:range cub:ManufacturingResource .
+
+cub:hasResourceClassification a owl:ObjectProperty ;
+    rdfs:domain cub:ManufacturingResource ;
+    rdfs:range cub:ResourceClassification .
+
+cub:recordsServiceCostFor a owl:ObjectProperty ;
+    rdfs:domain cub:ServiceCostFact ;
+    rdfs:range cub:WorkOrder .
+
+# Billing provenance and policy relationships
+
+cub:executesProgram a owl:ObjectProperty ;
+    rdfs:domain cub:BillingRun ;
+    rdfs:range cub:BillingProgram .
+
+cub:producesBillingLine a owl:ObjectProperty ;
+    rdfs:domain cub:BillingRun ;
+    rdfs:range cub:BillingLine .
+
+cub:hasBillingCategory a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:BillingCategory .
+
+cub:triggeredByShipmentLine a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:ShipmentLine .
+
+cub:billsOrderLine a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:CustomerOrderLine .
+
+cub:supportedByWorkOrder a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:WorkOrder .
+
+cub:evidenceFromLaborEntry a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:LaborEntry .
+
+cub:evidenceFromServiceCost a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:ServiceCostFact .
+
+cub:calculatedUsingMethod a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:BillingMethod .
+
+cub:calculatedUsingRateSchedule a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:RateSchedule .
+
+cub:hasRate a owl:ObjectProperty ;
+    rdfs:domain cub:RateSchedule ;
+    rdfs:range cub:Rate .
+
+cub:hasRateType a owl:ObjectProperty ;
+    rdfs:domain cub:Rate ;
+    rdfs:range cub:RateType .
+
+cub:usesFixedHourStandard a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:FixedHourStandard .
+
+cub:usesAllocationMethod a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:AllocationMethod .
+
+cub:evaluatedByRule a owl:ObjectProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range cub:BillingRule .
+
+cub:appliesToProgram a owl:ObjectProperty ;
+    rdfs:domain [ a owl:Class ;
+        owl:unionOf (cub:BillingRule cub:RateSchedule cub:FixedHourStandard) ] ;
+    rdfs:range cub:BillingProgram .
+
+cub:appliesToPart a owl:ObjectProperty ;
+    rdfs:domain [ a owl:Class ;
+        owl:unionOf (cub:BillingRule cub:FixedHourStandard) ] ;
+    rdfs:range cub:Part .
+
+cub:overridesRule a owl:ObjectProperty ;
+    rdfs:domain cub:ExceptionRule ;
+    rdfs:range cub:BillingRule .
+
+cub:declaresGrain a owl:ObjectProperty ;
+    rdfs:domain [ a owl:Class ;
+        owl:unionOf (cub:BillingLine cub:ShipmentLine cub:LaborEntry cub:WorkOrder) ] ;
+    rdfs:range cub:GrainDefinition .
+
+cub:hasGrainKeyComponent a owl:ObjectProperty ;
+    rdfs:domain cub:GrainDefinition ;
+    rdfs:range cub:GrainKeyComponent .
+
+cub:mapsToCategory a owl:ObjectProperty ;
+    rdfs:domain cub:SourceCodeAssignment ;
+    rdfs:range cub:BillingCategory .
+
+# Identifiers and dates
+
+cub:sourceIdentifier a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+cub:sourceObject a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+cub:sourceField a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+cub:sourceCode a owl:DatatypeProperty ;
+    rdfs:domain cub:SourceCodeAssignment ;
+    rdfs:range xsd:string .
+
+cub:programIdentifier a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingProgram ;
+    rdfs:range xsd:string .
+
+cub:effectiveFrom a owl:DatatypeProperty ;
+    rdfs:range xsd:dateTime .
+
+cub:effectiveTo a owl:DatatypeProperty ;
+    rdfs:range xsd:dateTime .
+
+cub:invoiceDate a owl:DatatypeProperty ;
+    rdfs:domain cub:Invoice ;
+    rdfs:range xsd:date .
+
+cub:runStartDate a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingRun ;
+    rdfs:range xsd:date .
+
+cub:runEndDate a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingRun ;
+    rdfs:range xsd:date .
+
+cub:generatedAt a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingRun ;
+    rdfs:range xsd:dateTime .
+
+# Quantities, hours, money, and calculation values
+
+cub:shippedQuantity a owl:DatatypeProperty ;
+    rdfs:domain cub:ShipmentLine ;
+    rdfs:range xsd:decimal .
+
+cub:billedQuantity a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range xsd:decimal .
+
+cub:hoursWorked a owl:DatatypeProperty ;
+    rdfs:domain cub:LaborEntry ;
+    rdfs:range xsd:decimal .
+
+cub:setupHours a owl:DatatypeProperty ;
+    rdfs:range xsd:decimal .
+
+cub:runHours a owl:DatatypeProperty ;
+    rdfs:range xsd:decimal .
+
+cub:runHoursPerUnit a owl:DatatypeProperty ;
+    rdfs:domain cub:FixedHourStandard ;
+    rdfs:range xsd:decimal .
+
+cub:allocationFactor a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range xsd:decimal .
+
+cub:rateAmount a owl:DatatypeProperty ;
+    rdfs:domain cub:Rate ;
+    rdfs:range xsd:decimal .
+
+cub:currencyCode a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
+
+cub:unitPrice a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range xsd:decimal .
+
+cub:preAdjustmentAmount a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range xsd:decimal .
+
+cub:extendedAmount a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range xsd:decimal .
+
+cub:expediteAmount a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range xsd:decimal .
+
+cub:specialFeeAmount a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range xsd:decimal .
+
+cub:serviceFeeAmount a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingLine ;
+    rdfs:range xsd:decimal .
+
+cub:serviceCostAmount a owl:DatatypeProperty ;
+    rdfs:domain cub:ServiceCostFact ;
+    rdfs:range xsd:decimal .
+
+cub:minimumChargeAmount a owl:DatatypeProperty ;
+    rdfs:domain cub:MinimumChargeRule ;
+    rdfs:range xsd:decimal .
+
+cub:decisionResult a owl:DatatypeProperty ;
+    rdfs:domain cub:EligibilityRule ;
+    rdfs:range xsd:boolean .
+
+cub:ruleReason a owl:DatatypeProperty ;
+    rdfs:domain cub:BillingRule ;
+    rdfs:range xsd:string .
+
+cub:grainDescription a owl:DatatypeProperty ;
+    rdfs:domain cub:GrainDefinition ;
+    rdfs:range xsd:string .
+
+cub:keyFieldName a owl:DatatypeProperty ;
+    rdfs:domain cub:GrainKeyComponent ;
+    rdfs:range xsd:string .
+
+# Controlled method, category, and rate-type individuals
+
+cub:ActualLaborHoursMethod a cub:BillingMethod ;
+    rdfs:label "Actual labor hours" .
+
+cub:FixedStandardHoursMethod a cub:BillingMethod ;
+    rdfs:label "Fixed standard hours" .
+
+cub:MinimumChargeMethod a cub:BillingMethod ;
+    rdfs:label "Minimum charge" .
+
+cub:ExpediteChargeMethod a cub:BillingMethod ;
+    rdfs:label "Expedite charge" .
+
+cub:ServiceCostConversionMethod a cub:BillingMethod ;
+    rdfs:label "Service-cost conversion" .
+
+cub:HybridBillingMethod a cub:BillingMethod ;
+    rdfs:label "Hybrid billing method" .
+
+cub:ASSY a cub:BillingCategory .
+cub:FiveAxis a cub:BillingCategory ;
+    rdfs:label "5AXIS" .
+cub:EME a cub:BillingCategory .
+cub:FINISH a cub:BillingCategory .
+cub:MFG a cub:BillingCategory .
+
+cub:HourlyChargeRate a cub:RateType .
+cub:SpecialFeeRate a cub:RateType .
+cub:ServiceConversionRate a cub:RateType .
+cub:ExpediteRate a cub:RateType .
+
+# Representative grain definitions
+
+cub:LaborEntryGrain a cub:GrainDefinition ;
+    cub:grainDescription "One source fact per LABOR_TICKET.TRANSACTION_ID" ;
+    cub:hasGrainKeyComponent cub:LaborTransactionIdKey .
+
+cub:LaborTransactionIdKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "LABOR_TICKET.TRANSACTION_ID" .
+
+cub:WorkOrderGrain a cub:GrainDefinition ;
+    cub:grainDescription "One work order per BASE_ID, LOT_ID, SPLIT_ID, SUB_ID, TYPE composite key" ;
+    cub:hasGrainKeyComponent cub:WorkOrderBaseKey,
+        cub:WorkOrderLotKey,
+        cub:WorkOrderSplitKey,
+        cub:WorkOrderSubKey,
+        cub:WorkOrderTypeKey .
+
+cub:WorkOrderBaseKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "WORK_ORDER.BASE_ID" .
+cub:WorkOrderLotKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "WORK_ORDER.LOT_ID" .
+cub:WorkOrderSplitKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "WORK_ORDER.SPLIT_ID" .
+cub:WorkOrderSubKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "WORK_ORDER.SUB_ID" .
+cub:WorkOrderTypeKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "WORK_ORDER.TYPE" .
+
+cub:AssyBillingLineGrain a cub:GrainDefinition ;
+    cub:grainDescription "One ASSY result per part, customer order, billed quantity basis, packlist, invoice date, invoice, and service-cost value" ;
+    cub:hasGrainKeyComponent cub:PartKey,
+        cub:CustomerOrderKey,
+        cub:BilledQuantityBasisKey,
+        cub:PacklistKey,
+        cub:InvoiceDateKey,
+        cub:InvoiceKey,
+        cub:ServiceCostValueKey .
+
+cub:PartKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "CUST_ORDER_LINE.PART_ID" .
+cub:CustomerOrderKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "CUSTOMER_ORDER.ID" .
+cub:BilledQuantityBasisKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "CUST_ORDER_LINE.TOTAL_SHIPPED_QTY" .
+cub:PacklistKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "SHIPPER.PACKLIST_ID" .
+cub:InvoiceDateKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "SHIPPER.INVOICED_DATE" .
+cub:InvoiceKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "SHIPPER.INVOICE_ID" .
+cub:ServiceCostValueKey a cub:GrainKeyComponent ;
+    cub:keyFieldName "WORK_ORDER.ACT_SERVICE_COST" .
+
+# Representative policy pattern, not production master data
+
+cub:AssyProgram a cub:BillingProgram ;
+    cub:programIdentifier "usp_BOE_BILLING_ASSY" .
+
+cub:AssyReworkExclusion a cub:ExclusionRule ;
+    cub:appliesToProgram cub:AssyProgram ;
+    cub:decisionResult false ;
+    cub:ruleReason "Exclude work-order IDs containing R and work-order parts containing REWORK." .
+
+cub:AssyNamedPartException a cub:ExceptionRule ;
+    cub:appliesToProgram cub:AssyProgram ;
+    cub:overridesRule cub:AssyReworkExclusion ;
+    cub:decisionResult true ;
+    cub:ruleReason "Allow explicitly configured part exceptions before applying the general rework exclusion." .
+

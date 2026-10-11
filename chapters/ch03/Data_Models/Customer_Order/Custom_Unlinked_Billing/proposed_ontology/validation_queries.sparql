@@ -1,0 +1,117 @@
+PREFIX cub: <https://skills.inc/mrp/custom-unlinked-billing#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+# CQ-02: Explain all eligibility rules evaluated for a billing line.
+SELECT ?billingLine ?rule ?ruleType ?decision ?reason
+WHERE {
+  ?billingLine a cub:BillingLine ;
+               cub:evaluatedByRule ?rule .
+  ?rule a ?ruleType ;
+        cub:decisionResult ?decision .
+  OPTIONAL { ?rule cub:ruleReason ?reason . }
+  FILTER (?ruleType IN (
+    cub:InclusionRule,
+    cub:ExclusionRule,
+    cub:ExceptionRule
+  ))
+}
+ORDER BY ?billingLine ?rule
+
+# CQ-03: Show exceptions and the rules they override.
+SELECT ?exception ?overriddenRule ?reason
+WHERE {
+  ?exception a cub:ExceptionRule ;
+             cub:overridesRule ?overriddenRule .
+  OPTIONAL { ?exception cub:ruleReason ?reason . }
+}
+
+# CQ-05/CQ-06: Show calculation method and rate schedule.
+SELECT ?billingLine ?method ?schedule ?rateType ?rateAmount ?currency
+WHERE {
+  ?billingLine a cub:BillingLine ;
+               cub:calculatedUsingMethod ?method ;
+               cub:calculatedUsingRateSchedule ?schedule .
+  ?schedule cub:hasRate ?rate .
+  ?rate cub:hasRateType ?rateType ;
+        cub:rateAmount ?rateAmount .
+  OPTIONAL { ?rate cub:currencyCode ?currency . }
+}
+
+# CQ-10: Trace a billing line to commercial and manufacturing evidence.
+SELECT ?billingLine ?shipmentLine ?orderLine ?workOrder ?laborEntry ?serviceCost
+WHERE {
+  ?billingLine a cub:BillingLine ;
+               cub:triggeredByShipmentLine ?shipmentLine ;
+               cub:billsOrderLine ?orderLine ;
+               cub:supportedByWorkOrder ?workOrder .
+  OPTIONAL { ?billingLine cub:evidenceFromLaborEntry ?laborEntry . }
+  OPTIONAL { ?billingLine cub:evidenceFromServiceCost ?serviceCost . }
+}
+
+# CQ-14: Work orders supporting more than one shipment-triggered billing line.
+SELECT ?workOrder (COUNT(DISTINCT ?shipmentLine) AS ?shipmentCount)
+WHERE {
+  ?billingLine a cub:BillingLine ;
+               cub:supportedByWorkOrder ?workOrder ;
+               cub:triggeredByShipmentLine ?shipmentLine .
+}
+GROUP BY ?workOrder
+HAVING (COUNT(DISTINCT ?shipmentLine) > 1)
+
+# CQ-15: Labor entries reused by multiple billing lines.
+SELECT ?laborEntry (COUNT(DISTINCT ?billingLine) AS ?billingLineCount)
+WHERE {
+  ?billingLine a cub:BillingLine ;
+               cub:evidenceFromLaborEntry ?laborEntry .
+}
+GROUP BY ?laborEntry
+HAVING (COUNT(DISTINCT ?billingLine) > 1)
+
+# CQ-17: Lines combining shipment triggers and labor without allocation metadata.
+SELECT ?billingLine ?workOrder ?shipmentLine
+WHERE {
+  ?billingLine a cub:BillingLine ;
+               cub:supportedByWorkOrder ?workOrder ;
+               cub:triggeredByShipmentLine ?shipmentLine ;
+               cub:evidenceFromLaborEntry ?laborEntry .
+  FILTER NOT EXISTS { ?billingLine cub:usesAllocationMethod ?method . }
+}
+
+# CQ-18: Invalid quantities, missing rates, or amount inconsistencies.
+SELECT ?billingLine ?issue
+WHERE {
+  {
+    ?billingLine a cub:BillingLine ;
+                 cub:billedQuantity ?quantity .
+    FILTER (?quantity <= 0)
+    BIND ("NON_POSITIVE_BILLED_QUANTITY" AS ?issue)
+  }
+  UNION
+  {
+    ?billingLine a cub:BillingLine .
+    FILTER NOT EXISTS {
+      ?billingLine cub:calculatedUsingRateSchedule/cub:hasRate ?rate .
+    }
+    BIND ("MISSING_RATE" AS ?issue)
+  }
+  UNION
+  {
+    ?billingLine a cub:BillingLine ;
+                 cub:billedQuantity ?quantity ;
+                 cub:unitPrice ?unitPrice ;
+                 cub:extendedAmount ?extendedAmount .
+    FILTER (ABS((?quantity * ?unitPrice) - ?extendedAmount) > 0.01)
+    BIND ("UNIT_EXTENDED_AMOUNT_MISMATCH" AS ?issue)
+  }
+}
+
+# CQ-21: List source codes that are not mapped to a governed category.
+SELECT ?assignment ?sourceObject ?sourceField ?sourceCode
+WHERE {
+  ?assignment a cub:SourceCodeAssignment ;
+              cub:sourceObject ?sourceObject ;
+              cub:sourceField ?sourceField ;
+              cub:sourceCode ?sourceCode .
+  FILTER NOT EXISTS { ?assignment cub:mapsToCategory ?category . }
+}
+

@@ -1,0 +1,69 @@
+@prefix vmfg: <http://enterprise.org/manufacturing/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+vmfg:PartShape a sh:NodeShape ;
+    sh:targetClass vmfg:Part ;
+    sh:property [ sh:path vmfg:sourceKey ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:partId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+vmfg:WorkOrderShape a sh:NodeShape ;
+    sh:targetClass vmfg:WorkOrder ;
+    sh:property [ sh:path vmfg:sourceKey ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:workOrderType ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:baseId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:lotId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:splitId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:subId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:producesPart ; sh:class vmfg:Part ; sh:maxCount 1 ] .
+
+vmfg:OperationShape a sh:NodeShape ;
+    sh:targetClass vmfg:Operation ;
+    sh:property [ sh:path vmfg:sourceKey ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:sequenceNumber ; sh:datatype xsd:integer ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:operationOf ; sh:class vmfg:WorkOrder ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:usesResource ; sh:class vmfg:ShopResource ; sh:maxCount 1 ] .
+
+vmfg:RequirementShape a sh:NodeShape ;
+    sh:targetClass vmfg:Requirement ;
+    sh:property [ sh:path vmfg:sourceKey ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:operationSequenceNumber ; sh:datatype xsd:integer ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:pieceNumber ; sh:datatype xsd:integer ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:requiresPart ; sh:class vmfg:Part ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:requiredAtOperation ; sh:class vmfg:Operation ; sh:maxCount 1 ] .
+
+vmfg:ShopResourceShape a sh:NodeShape ;
+    sh:targetClass vmfg:ShopResource ;
+    sh:property [ sh:path vmfg:sourceKey ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:resourceId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+vmfg:ResourceCapacityShape a sh:NodeShape ;
+    sh:targetClass vmfg:ResourceCapacity ;
+    sh:property [ sh:path vmfg:sourceKey ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:siteId ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:shift1CapacityHours ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:shift2CapacityHours ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:shift3CapacityHours ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:efficiencyFactor ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:maxCount 1 ] .
+
+vmfg:UserDefinedFieldDefinitionShape a sh:NodeShape ;
+    sh:targetClass vmfg:UserDefinedFieldDefinition ;
+    sh:property [ sh:path vmfg:sourceKey ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:programId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:fieldId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:fieldName ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:dataTypeCode ; sh:datatype xsd:integer ; sh:maxCount 1 ] .
+
+vmfg:UserDefinedFieldShape a sh:NodeShape ;
+    sh:targetClass vmfg:UserDefinedField ;
+    sh:property [ sh:path vmfg:sourceKey ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:programId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:fieldId ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:documentKey ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path vmfg:dataTypeCode ; sh:datatype xsd:integer ; sh:maxCount 1 ] ;
+    sh:xone (
+        [ sh:property [ sh:path vmfg:stringValue ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ]
+        [ sh:property [ sh:path vmfg:numberValue ; sh:datatype xsd:decimal ; sh:minCount 1 ; sh:maxCount 1 ] ]
+        [ sh:property [ sh:path vmfg:booleanValue ; sh:datatype xsd:boolean ; sh:minCount 1 ; sh:maxCount 1 ] ]
+        [ sh:property [ sh:path vmfg:dateValue ; sh:datatype xsd:dateTime ; sh:minCount 1 ; sh:maxCount 1 ] ]
+    ) .

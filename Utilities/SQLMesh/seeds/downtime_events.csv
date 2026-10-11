@@ -1,0 +1,101 @@
+event_id,line_id,equipment_id,event_start_time,event_end_time,downtime_duration_minutes,downtime_category,downtime_reason,impact_severity,production_loss_units,cost_impact,resolution_method,reported_by,created_at
+1,8,50,2024-11-02 16:48:56,2024-11-02 18:25:56,97,Planned Maintenance,Reason for 97 min downtime event,Critical,37,4022.66,Operator intervention,Supervisor C,2024-11-02 16:48:56
+2,15,60,2024-05-23 15:23:43,2024-05-23 22:13:43,410,Unplanned Breakdown,Reason for 410 min downtime event,Critical,45,5160.39,Part replacement,Shift Lead A,2024-05-23 15:23:43
+3,17,60,2024-08-23 07:24:42,2024-08-23 08:10:42,46,Planned Maintenance,Reason for 46 min downtime event,Major,49,1942.14,External support,Maintenance D,2024-08-23 07:24:42
+4,8,62,2024-09-29 23:20:45,2024-09-30 06:00:45,400,Operator Unavailable,Reason for 400 min downtime event,Minor,7,7464.21,Operator intervention,Supervisor C,2024-09-29 23:20:45
+5,1,24,2024-06-06 08:18:39,2024-06-06 13:04:39,286,Quality Hold,Reason for 286 min downtime event,Major,9,12475.74,Scheduled end,Supervisor C,2024-06-06 08:18:39
+6,6,50,2024-12-27 16:42:44,2024-12-27 22:40:44,358,Planned Maintenance,Reason for 358 min downtime event,Critical,72,6053.9,Software restart,Maintenance D,2024-12-27 16:42:44
+7,5,58,2024-12-16 19:13:36,2024-12-16 22:54:36,221,Unplanned Breakdown,Reason for 221 min downtime event,Minor,66,9581.72,Part replacement,Maintenance D,2024-12-16 19:13:36
+8,5,2,2024-08-01 15:36:18,2024-08-01 17:59:18,143,Quality Hold,Reason for 143 min downtime event,Minor,48,5337.86,Recalibration,Maintenance D,2024-08-01 15:36:18
+9,7,52,2024-02-04 07:31:09,2024-02-04 10:39:09,188,Quality Hold,Reason for 188 min downtime event,Major,88,2920.49,Scheduled end,Operator B,2024-02-04 07:31:09
+10,17,61,2024-04-21 19:15:38,2024-04-21 23:10:38,235,Changeover,Reason for 235 min downtime event,Critical,52,10771.66,External support,Shift Lead A,2024-04-21 19:15:38
+11,13,30,2024-05-14 18:49:25,2024-05-14 23:31:25,282,Unplanned Breakdown,Reason for 282 min downtime event,Critical,88,6594.39,Software restart,Operator B,2024-05-14 18:49:25
+12,1,19,2024-05-12 00:13:09,2024-05-12 03:25:09,192,Quality Hold,Reason for 192 min downtime event,Critical,73,5131.16,Part replacement,Supervisor C,2024-05-12 00:13:09
+13,9,2,2024-11-01 16:21:40,2024-11-01 20:15:40,234,Material Shortage,Reason for 234 min downtime event,Critical,87,8482.38,Software restart,Maintenance D,2024-11-01 16:21:40
+14,16,65,2024-08-18 02:06:12,2024-08-18 08:38:12,392,Changeover,Reason for 392 min downtime event,Major,63,15063.46,Software restart,Supervisor C,2024-08-18 02:06:12
+15,3,4,2024-03-22 15:53:11,2024-03-22 23:23:11,450,Unplanned Breakdown,Reason for 450 min downtime event,Minor,33,7148.93,Recalibration,Maintenance D,2024-03-22 15:53:11
+16,5,59,2024-04-17 14:39:08,2024-04-17 21:17:08,398,Operator Unavailable,Reason for 398 min downtime event,Critical,23,4929.41,Recalibration,Operator B,2024-04-17 14:39:08
+17,4,14,2024-11-25 05:21:37,2024-11-25 09:42:37,261,Power Outage,Reason for 261 min downtime event,Critical,59,11276.58,External support,Maintenance D,2024-11-25 05:21:37
+18,16,14,2024-08-06 22:05:27,2024-08-06 23:21:27,76,Quality Hold,Reason for 76 min downtime event,Critical,7,3129.49,Recalibration,Supervisor C,2024-08-06 22:05:27
+19,18,52,2024-02-28 10:31:13,2024-02-28 13:03:13,152,Changeover,Reason for 152 min downtime event,Minor,29,1716.88,Recalibration,Shift Lead A,2024-02-28 10:31:13
+20,7,23,2024-08-05 21:03:56,2024-08-05 21:22:56,19,Unplanned Breakdown,Reason for 19 min downtime event,Critical,23,757.63,Scheduled end,Shift Lead A,2024-08-05 21:03:56
+21,13,35,2024-02-18 09:41:23,2024-02-18 11:30:23,109,Quality Hold,Reason for 109 min downtime event,Critical,7,2931.24,Part replacement,Shift Lead A,2024-02-18 09:41:23
+22,1,28,2024-08-18 16:54:49,2024-08-19 00:41:49,467,Power Outage,Reason for 467 min downtime event,Critical,51,21927.53,Operator intervention,Shift Lead A,2024-08-18 16:54:49
+23,10,26,2024-06-24 00:23:32,2024-06-24 00:54:32,31,Unplanned Breakdown,Reason for 31 min downtime event,Critical,52,1345.56,Recalibration,Supervisor C,2024-06-24 00:23:32
+24,8,15,2024-05-23 13:42:59,2024-05-23 18:52:59,310,Power Outage,Reason for 310 min downtime event,Major,20,10083.7,Operator intervention,Maintenance D,2024-05-23 13:42:59
+25,18,29,2024-05-03 20:12:52,2024-05-03 20:29:52,17,Changeover,Reason for 17 min downtime event,Critical,94,440.44,Software restart,Supervisor C,2024-05-03 20:12:52
+26,12,42,2024-02-01 05:41:23,2024-02-01 13:27:23,466,Planned Maintenance,Reason for 466 min downtime event,Minor,77,8741.86,Scheduled end,Operator B,2024-02-01 05:41:23
+27,6,64,2024-03-06 16:49:17,2024-03-06 23:02:17,373,Unplanned Breakdown,Reason for 373 min downtime event,Minor,11,6118.17,Scheduled end,Shift Lead A,2024-03-06 16:49:17
+28,2,39,2024-07-17 08:05:25,2024-07-17 11:18:25,193,Power Outage,Reason for 193 min downtime event,Minor,54,2389.34,Operator intervention,Maintenance D,2024-07-17 08:05:25
+29,11,22,2024-08-19 14:23:10,2024-08-19 20:08:10,345,Quality Hold,Reason for 345 min downtime event,Critical,70,12344.39,Software restart,Operator B,2024-08-19 14:23:10
+30,20,48,2024-10-28 17:48:47,2024-10-28 20:18:47,150,Planned Maintenance,Reason for 150 min downtime event,Major,92,1503.42,Scheduled end,Maintenance D,2024-10-28 17:48:47
+31,16,47,2024-06-03 00:06:05,2024-06-03 03:55:05,229,Power Outage,Reason for 229 min downtime event,Major,2,3843.96,Scheduled end,Shift Lead A,2024-06-03 00:06:05
+32,6,6,2024-12-06 03:45:37,2024-12-06 08:49:37,304,Unplanned Breakdown,Reason for 304 min downtime event,Critical,98,3985.49,Software restart,Supervisor C,2024-12-06 03:45:37
+33,9,34,2024-05-01 22:33:44,2024-05-01 23:04:44,31,Changeover,Reason for 31 min downtime event,Minor,4,1035.13,Recalibration,Operator B,2024-05-01 22:33:44
+34,7,23,2024-06-27 07:00:21,2024-06-27 09:21:21,141,Planned Maintenance,Reason for 141 min downtime event,Critical,31,3426.42,Part replacement,Operator B,2024-06-27 07:00:21
+35,11,45,2024-07-10 23:44:15,2024-07-11 06:51:15,427,Power Outage,Reason for 427 min downtime event,Critical,14,14828.72,External support,Operator B,2024-07-10 23:44:15
+36,2,29,2024-06-21 10:19:42,2024-06-21 13:22:42,183,Power Outage,Reason for 183 min downtime event,Major,74,5521.43,Scheduled end,Supervisor C,2024-06-21 10:19:42
+37,7,32,2024-12-21 07:34:42,2024-12-21 13:08:42,334,Unplanned Breakdown,Reason for 334 min downtime event,Critical,37,14693.35,Operator intervention,Operator B,2024-12-21 07:34:42
+38,1,4,2024-10-30 15:32:15,2024-10-30 16:54:15,82,Material Shortage,Reason for 82 min downtime event,Minor,95,3248.57,External support,Operator B,2024-10-30 15:32:15
+39,9,35,2024-03-03 04:35:57,2024-03-03 11:55:57,440,Planned Maintenance,Reason for 440 min downtime event,Critical,74,5412.57,Software restart,Maintenance D,2024-03-03 04:35:57
+40,20,18,2024-06-09 22:16:20,2024-06-10 03:38:20,322,Planned Maintenance,Reason for 322 min downtime event,Critical,18,6346.32,Operator intervention,Maintenance D,2024-06-09 22:16:20
+41,15,40,2024-04-11 02:44:23,2024-04-11 07:05:23,261,Changeover,Reason for 261 min downtime event,Major,35,4280.95,Part replacement,Maintenance D,2024-04-11 02:44:23
+42,9,12,2024-04-03 21:40:26,2024-04-04 04:31:26,411,Changeover,Reason for 411 min downtime event,Critical,57,9730.8,Part replacement,Operator B,2024-04-03 21:40:26
+43,3,30,2024-04-02 14:24:02,2024-04-02 18:27:02,243,Planned Maintenance,Reason for 243 min downtime event,Major,47,4686.2,Operator intervention,Operator B,2024-04-02 14:24:02
+44,11,20,2024-08-04 09:58:42,2024-08-04 14:15:42,257,Operator Unavailable,Reason for 257 min downtime event,Minor,80,12005.08,Software restart,Maintenance D,2024-08-04 09:58:42
+45,1,55,2024-02-22 05:09:54,2024-02-22 11:23:54,374,Planned Maintenance,Reason for 374 min downtime event,Major,98,7159.39,Part replacement,Operator B,2024-02-22 05:09:54
+46,9,41,2024-12-03 19:24:27,2024-12-04 03:21:27,477,Power Outage,Reason for 477 min downtime event,Critical,34,5935.49,Recalibration,Shift Lead A,2024-12-03 19:24:27
+47,8,43,2024-02-02 12:52:57,2024-02-02 19:00:57,368,Material Shortage,Reason for 368 min downtime event,Critical,40,5064.96,Recalibration,Operator B,2024-02-02 12:52:57
+48,4,39,2024-02-21 21:11:09,2024-02-22 02:53:09,342,Unplanned Breakdown,Reason for 342 min downtime event,Minor,6,10498.37,Operator intervention,Maintenance D,2024-02-21 21:11:09
+49,5,34,2024-10-29 16:47:03,2024-10-29 22:28:03,341,Quality Hold,Reason for 341 min downtime event,Minor,16,8516.29,External support,Supervisor C,2024-10-29 16:47:03
+50,17,31,2024-03-08 05:34:56,2024-03-08 06:36:56,62,Operator Unavailable,Reason for 62 min downtime event,Major,80,2598.78,Software restart,Shift Lead A,2024-03-08 05:34:56
+51,1,39,2024-10-29 06:33:56,2024-10-29 13:04:56,391,Power Outage,Reason for 391 min downtime event,Minor,61,11614.86,Operator intervention,Maintenance D,2024-10-29 06:33:56
+52,19,26,2024-11-20 13:54:56,2024-11-20 21:13:56,439,Unplanned Breakdown,Reason for 439 min downtime event,Critical,96,7377.93,Scheduled end,Maintenance D,2024-11-20 13:54:56
+53,20,8,2024-06-30 03:28:07,2024-06-30 06:46:07,198,Unplanned Breakdown,Reason for 198 min downtime event,Major,59,7653.98,External support,Supervisor C,2024-06-30 03:28:07
+54,17,43,2024-08-09 10:00:36,2024-08-09 10:44:36,44,Operator Unavailable,Reason for 44 min downtime event,Minor,100,1820.52,External support,Operator B,2024-08-09 10:00:36
+55,11,56,2024-10-04 06:15:17,2024-10-04 13:06:17,411,Operator Unavailable,Reason for 411 min downtime event,Major,17,10760.49,Recalibration,Shift Lead A,2024-10-04 06:15:17
+56,16,17,2024-09-17 09:41:21,2024-09-17 13:19:21,218,Operator Unavailable,Reason for 218 min downtime event,Minor,99,3647.42,Software restart,Operator B,2024-09-17 09:41:21
+57,12,11,2024-11-22 11:36:36,2024-11-22 18:08:36,392,Power Outage,Reason for 392 min downtime event,Minor,50,6566.36,Recalibration,Operator B,2024-11-22 11:36:36
+58,4,24,2024-04-03 12:45:22,2024-04-03 13:04:22,19,Material Shortage,Reason for 19 min downtime event,Minor,84,899.71,Operator intervention,Operator B,2024-04-03 12:45:22
+59,18,53,2024-06-02 16:16:58,2024-06-02 17:59:58,103,Unplanned Breakdown,Reason for 103 min downtime event,Minor,97,2068.04,Recalibration,Shift Lead A,2024-06-02 16:16:58
+60,6,32,2024-02-16 06:10:20,2024-02-16 13:10:20,420,Material Shortage,Reason for 420 min downtime event,Critical,36,13771.49,Recalibration,Shift Lead A,2024-02-16 06:10:20
+61,14,51,2024-01-07 22:02:42,2024-01-08 04:16:42,374,Unplanned Breakdown,Reason for 374 min downtime event,Minor,56,4334.77,Operator intervention,Maintenance D,2024-01-07 22:02:42
+62,11,7,2024-01-01 09:32:57,2024-01-01 16:52:57,440,Changeover,Reason for 440 min downtime event,Major,55,7818.01,Part replacement,Maintenance D,2024-01-01 09:32:57
+63,1,30,2024-05-25 23:33:25,2024-05-26 00:08:25,35,Changeover,Reason for 35 min downtime event,Critical,6,1382.25,Part replacement,Operator B,2024-05-25 23:33:25
+64,7,23,2024-05-05 13:29:53,2024-05-05 20:14:53,405,Unplanned Breakdown,Reason for 405 min downtime event,Critical,38,17598.93,Part replacement,Shift Lead A,2024-05-05 13:29:53
+65,1,6,2024-10-30 08:05:23,2024-10-30 11:35:23,210,Quality Hold,Reason for 210 min downtime event,Critical,67,3305.96,Operator intervention,Shift Lead A,2024-10-30 08:05:23
+66,13,15,2024-06-13 14:33:45,2024-06-13 17:11:45,158,Operator Unavailable,Reason for 158 min downtime event,Minor,53,6831.63,Part replacement,Maintenance D,2024-06-13 14:33:45
+67,10,28,2024-08-11 04:43:33,2024-08-11 08:18:33,215,Operator Unavailable,Reason for 215 min downtime event,Minor,91,10228.78,Part replacement,Shift Lead A,2024-08-11 04:43:33
+68,15,23,2024-10-20 11:51:12,2024-10-20 14:02:12,131,Unplanned Breakdown,Reason for 131 min downtime event,Major,54,1782.29,Operator intervention,Operator B,2024-10-20 11:51:12
+69,7,53,2024-04-24 04:03:11,2024-04-24 06:03:11,120,Planned Maintenance,Reason for 120 min downtime event,Critical,82,5696.91,Scheduled end,Supervisor C,2024-04-24 04:03:11
+70,10,18,2024-05-24 03:23:29,2024-05-24 07:20:29,237,Unplanned Breakdown,Reason for 237 min downtime event,Minor,12,6058.57,Software restart,Supervisor C,2024-05-24 03:23:29
+71,6,60,2024-02-29 07:09:32,2024-02-29 11:19:32,250,Quality Hold,Reason for 250 min downtime event,Minor,49,7733.59,Operator intervention,Maintenance D,2024-02-29 07:09:32
+72,7,33,2024-01-17 15:21:51,2024-01-17 22:55:51,454,Changeover,Reason for 454 min downtime event,Major,23,15865.95,Part replacement,Supervisor C,2024-01-17 15:21:51
+73,11,44,2024-08-07 02:31:44,2024-08-07 06:48:44,257,Planned Maintenance,Reason for 257 min downtime event,Minor,70,7107.39,Part replacement,Maintenance D,2024-08-07 02:31:44
+74,7,23,2024-11-13 22:24:34,2024-11-14 03:28:34,304,Material Shortage,Reason for 304 min downtime event,Minor,23,3540.7,Recalibration,Supervisor C,2024-11-13 22:24:34
+75,10,35,2024-10-13 07:58:50,2024-10-13 12:00:50,242,Power Outage,Reason for 242 min downtime event,Major,9,9859.88,Recalibration,Operator B,2024-10-13 07:58:50
+76,11,26,2024-05-17 12:34:25,2024-05-17 16:28:25,234,Changeover,Reason for 234 min downtime event,Major,73,4731.75,Scheduled end,Shift Lead A,2024-05-17 12:34:25
+77,10,48,2024-03-25 13:04:06,2024-03-25 20:46:06,462,Operator Unavailable,Reason for 462 min downtime event,Critical,48,20181.39,Recalibration,Maintenance D,2024-03-25 13:04:06
+78,9,60,2024-10-13 20:40:25,2024-10-13 21:16:25,36,Unplanned Breakdown,Reason for 36 min downtime event,Critical,66,984.78,External support,Supervisor C,2024-10-13 20:40:25
+79,1,44,2024-02-02 23:46:08,2024-02-03 00:07:08,21,Unplanned Breakdown,Reason for 21 min downtime event,Minor,43,735.69,Software restart,Maintenance D,2024-02-02 23:46:08
+80,13,36,2024-05-17 06:20:56,2024-05-17 07:21:56,61,Unplanned Breakdown,Reason for 61 min downtime event,Major,99,2049.52,Part replacement,Shift Lead A,2024-05-17 06:20:56
+81,18,10,2024-10-24 08:01:24,2024-10-24 12:20:24,259,Material Shortage,Reason for 259 min downtime event,Minor,54,3107.08,Operator intervention,Maintenance D,2024-10-24 08:01:24
+82,15,65,2024-02-18 10:41:22,2024-02-18 12:49:22,128,Changeover,Reason for 128 min downtime event,Major,35,2366.87,Part replacement,Maintenance D,2024-02-18 10:41:22
+83,15,45,2024-07-11 02:59:54,2024-07-11 07:51:54,292,Quality Hold,Reason for 292 min downtime event,Major,53,12837.25,Recalibration,Maintenance D,2024-07-11 02:59:54
+84,3,48,2024-04-29 14:42:50,2024-04-29 19:40:50,298,Operator Unavailable,Reason for 298 min downtime event,Major,88,4018.56,Software restart,Shift Lead A,2024-04-29 14:42:50
+85,16,22,2024-01-31 05:25:49,2024-01-31 09:31:49,246,Changeover,Reason for 246 min downtime event,Critical,1,10106.38,Software restart,Supervisor C,2024-01-31 05:25:49
+86,18,50,2024-01-21 16:32:42,2024-01-21 22:19:42,347,Planned Maintenance,Reason for 347 min downtime event,Major,30,8513.17,Operator intervention,Shift Lead A,2024-01-21 16:32:42
+87,8,57,2024-06-21 01:19:44,2024-06-21 03:30:44,131,Material Shortage,Reason for 131 min downtime event,Major,75,3978.19,Recalibration,Shift Lead A,2024-06-21 01:19:44
+88,15,28,2024-07-21 17:35:13,2024-07-21 23:20:13,345,Planned Maintenance,Reason for 345 min downtime event,Major,60,13121.63,Part replacement,Operator B,2024-07-21 17:35:13
+89,14,61,2024-04-03 06:40:39,2024-04-03 10:30:39,230,Changeover,Reason for 230 min downtime event,Minor,35,9440.13,Scheduled end,Shift Lead A,2024-04-03 06:40:39
+90,17,56,2024-09-19 16:27:40,2024-09-19 21:02:40,275,Material Shortage,Reason for 275 min downtime event,Critical,64,11109.2,External support,Shift Lead A,2024-09-19 16:27:40
+91,7,54,2024-07-17 17:08:19,2024-07-17 23:47:19,399,Unplanned Breakdown,Reason for 399 min downtime event,Major,87,16968.78,External support,Maintenance D,2024-07-17 17:08:19
+92,11,42,2024-07-23 00:52:34,2024-07-23 07:26:34,394,Power Outage,Reason for 394 min downtime event,Critical,85,13975.98,Scheduled end,Operator B,2024-07-23 00:52:34
+93,15,8,2024-03-12 04:17:39,2024-03-12 10:27:39,370,Material Shortage,Reason for 370 min downtime event,Minor,71,9954.29,External support,Shift Lead A,2024-03-12 04:17:39
+94,15,4,2024-10-06 14:37:01,2024-10-06 20:41:01,364,Quality Hold,Reason for 364 min downtime event,Major,26,6360.08,Part replacement,Shift Lead A,2024-10-06 14:37:01
+95,1,61,2024-07-24 05:55:46,2024-07-24 11:05:46,310,Unplanned Breakdown,Reason for 310 min downtime event,Minor,74,5298.66,Scheduled end,Shift Lead A,2024-07-24 05:55:46
+96,18,21,2024-12-10 20:37:51,2024-12-11 03:49:51,432,Quality Hold,Reason for 432 min downtime event,Critical,71,6979.71,External support,Supervisor C,2024-12-10 20:37:51
+97,3,59,2024-04-14 08:29:49,2024-04-14 12:41:49,252,Operator Unavailable,Reason for 252 min downtime event,Critical,68,6782.72,Software restart,Supervisor C,2024-04-14 08:29:49
+98,10,21,2024-03-28 14:45:13,2024-03-28 20:00:13,315,Planned Maintenance,Reason for 315 min downtime event,Critical,91,11912.75,Scheduled end,Operator B,2024-03-28 14:45:13
+99,10,3,2024-02-14 08:38:37,2024-02-14 11:40:37,182,Planned Maintenance,Reason for 182 min downtime event,Major,45,7462.64,Scheduled end,Maintenance D,2024-02-14 08:38:37
+100,20,23,2024-08-18 00:58:30,2024-08-18 04:27:30,209,Planned Maintenance,Reason for 209 min downtime event,Minor,43,8941.24,Operator intervention,Operator B,2024-08-18 00:58:30

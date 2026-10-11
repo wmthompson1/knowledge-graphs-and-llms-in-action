@@ -1,0 +1,134 @@
+@prefix mfg:   <https://wmthompson1.github.io/create-context-graph/mfg#> .
+@prefix mfgm:  <https://wmthompson1.github.io/create-context-graph/mfgm#> .
+@prefix mfgq:  <https://wmthompson1.github.io/create-context-graph/mfgq#> .
+@prefix sapo:  <https://sap-ontology.deloitte.com/schema#> .
+@prefix salt:  <https://wmthompson1.github.io/create-context-graph/salt#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+
+#################################################################
+# Unified Manufacturing + Quality Ontology
+# Combines mfgm + mfgq into a single Deloitte-aligned domain.
+#################################################################
+
+#################################################################
+# Manufacturing Classes
+#################################################################
+
+mfg:WorkOrder a owl:Class ;
+    rdfs:label "Work Order" ;
+    rdfs:comment "Manufacturing work order representing a production instance." ;
+    sapo:mapsToDomain sapo:ProcessInstance .
+
+mfg:Part a owl:Class ;
+    rdfs:label "Part" ;
+    rdfs:comment "Manufactured or purchased part." ;
+    sapo:mapsToDomain sapo:MasterData .
+
+mfg:BillOfMaterials a owl:Class ;
+    rdfs:label "Bill of Materials" ;
+    rdfs:comment "Structured component hierarchy for a manufactured part." ;
+    sapo:mapsToDomain sapo:DataObject .
+
+mfg:MaterialRequirement a owl:Class ;
+    rdfs:label "Material Requirement" ;
+    rdfs:comment "Material requirement for a work order or production step." ;
+    sapo:mapsToDomain sapo:Input .
+
+mfg:WorkCenter a owl:Class ;
+    rdfs:label "Work Center" ;
+    rdfs:comment "Manufacturing resource node or production center." ;
+    sapo:mapsToDomain sapo:SystemComponent .
+
+mfg:ProductionEvent a owl:Class ;
+    rdfs:label "Production Event" ;
+    rdfs:comment "Execution event occurring during manufacturing." ;
+    sapo:mapsToDomain sapo:Event .
+
+#################################################################
+# Quality Classes
+#################################################################
+
+mfg:Inspection a owl:Class ;
+    rdfs:label "Inspection" ;
+    rdfs:comment "Quality inspection activity." ;
+    sapo:mapsToDomain sapo:Activity .
+
+mfg:QualityEvent a owl:Class ;
+    rdfs:label "Quality Event" ;
+    rdfs:comment "Event representing a quality deviation or inspection result." ;
+    sapo:mapsToDomain sapo:Event .
+
+mfg:NonConformanceReport a owl:Class ;
+    rdfs:label "Non-Conformance Report" ;
+    rdfs:comment "Formal record of a quality deviation." ;
+    sapo:mapsToDomain sapo:Issue .
+
+mfg:Defect a owl:Class ;
+    rdfs:label "Defect" ;
+    rdfs:comment "Observed defect during inspection or production." ;
+    sapo:mapsToDomain sapo:Finding .
+
+mfg:CorrectiveAction a owl:Class ;
+    rdfs:label "Corrective Action" ;
+    rdfs:comment "Action taken to remediate a quality issue." ;
+    sapo:mapsToDomain sapo:Remediation .
+
+mfg:RootCause a owl:Class ;
+    rdfs:label "Root Cause" ;
+    rdfs:comment "Root cause analysis result for a quality deviation." ;
+    sapo:mapsToDomain sapo:Cause .
+
+#################################################################
+# Cross-Domain Bindings (Manufacturing ↔ Quality)
+#################################################################
+
+mfg:QualityEvent mfg:affectsPart mfg:Part ;
+    rdfs:comment "Quality event affecting a manufactured part." .
+
+mfg:QualityEvent mfg:associatedWithOrder mfg:WorkOrder ;
+    rdfs:comment "Quality event associated with a manufacturing work order." .
+
+mfg:Inspection mfg:inspectsPart mfg:Part ;
+    rdfs:comment "Inspection performed on a part." .
+
+mfg:NonConformanceReport mfg:associatedWithInspection mfg:Inspection ;
+    rdfs:comment "NCR linked to an inspection." .
+
+mfg:CorrectiveAction mfg:addressesDefect mfg:Defect ;
+    rdfs:comment "Corrective action addressing a defect." .
+
+mfg:RootCause mfg:explainsDefect mfg:Defect ;
+    rdfs:comment "Root cause explaining a defect." .
+
+#################################################################
+# Unified Properties
+#################################################################
+
+mfg:hasEvent a owl:ObjectProperty ;
+    rdfs:label "has event" ;
+    rdfs:domain mfg:WorkOrder ;
+    rdfs:range mfg:ProductionEvent .
+
+mfg:hasQualityEvent a owl:ObjectProperty ;
+    rdfs:label "has quality event" ;
+    rdfs:domain mfg:WorkOrder ;
+    rdfs:range mfg:QualityEvent .
+
+mfg:hasInspection a owl:ObjectProperty ;
+    rdfs:label "has inspection" ;
+    rdfs:domain mfg:Part ;
+    rdfs:range mfg:Inspection .
+
+mfg:hasNCR a owl:ObjectProperty ;
+    rdfs:label "has NCR" ;
+    rdfs:domain mfg:Part ;
+    rdfs:range mfg:NonConformanceReport .
+
+#################################################################
+# Deloitte Alignment Hooks
+#################################################################
+
+mfg:mapsToSAPO a owl:ObjectProperty ;
+    rdfs:label "maps to Deloitte SAP Ontology" ;
+    rdfs:comment "Used to align unified manufacturing + quality classes to Deloitte sap-ontology domains." .

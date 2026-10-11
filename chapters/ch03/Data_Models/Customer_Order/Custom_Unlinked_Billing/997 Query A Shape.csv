@@ -1,0 +1,19 @@
+TABLE_TYPE,dbms,TABLE_CATALOG,TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME,ORDINAL_POSITION,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,SPROC,1,varchar,5
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,COST ITEM,2,int,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,POS,3,nvarchar,20
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,PART NUMBER,4,nvarchar,30
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,RAMAC,5,nvarchar,15
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,BILLED QTY,6,decimal,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,UNIT PRICE,7,float,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,EXTENDED DOLLARS,8,float,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,EXPEDITE DOLLARS,9,float,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,SPECIAL FEE,10,int,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,SERVICE_FEE,11,int,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,SETUP HOURS,12,float,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,RUN HOURS,13,float,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,EXPEDITE HOURS,14,int,NULL
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,PACK SLIPS / DATE,15,nvarchar,4000
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,INVOICE ID,16,nvarchar,15
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,COMMENTS,17,varchar,20
+BASE TABLE,sqlserver,Staging,dbo,QueryA_Shape,SORTATION,18,varchar,1

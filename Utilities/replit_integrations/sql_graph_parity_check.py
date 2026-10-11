@@ -1,0 +1,360 @@
+"""sql_graph_parity_check.py — prove graph_metadata.json == the SQLite graph tables.
+
+The exporter (export_graph_metadata.py) materializes the canonical graph into the
+``sql_graph_nodes`` / ``sql_graph_edges`` tables and then serializes
+graph_metadata.json FROM those tables.  This check independently re-reads both
+artifacts and asserts they agree node-for-node and edge-for-edge — so a stale or
+hand-edited JSON (or a stale table) fails the build.
+
+What is compared (the document-level ``synced_at`` is intentionally ignored — it
+is a fresh timestamp on every run and is not stored in the tables):
+  * row counts per collection
+  * the set of ``_key`` values
+  * every field of every node/edge, by ``_key``
+  * the emission order (JSON order == ``ORDER BY ordinal`` read-back order)
+
+Exit codes:
+    0  — parity holds (or skipped because inputs are absent in --skip-on-missing)
+    1  — parity mismatch
+    2  — a required input was missing (and --skip-on-missing not set)
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import os
+import sqlite3
+import sys
+from datetime import datetime, timezone
+from typing import Any, Dict, List
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+if _HERE not in sys.path:
+    sys.path.insert(0, _HERE)
+
+import export_graph_metadata as ex  # noqa: E402
+
+
+def _load_json_graph(path: str) -> tuple[List[dict], List[dict]]:
+    with open(path, encoding="utf-8") as fh:
+        doc = json.load(fh)
+    return doc["nodes"], doc["edges"]
+
+
+def _index_by_key(items: List[dict]) -> Dict[str, dict]:
+    return {it["_key"]: it for it in items}
+
+
+def _compare(
+    label: str,
+    json_items: List[dict],
+    db_items: List[dict],
+    *,
+    check_order: bool = True,
+    left: str = "JSON",
+    right: str = "SQLite",
+) -> List[str]:
+    """Compare two flat lists of node/edge dicts keyed by ``_key``.
+
+    ``check_order`` asserts the two lists are in the same order — true for the
+    JSON↔SQLite check (both are deterministically ordered by ``ordinal``), but
+    false for the SQLite↔AQL check (ArangoDB returns documents unordered).
+    ``left``/``right`` only label the two sides in error messages.
+    """
+    errors: List[str] = []
+    j = _index_by_key(json_items)
+    d = _index_by_key(db_items)
+
+    if len(json_items) != len(j):
+        errors.append(f"{label}: duplicate _key in JSON ({len(json_items)} rows, {len(j)} unique)")
+    if len(db_items) != len(d):
+        errors.append(f"{label}: duplicate _key in {right} ({len(db_items)} rows, {len(d)} unique)")
+    if len(json_items) != len(db_items):
+        errors.append(f"{label}: count mismatch — {left}={len(json_items)} {right}={len(db_items)}")
+
+    only_json = sorted(set(j) - set(d))
+    only_db = sorted(set(d) - set(j))
+    if only_json:
+        errors.append(f"{label}: {len(only_json)} _key(s) in {left} but not {right}, e.g. {only_json[:5]}")
+    if only_db:
+        errors.append(f"{label}: {len(only_db)} _key(s) in {right} but not {left}, e.g. {only_db[:5]}")
+
+    for key in sorted(set(j) & set(d)):
+        jd, dd = j[key], d[key]
+        if jd != dd:
+            fields = sorted(set(jd) | set(dd))
+            bad = [f for f in fields if jd.get(f) != dd.get(f)]
+            errors.append(
+                f"{label}: field mismatch for {key!r} on {bad}: "
+                f"{left.lower()}={ {f: jd.get(f) for f in bad} } {right.lower()}={ {f: dd.get(f) for f in bad} }"
+            )
+
+    if check_order and [it["_key"] for it in json_items] != [it["_key"] for it in db_items]:
+        errors.append(f"{label}: emission order differs between {left} and {right} read-back")
+
+    return errors
+
+
+_REPORT_TITLE = "SQLite <-> graph_metadata.json parity report"
+
+
+def _write_report_file(path: str, text: str) -> None:
+    """Write a parity report to ``path`` (creating parent dirs) as UTF-8 with a
+    trailing newline. Shared by both parity checkers. A filesystem error here is
+    warned about but never masks the parity exit code — the report is a
+    convenience artifact, not the gate itself."""
+    try:
+        parent = os.path.dirname(os.path.abspath(path))
+        if parent:
+            os.makedirs(parent, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write(text if text.endswith("\n") else text + "\n")
+    except OSError as exc:
+        print(f"[parity] WARNING — could not write report file {path!r}: {exc}", file=sys.stderr)
+
+
+# Identity columns are emitted first; the remaining fields follow alphabetically.
+_COLUMNAR_LEAD = ("_key", "_id", "_from", "_to")
+
+
+def _columnar_fieldnames(items: List[dict]) -> List[str]:
+    """Column order for a columnar CSV: identity columns first, then the rest of
+    the fields (the union across all rows) alphabetically — so two dumps of the
+    same collection always have identical, diff-friendly headers."""
+    present: set[str] = set()
+    for it in items:
+        present.update(it.keys())
+    lead = [c for c in _COLUMNAR_LEAD if c in present]
+    rest = sorted(present - set(lead))
+    return lead + rest
+
+
+def _csv_value(value: Any) -> Any:
+    """Stable scalar rendering for a CSV cell so the two sides diff cleanly:
+    None -> '', bool -> 'true'/'false', dict/list -> compact sorted JSON."""
+    if value is None:
+        return ""
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, (dict, list)):
+        return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return value
+
+
+def _write_columnar_csv(path: str, items: List[dict]) -> None:
+    """Write ``items`` as a columnar CSV (one row per record, one column per
+    field, rows sorted by ``_key``). Like the report writer, a filesystem error
+    is warned about but never masks the parity exit code."""
+    try:
+        parent = os.path.dirname(os.path.abspath(path))
+        if parent:
+            os.makedirs(parent, exist_ok=True)
+        fieldnames = _columnar_fieldnames(items)
+        with open(path, "w", encoding="utf-8", newline="") as fh:
+            writer = csv.DictWriter(fh, fieldnames=fieldnames, extrasaction="ignore")
+            writer.writeheader()
+            for it in sorted(items, key=lambda d: str(d.get("_key", ""))):
+                writer.writerow({k: _csv_value(it.get(k)) for k in fieldnames})
+    except OSError as exc:
+        print(f"[parity] WARNING — could not write columnar CSV {path!r}: {exc}", file=sys.stderr)
+
+
+def _write_columnar_pair(csv_dir: str, prefix: str, nodes: List[dict], edges: List[dict]) -> None:
+    """Write ``<csv_dir>/<prefix>_nodes.csv`` and ``<csv_dir>/<prefix>_edges.csv``
+    — the per-record columnar reports used to confirm a metadata <-> graph resync."""
+    _write_columnar_csv(os.path.join(csv_dir, f"{prefix}_nodes.csv"), nodes)
+    _write_columnar_csv(os.path.join(csv_dir, f"{prefix}_edges.csv"), edges)
+
+
+def _clear_columnar_pair(csv_dir: str, prefix: str) -> None:
+    """Remove any previously written columnar CSVs for ``prefix`` up front, so a
+    skipped/failed run never leaves a stale snapshot behind. The presence of
+    these files therefore always means a fresh, successful dump from *this* run —
+    a CSV-only consumer can trust their existence as the freshness signal."""
+    for suffix in ("nodes", "edges"):
+        path = os.path.join(csv_dir, f"{prefix}_{suffix}.csv")
+        try:
+            if os.path.exists(path):
+                os.remove(path)
+        except OSError as exc:
+            print(f"[parity] WARNING — could not remove stale CSV {path!r}: {exc}", file=sys.stderr)
+
+
+def _build_report(
+    *,
+    title: str,
+    sources: List[tuple[str, str]],
+    left_name: str,
+    right_name: str,
+    node_counts: tuple[int, int],
+    edge_counts: tuple[int, int],
+    node_errors: List[str],
+    edge_errors: List[str],
+    status_line: str,
+) -> str:
+    """Render a human-readable parity report: header, count table, any diffs,
+    then the one-line status. Shared by both parity checkers so the SQL<->file
+    and SQL<->AQL reports look identical."""
+    generated = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    out = [title, f"generated: {generated}"]
+    out.extend(f"{name}: {value}" for name, value in sources)
+    out.append("")
+    out.append(f"{'collection':<14}{left_name:>10}{right_name:>12}{'Match':>9}")
+    out.append("-" * 45)
+    out.append(
+        f"{'nodes':<14}{node_counts[0]:>10}{node_counts[1]:>12}"
+        f"{('OK' if not node_errors else 'MISMATCH'):>9}"
+    )
+    out.append(
+        f"{'edges':<14}{edge_counts[0]:>10}{edge_counts[1]:>12}"
+        f"{('OK' if not edge_errors else 'MISMATCH'):>9}"
+    )
+    out.append("")
+    diffs = node_errors + edge_errors
+    if diffs:
+        out.append("differences:")
+        out.extend(f"  - {d}" for d in diffs)
+        out.append("")
+    out.append(status_line)
+    return "\n".join(out)
+
+
+def _write_status_report(report_file: str | None, title: str, status: str) -> None:
+    """Write a minimal report for skip/error outcomes where no comparison ran."""
+    if not report_file:
+        return
+    generated = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    _write_report_file(report_file, f"{title}\ngenerated: {generated}\n\n{status}")
+
+
+def check_parity(
+    db_path: str,
+    json_path: str,
+    skip_on_missing: bool = False,
+    report_file: str | None = None,
+    csv_dir: str | None = None,
+) -> int:
+    if csv_dir:
+        _clear_columnar_pair(csv_dir, "graph_metadata")
+
+    if not os.path.exists(json_path):
+        msg = f"graph JSON not found: {json_path}"
+        if skip_on_missing:
+            print(f"[sql_graph_parity] SKIP — {msg}")
+            _write_status_report(report_file, _REPORT_TITLE, f"SKIP — {msg}")
+            return 0
+        print(f"[sql_graph_parity] ERROR — {msg}", file=sys.stderr)
+        _write_status_report(report_file, _REPORT_TITLE, f"ERROR — {msg}")
+        return 2
+
+    if not os.path.exists(db_path):
+        msg = f"SQLite database not found: {db_path}"
+        if skip_on_missing:
+            print(f"[sql_graph_parity] SKIP — {msg}")
+            _write_status_report(report_file, _REPORT_TITLE, f"SKIP — {msg}")
+            return 0
+        print(f"[sql_graph_parity] ERROR — {msg}", file=sys.stderr)
+        _write_status_report(report_file, _REPORT_TITLE, f"ERROR — {msg}")
+        return 2
+
+    conn = sqlite3.connect(db_path)
+    try:
+        existing = {r[0] for r in conn.execute(
+            "SELECT name FROM sqlite_master WHERE type='table'"
+        )}
+        if not {ex.SQL_GRAPH_NODES_TABLE, ex.SQL_GRAPH_EDGES_TABLE} <= existing:
+            msg = (
+                f"{ex.SQL_GRAPH_NODES_TABLE} / {ex.SQL_GRAPH_EDGES_TABLE} not present "
+                "(run export_graph_metadata.py to materialize them)"
+            )
+            if skip_on_missing:
+                print(f"[sql_graph_parity] SKIP — {msg}")
+                _write_status_report(report_file, _REPORT_TITLE, f"SKIP — {msg}")
+                return 0
+            print(f"[sql_graph_parity] ERROR — {msg}", file=sys.stderr)
+            _write_status_report(report_file, _REPORT_TITLE, f"ERROR — {msg}")
+            return 2
+        db_nodes = ex._load_nodes_from_sqlite(conn)
+        db_edges = ex._load_edges_from_sqlite(conn)
+    finally:
+        conn.close()
+
+    json_nodes, json_edges = _load_json_graph(json_path)
+
+    if csv_dir:
+        _write_columnar_pair(csv_dir, "graph_metadata", json_nodes, json_edges)
+
+    node_errors = _compare("nodes", json_nodes, db_nodes)
+    edge_errors = _compare("edges", json_edges, db_edges)
+    errors = node_errors + edge_errors
+
+    if errors:
+        status_line = (
+            "[sql_graph_parity] FAIL — graph_metadata.json does not match the SQLite graph tables"
+        )
+    else:
+        status_line = (
+            f"[sql_graph_parity] OK — {len(json_nodes)} nodes and {len(json_edges)} edges "
+            "match between SQLite and graph_metadata.json"
+        )
+
+    if report_file:
+        _write_report_file(report_file, _build_report(
+            title=_REPORT_TITLE,
+            sources=[("db", db_path), ("json", json_path)],
+            left_name="JSON",
+            right_name="SQLite",
+            node_counts=(len(json_nodes), len(db_nodes)),
+            edge_counts=(len(json_edges), len(db_edges)),
+            node_errors=node_errors,
+            edge_errors=edge_errors,
+            status_line=status_line,
+        ))
+
+    if errors:
+        print("[sql_graph_parity] FAIL — graph_metadata.json does not match the SQLite graph tables:")
+        for e in errors:
+            print(f"  - {e}")
+        return 1
+
+    print(
+        f"[sql_graph_parity] OK — {len(json_nodes)} nodes and {len(json_edges)} edges "
+        "match between SQLite and graph_metadata.json"
+    )
+    return 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--db", default=ex.DB_PATH, help="Path to manufacturing.db (default: %(default)s)")
+    parser.add_argument("--json", default=ex.JSON_PATH, help="Path to graph_metadata.json (default: %(default)s)")
+    parser.add_argument(
+        "--skip-on-missing",
+        action="store_true",
+        help="Exit 0 instead of erroring when the DB, JSON, or tables are absent.",
+    )
+    parser.add_argument(
+        "--report-file",
+        default=None,
+        help="Also write the parity report (count table + status) to this file.",
+    )
+    parser.add_argument(
+        "--csv-dir",
+        default=None,
+        help="Also write columnar per-record CSVs (graph_metadata_nodes.csv / "
+        "graph_metadata_edges.csv) into this directory.",
+    )
+    args = parser.parse_args()
+    return check_parity(
+        args.db,
+        args.json,
+        skip_on_missing=args.skip_on_missing,
+        report_file=args.report_file,
+        csv_dir=args.csv_dir,
+    )
+
+
+if __name__ == "__main__":
+    sys.exit(main())

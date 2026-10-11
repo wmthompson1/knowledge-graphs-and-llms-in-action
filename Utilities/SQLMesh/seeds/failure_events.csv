@@ -1,0 +1,101 @@
+failure_id,equipment_id,failure_date,failure_type,failure_mode,severity_level,downtime_hours,repair_cost,parts_replaced,technician_assigned,failure_description,root_cause_analysis,preventive_action,mtbf_impact,created_at
+1,62,2024-09-29 21:41:03,Electrical,Calibration Drift,Critical,13.52,13516.65,Motor,Tech-C,Equipment failure requiring 13.5h repair,Improper maintenance,Increase inspection frequency,20.4,2024-09-29 21:41:03
+2,38,2024-10-03 21:38:35,Software,Sensor Malfunction,Minor,10.13,7722.82,Sensor,Tech-E,Equipment failure requiring 10.1h repair,Manufacturing defect,Update maintenance schedule,11.9,2024-10-03 21:38:35
+3,48,2024-12-09 22:23:38,Hydraulic,Sensor Malfunction,Minor,17.52,22815.55,Sensor,Tech-D,Equipment failure requiring 17.5h repair,Overload condition,Process adjustment,-15.1,2024-12-09 22:23:38
+4,15,2024-09-23 04:36:09,Pneumatic,Bearing Wear,Critical,22.72,4014.75,Belt,Tech-E,Equipment failure requiring 22.7h repair,Environmental stress,Process adjustment,10.9,2024-09-23 04:36:09
+5,18,2024-12-05 22:58:52,Software,Electrical Short,Minor,20.21,5094.52,Controller,Tech-D,Equipment failure requiring 20.2h repair,Wear and tear,Operator training,-48.6,2024-12-05 22:58:52
+6,34,2024-06-17 21:08:20,Software,Motor Burnout,Major,12.93,19972.72,Motor,Tech-D,Equipment failure requiring 12.9h repair,Environmental stress,Replace aging components,2.3,2024-06-17 21:08:20
+7,24,2024-07-19 19:03:19,Electrical,Bearing Wear,Critical,2.96,13440.0,Sensor,Tech-D,Equipment failure requiring 3.0h repair,Manufacturing defect,Increase inspection frequency,27.5,2024-07-19 19:03:19
+8,63,2024-10-22 08:56:52,Pneumatic,Motor Burnout,Major,14.83,23658.87,Sensor,Tech-E,Equipment failure requiring 14.8h repair,Wear and tear,Increase inspection frequency,23.8,2024-10-22 08:56:52
+9,22,2024-11-12 23:54:33,Mechanical,Vibration Damage,Major,22.05,14638.76,Sensor,Tech-C,Equipment failure requiring 22.1h repair,Improper maintenance,Process adjustment,36.1,2024-11-12 23:54:33
+10,48,2024-08-04 21:18:23,Mechanical,Controller Failure,Minor,5.38,12862.52,Bearing,Tech-D,Equipment failure requiring 5.4h repair,Under investigation,Increase inspection frequency,26.9,2024-08-04 21:18:23
+11,51,2024-12-08 11:35:35,Mechanical,Motor Burnout,Critical,5.09,14604.0,Controller,Tech-A,Equipment failure requiring 5.1h repair,Wear and tear,Replace aging components,45.9,2024-12-08 11:35:35
+12,61,2024-09-29 04:34:29,Software,Sensor Malfunction,Minor,20.54,21720.42,Sensor,Tech-A,Equipment failure requiring 20.5h repair,Improper maintenance,Operator training,-45.8,2024-09-29 04:34:29
+13,13,2024-01-31 19:20:14,Pneumatic,Motor Burnout,Critical,8.21,7443.47,Bearing,Tech-B,Equipment failure requiring 8.2h repair,Overload condition,Replace aging components,21.5,2024-01-31 19:20:14
+14,44,2024-04-15 14:34:49,Pneumatic,Vibration Damage,Critical,2.14,9788.31,Belt,Tech-B,Equipment failure requiring 2.1h repair,Environmental stress,Increase inspection frequency,-28.3,2024-04-15 14:34:49
+15,52,2024-06-27 18:33:21,Pneumatic,Hydraulic Leak,Critical,17.43,9154.13,Controller,Tech-A,Equipment failure requiring 17.4h repair,Under investigation,Increase inspection frequency,12.7,2024-06-27 18:33:21
+16,56,2024-10-05 11:42:53,Mechanical,Controller Failure,Minor,23.42,23912.85,Belt,Tech-B,Equipment failure requiring 23.4h repair,Wear and tear,Update maintenance schedule,36.1,2024-10-05 11:42:53
+17,24,2024-07-11 08:42:59,Software,Controller Failure,Critical,14.24,2980.92,Sensor,Tech-B,Equipment failure requiring 14.2h repair,Environmental stress,Process adjustment,-45.7,2024-07-11 08:42:59
+18,61,2024-03-09 18:29:52,Hydraulic,Sensor Malfunction,Major,21.91,1190.24,Motor,Tech-E,Equipment failure requiring 21.9h repair,Manufacturing defect,Operator training,49.7,2024-03-09 18:29:52
+19,44,2024-11-28 13:46:12,Electrical,Belt Snap,Critical,10.13,13270.38,Belt,Tech-C,Equipment failure requiring 10.1h repair,Overload condition,Increase inspection frequency,31.7,2024-11-28 13:46:12
+20,14,2024-12-15 15:00:29,Pneumatic,Vibration Damage,Major,2.3,16047.85,Motor,Tech-C,Equipment failure requiring 2.3h repair,Manufacturing defect,Update maintenance schedule,-9.0,2024-12-15 15:00:29
+21,16,2024-05-15 01:33:36,Mechanical,Hydraulic Leak,Minor,23.42,14225.3,Bearing,Tech-B,Equipment failure requiring 23.4h repair,Environmental stress,Replace aging components,-49.2,2024-05-15 01:33:36
+22,55,2024-03-14 17:43:00,Electrical,Electrical Short,Critical,10.36,6950.78,Sensor,Tech-C,Equipment failure requiring 10.4h repair,Environmental stress,Increase inspection frequency,2.9,2024-03-14 17:43:00
+23,28,2024-10-23 08:22:15,Mechanical,Calibration Drift,Major,14.41,14590.75,Bearing,Tech-D,Equipment failure requiring 14.4h repair,Environmental stress,Operator training,-24.0,2024-10-23 08:22:15
+24,1,2024-12-03 22:05:36,Pneumatic,Sensor Malfunction,Critical,15.23,12888.58,Sensor,Tech-E,Equipment failure requiring 15.2h repair,Manufacturing defect,Operator training,26.5,2024-12-03 22:05:36
+25,31,2024-06-12 12:45:54,Software,Electrical Short,Minor,3.13,22372.54,Motor,Tech-D,Equipment failure requiring 3.1h repair,Wear and tear,Operator training,-23.4,2024-06-12 12:45:54
+26,55,2024-04-10 00:46:28,Pneumatic,Electrical Short,Critical,15.58,19826.49,Belt,Tech-C,Equipment failure requiring 15.6h repair,Under investigation,Increase inspection frequency,-29.7,2024-04-10 00:46:28
+27,9,2024-04-16 21:30:17,Pneumatic,Vibration Damage,Critical,12.34,13935.23,Belt,Tech-C,Equipment failure requiring 12.3h repair,Manufacturing defect,Replace aging components,23.2,2024-04-16 21:30:17
+28,61,2024-04-19 14:44:05,Hydraulic,Bearing Wear,Major,7.17,2810.18,None,Tech-A,Equipment failure requiring 7.2h repair,Manufacturing defect,Increase inspection frequency,12.3,2024-04-19 14:44:05
+29,54,2024-02-27 12:42:38,Mechanical,Sensor Malfunction,Minor,5.04,3629.05,Motor,Tech-C,Equipment failure requiring 5.0h repair,Overload condition,Replace aging components,47.0,2024-02-27 12:42:38
+30,22,2024-05-14 02:28:09,Electrical,Motor Burnout,Minor,15.9,1353.83,None,Tech-C,Equipment failure requiring 15.9h repair,Environmental stress,Operator training,-36.6,2024-05-14 02:28:09
+31,8,2024-05-17 10:10:34,Hydraulic,Calibration Drift,Minor,2.06,7166.73,Controller,Tech-B,Equipment failure requiring 2.1h repair,Improper maintenance,Update maintenance schedule,-12.9,2024-05-17 10:10:34
+32,8,2024-05-02 20:03:19,Pneumatic,Vibration Damage,Minor,15.62,15595.08,Bearing,Tech-B,Equipment failure requiring 15.6h repair,Improper maintenance,Update maintenance schedule,4.4,2024-05-02 20:03:19
+33,61,2024-08-26 01:01:31,Electrical,Overheating,Major,14.3,21705.98,Controller,Tech-D,Equipment failure requiring 14.3h repair,Improper maintenance,Replace aging components,-32.3,2024-08-26 01:01:31
+34,19,2024-02-10 18:03:32,Electrical,Belt Snap,Critical,20.29,6992.86,None,Tech-B,Equipment failure requiring 20.3h repair,Improper maintenance,Operator training,-40.0,2024-02-10 18:03:32
+35,25,2024-09-30 22:38:28,Software,Overheating,Minor,1.71,11074.72,None,Tech-D,Equipment failure requiring 1.7h repair,Improper maintenance,Increase inspection frequency,-2.5,2024-09-30 22:38:28
+36,22,2024-03-17 19:53:05,Mechanical,Sensor Malfunction,Critical,9.88,1279.04,Sensor,Tech-B,Equipment failure requiring 9.9h repair,Environmental stress,Operator training,22.1,2024-03-17 19:53:05
+37,53,2024-02-05 20:47:53,Pneumatic,Calibration Drift,Critical,8.97,744.42,Belt,Tech-D,Equipment failure requiring 9.0h repair,Manufacturing defect,Update maintenance schedule,-47.0,2024-02-05 20:47:53
+38,43,2024-02-19 18:01:11,Pneumatic,Bearing Wear,Critical,6.22,20063.99,Motor,Tech-E,Equipment failure requiring 6.2h repair,Environmental stress,Increase inspection frequency,-31.0,2024-02-19 18:01:11
+39,21,2024-01-18 23:49:26,Mechanical,Motor Burnout,Critical,11.11,13743.13,Belt,Tech-E,Equipment failure requiring 11.1h repair,Wear and tear,Process adjustment,-2.7,2024-01-18 23:49:26
+40,19,2024-02-08 23:51:03,Electrical,Motor Burnout,Critical,9.66,20204.49,Sensor,Tech-C,Equipment failure requiring 9.7h repair,Under investigation,Update maintenance schedule,24.3,2024-02-08 23:51:03
+41,22,2024-02-27 18:03:28,Pneumatic,Motor Burnout,Major,3.11,20938.75,Belt,Tech-C,Equipment failure requiring 3.1h repair,Overload condition,Replace aging components,-9.3,2024-02-27 18:03:28
+42,38,2024-03-15 08:12:47,Electrical,Sensor Malfunction,Major,18.35,4033.5,None,Tech-D,Equipment failure requiring 18.4h repair,Wear and tear,Replace aging components,-15.8,2024-03-15 08:12:47
+43,11,2024-04-19 21:23:52,Electrical,Bearing Wear,Minor,6.84,7154.13,None,Tech-D,Equipment failure requiring 6.8h repair,Environmental stress,Replace aging components,-12.4,2024-04-19 21:23:52
+44,54,2024-01-12 07:34:54,Software,Controller Failure,Critical,16.35,6003.91,Motor,Tech-D,Equipment failure requiring 16.4h repair,Environmental stress,Increase inspection frequency,15.2,2024-01-12 07:34:54
+45,4,2024-11-04 10:55:35,Electrical,Belt Snap,Major,17.42,20765.45,Sensor,Tech-E,Equipment failure requiring 17.4h repair,Manufacturing defect,Update maintenance schedule,-38.8,2024-11-04 10:55:35
+46,15,2024-01-19 04:47:04,Software,Electrical Short,Minor,2.99,23093.59,Bearing,Tech-B,Equipment failure requiring 3.0h repair,Environmental stress,Process adjustment,38.1,2024-01-19 04:47:04
+47,53,2024-12-25 10:23:45,Software,Vibration Damage,Minor,17.71,10985.02,Controller,Tech-D,Equipment failure requiring 17.7h repair,Improper maintenance,Replace aging components,-3.6,2024-12-25 10:23:45
+48,35,2024-01-31 00:21:07,Software,Vibration Damage,Major,12.25,1079.07,None,Tech-B,Equipment failure requiring 12.2h repair,Environmental stress,Process adjustment,47.6,2024-01-31 00:21:07
+49,63,2024-10-16 03:59:17,Software,Calibration Drift,Minor,13.94,3700.42,Belt,Tech-C,Equipment failure requiring 13.9h repair,Wear and tear,Increase inspection frequency,-9.6,2024-10-16 03:59:17
+50,17,2024-09-27 07:20:24,Electrical,Controller Failure,Critical,9.74,7325.76,Sensor,Tech-E,Equipment failure requiring 9.7h repair,Environmental stress,Update maintenance schedule,-5.1,2024-09-27 07:20:24
+51,29,2024-01-21 18:21:22,Pneumatic,Electrical Short,Major,4.21,8304.75,Belt,Tech-B,Equipment failure requiring 4.2h repair,Improper maintenance,Increase inspection frequency,-33.2,2024-01-21 18:21:22
+52,63,2024-03-26 07:15:22,Electrical,Bearing Wear,Major,17.97,22615.23,Bearing,Tech-B,Equipment failure requiring 18.0h repair,Improper maintenance,Increase inspection frequency,-43.9,2024-03-26 07:15:22
+53,32,2024-01-10 19:58:18,Software,Overheating,Major,12.7,6362.18,Bearing,Tech-E,Equipment failure requiring 12.7h repair,Wear and tear,Increase inspection frequency,1.6,2024-01-10 19:58:18
+54,16,2024-10-19 20:41:05,Software,Motor Burnout,Major,23.98,20058.87,Bearing,Tech-E,Equipment failure requiring 24.0h repair,Wear and tear,Operator training,6.8,2024-10-19 20:41:05
+55,18,2024-11-17 05:32:38,Hydraulic,Hydraulic Leak,Major,19.78,18683.03,Controller,Tech-E,Equipment failure requiring 19.8h repair,Manufacturing defect,Operator training,24.0,2024-11-17 05:32:38
+56,44,2024-11-12 01:37:42,Software,Electrical Short,Critical,9.62,23598.67,Controller,Tech-D,Equipment failure requiring 9.6h repair,Environmental stress,Update maintenance schedule,-11.1,2024-11-12 01:37:42
+57,36,2024-01-21 01:50:40,Electrical,Hydraulic Leak,Major,1.04,3409.15,Bearing,Tech-B,Equipment failure requiring 1.0h repair,Environmental stress,Increase inspection frequency,43.0,2024-01-21 01:50:40
+58,48,2024-09-24 03:06:02,Software,Controller Failure,Minor,7.98,3967.28,Controller,Tech-C,Equipment failure requiring 8.0h repair,Improper maintenance,Increase inspection frequency,-31.1,2024-09-24 03:06:02
+59,27,2024-05-13 00:26:17,Software,Hydraulic Leak,Major,2.11,10615.39,Bearing,Tech-D,Equipment failure requiring 2.1h repair,Overload condition,Operator training,44.3,2024-05-13 00:26:17
+60,35,2024-11-06 21:44:40,Hydraulic,Overheating,Major,6.38,4132.61,Bearing,Tech-A,Equipment failure requiring 6.4h repair,Wear and tear,Process adjustment,-36.2,2024-11-06 21:44:40
+61,12,2024-11-25 00:35:01,Pneumatic,Sensor Malfunction,Critical,19.54,16489.15,Controller,Tech-D,Equipment failure requiring 19.5h repair,Manufacturing defect,Update maintenance schedule,46.8,2024-11-25 00:35:01
+62,45,2024-03-17 14:14:19,Pneumatic,Motor Burnout,Major,3.81,6920.96,Sensor,Tech-B,Equipment failure requiring 3.8h repair,Environmental stress,Replace aging components,29.0,2024-03-17 14:14:19
+63,53,2024-07-02 23:11:55,Software,Sensor Malfunction,Critical,23.32,8938.8,Belt,Tech-A,Equipment failure requiring 23.3h repair,Wear and tear,Update maintenance schedule,-41.3,2024-07-02 23:11:55
+64,18,2024-11-13 03:26:52,Pneumatic,Controller Failure,Critical,23.82,13949.33,None,Tech-D,Equipment failure requiring 23.8h repair,Wear and tear,Replace aging components,28.6,2024-11-13 03:26:52
+65,37,2024-06-16 12:35:44,Hydraulic,Motor Burnout,Critical,13.76,1990.39,Controller,Tech-B,Equipment failure requiring 13.8h repair,Improper maintenance,Increase inspection frequency,-23.5,2024-06-16 12:35:44
+66,17,2024-07-28 00:51:24,Pneumatic,Hydraulic Leak,Minor,1.76,4011.44,Bearing,Tech-A,Equipment failure requiring 1.8h repair,Wear and tear,Replace aging components,-29.9,2024-07-28 00:51:24
+67,55,2024-03-06 20:40:22,Mechanical,Controller Failure,Critical,17.77,3564.79,None,Tech-C,Equipment failure requiring 17.8h repair,Manufacturing defect,Update maintenance schedule,-48.8,2024-03-06 20:40:22
+68,29,2024-08-07 15:50:45,Software,Belt Snap,Major,18.16,18272.45,Sensor,Tech-B,Equipment failure requiring 18.2h repair,Improper maintenance,Operator training,-8.1,2024-08-07 15:50:45
+69,4,2024-04-22 23:05:01,Mechanical,Calibration Drift,Critical,7.55,8655.96,Bearing,Tech-C,Equipment failure requiring 7.5h repair,Environmental stress,Replace aging components,46.4,2024-04-22 23:05:01
+70,34,2024-06-07 17:54:23,Electrical,Controller Failure,Minor,20.37,24047.01,Bearing,Tech-D,Equipment failure requiring 20.4h repair,Environmental stress,Process adjustment,-33.1,2024-06-07 17:54:23
+71,17,2024-06-11 03:41:51,Hydraulic,Sensor Malfunction,Major,18.11,11600.05,Bearing,Tech-E,Equipment failure requiring 18.1h repair,Environmental stress,Operator training,20.4,2024-06-11 03:41:51
+72,52,2024-07-17 12:46:57,Electrical,Sensor Malfunction,Major,22.4,24597.34,Controller,Tech-D,Equipment failure requiring 22.4h repair,Environmental stress,Process adjustment,-5.8,2024-07-17 12:46:57
+73,60,2024-05-18 22:42:09,Mechanical,Sensor Malfunction,Minor,7.4,1972.19,Motor,Tech-C,Equipment failure requiring 7.4h repair,Wear and tear,Increase inspection frequency,-8.7,2024-05-18 22:42:09
+74,62,2024-02-25 18:34:40,Software,Sensor Malfunction,Critical,7.63,6264.69,Sensor,Tech-B,Equipment failure requiring 7.6h repair,Overload condition,Increase inspection frequency,-19.3,2024-02-25 18:34:40
+75,15,2024-08-02 13:46:38,Electrical,Motor Burnout,Major,13.37,19870.43,Belt,Tech-C,Equipment failure requiring 13.4h repair,Manufacturing defect,Update maintenance schedule,-33.6,2024-08-02 13:46:38
+76,3,2024-05-11 20:55:44,Hydraulic,Belt Snap,Major,18.96,16249.04,Bearing,Tech-A,Equipment failure requiring 19.0h repair,Wear and tear,Process adjustment,-0.7,2024-05-11 20:55:44
+77,19,2024-04-10 19:54:17,Hydraulic,Hydraulic Leak,Critical,13.44,21500.78,Belt,Tech-B,Equipment failure requiring 13.4h repair,Overload condition,Replace aging components,-16.3,2024-04-10 19:54:17
+78,65,2024-10-27 10:28:03,Electrical,Motor Burnout,Minor,12.26,13162.02,Controller,Tech-D,Equipment failure requiring 12.3h repair,Manufacturing defect,Increase inspection frequency,49.3,2024-10-27 10:28:03
+79,3,2024-07-26 09:27:15,Software,Motor Burnout,Critical,20.86,24827.6,Motor,Tech-A,Equipment failure requiring 20.9h repair,Improper maintenance,Update maintenance schedule,-18.9,2024-07-26 09:27:15
+80,24,2024-12-02 10:09:24,Electrical,Bearing Wear,Critical,2.43,17851.71,Bearing,Tech-C,Equipment failure requiring 2.4h repair,Manufacturing defect,Process adjustment,-7.6,2024-12-02 10:09:24
+81,65,2024-05-02 18:04:59,Hydraulic,Bearing Wear,Critical,3.84,5464.58,Bearing,Tech-B,Equipment failure requiring 3.8h repair,Wear and tear,Process adjustment,-5.3,2024-05-02 18:04:59
+82,7,2024-10-30 22:40:44,Mechanical,Motor Burnout,Major,14.7,1294.63,Bearing,Tech-B,Equipment failure requiring 14.7h repair,Overload condition,Operator training,31.3,2024-10-30 22:40:44
+83,64,2024-05-03 03:53:36,Mechanical,Calibration Drift,Major,18.13,19167.23,Controller,Tech-D,Equipment failure requiring 18.1h repair,Wear and tear,Increase inspection frequency,38.5,2024-05-03 03:53:36
+84,46,2024-07-17 05:39:53,Pneumatic,Bearing Wear,Minor,18.37,12929.51,Bearing,Tech-E,Equipment failure requiring 18.4h repair,Under investigation,Update maintenance schedule,34.5,2024-07-17 05:39:53
+85,43,2024-11-21 16:59:25,Software,Bearing Wear,Minor,19.8,3451.77,Motor,Tech-D,Equipment failure requiring 19.8h repair,Overload condition,Replace aging components,-16.2,2024-11-21 16:59:25
+86,22,2024-03-25 04:20:47,Pneumatic,Electrical Short,Minor,1.03,21747.09,Belt,Tech-E,Equipment failure requiring 1.0h repair,Under investigation,Increase inspection frequency,-2.8,2024-03-25 04:20:47
+87,30,2024-08-27 21:47:58,Hydraulic,Motor Burnout,Major,18.37,3091.7,Bearing,Tech-E,Equipment failure requiring 18.4h repair,Under investigation,Process adjustment,-38.9,2024-08-27 21:47:58
+88,20,2024-11-11 17:06:41,Electrical,Hydraulic Leak,Minor,23.43,15095.19,Controller,Tech-D,Equipment failure requiring 23.4h repair,Overload condition,Operator training,-1.0,2024-11-11 17:06:41
+89,44,2024-03-02 19:29:45,Electrical,Bearing Wear,Major,5.15,22018.51,Controller,Tech-A,Equipment failure requiring 5.2h repair,Wear and tear,Replace aging components,29.8,2024-03-02 19:29:45
+90,47,2024-10-07 00:32:36,Software,Vibration Damage,Minor,16.33,1271.21,Motor,Tech-C,Equipment failure requiring 16.3h repair,Under investigation,Update maintenance schedule,-30.6,2024-10-07 00:32:36
+91,24,2024-03-10 07:45:55,Electrical,Motor Burnout,Major,21.09,14834.46,Belt,Tech-E,Equipment failure requiring 21.1h repair,Under investigation,Operator training,5.1,2024-03-10 07:45:55
+92,61,2024-08-21 09:27:03,Mechanical,Overheating,Major,9.86,17214.89,Sensor,Tech-A,Equipment failure requiring 9.9h repair,Environmental stress,Process adjustment,19.0,2024-08-21 09:27:03
+93,47,2024-05-05 21:02:48,Electrical,Motor Burnout,Major,20.47,1845.51,Bearing,Tech-D,Equipment failure requiring 20.5h repair,Overload condition,Replace aging components,-11.2,2024-05-05 21:02:48
+94,28,2024-01-03 17:29:19,Electrical,Controller Failure,Critical,22.3,24491.02,None,Tech-E,Equipment failure requiring 22.3h repair,Overload condition,Replace aging components,-21.8,2024-01-03 17:29:19
+95,29,2024-04-18 04:05:46,Pneumatic,Sensor Malfunction,Major,15.07,13774.82,Sensor,Tech-E,Equipment failure requiring 15.1h repair,Wear and tear,Replace aging components,-47.6,2024-04-18 04:05:46
+96,10,2024-06-03 03:54:02,Mechanical,Controller Failure,Critical,17.86,1647.84,Bearing,Tech-C,Equipment failure requiring 17.9h repair,Wear and tear,Operator training,-2.4,2024-06-03 03:54:02
+97,38,2024-07-05 20:01:36,Hydraulic,Hydraulic Leak,Critical,23.75,16859.79,Controller,Tech-C,Equipment failure requiring 23.8h repair,Improper maintenance,Update maintenance schedule,5.0,2024-07-05 20:01:36
+98,16,2024-02-17 00:06:51,Software,Vibration Damage,Major,8.16,6859.63,Motor,Tech-D,Equipment failure requiring 8.2h repair,Manufacturing defect,Process adjustment,28.7,2024-02-17 00:06:51
+99,44,2024-03-03 11:39:10,Software,Motor Burnout,Critical,11.6,13877.21,Bearing,Tech-D,Equipment failure requiring 11.6h repair,Environmental stress,Update maintenance schedule,30.7,2024-03-03 11:39:10
+100,64,2024-03-09 08:31:38,Pneumatic,Motor Burnout,Major,14.42,9375.87,Motor,Tech-D,Equipment failure requiring 14.4h repair,Under investigation,Increase inspection frequency,26.2,2024-03-09 08:31:38

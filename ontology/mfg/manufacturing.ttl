@@ -1,0 +1,68 @@
+@prefix mfgm: <https://example.com/mfgm/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+mfgm: a owl:Ontology ;
+  rdfs:label "Manufacturing Operations Ontology v1.2"@en ;
+  rdfs:comment "Adds supplier risk, schedule capacity, lifecycle, and event metadata while preserving read-only, evidence-bound design."@en .
+
+# Core classes (v1.1)
+mfgm:WorkOrder a owl:Class .
+mfgm:Part a owl:Class .
+mfgm:ScheduleSlot a owl:Class .
+mfgm:Supplier a owl:Class .
+mfgm:ProductionEvent a owl:Class .
+
+# v1.2 attributes
+mfgm:riskScore a owl:DatatypeProperty ; rdfs:domain mfgm:Supplier ; rdfs:range xsd:integer .
+mfgm:onTimeDeliveryPct a owl:DatatypeProperty ; rdfs:domain mfgm:Supplier ; rdfs:range xsd:decimal .
+mfgm:qualityScore a owl:DatatypeProperty ; rdfs:domain mfgm:Supplier ; rdfs:range xsd:decimal .
+mfgm:complianceStatus a owl:DatatypeProperty ; rdfs:domain mfgm:Supplier ; rdfs:range xsd:string .
+
+mfgm:plannedCapacity a owl:DatatypeProperty ; rdfs:domain mfgm:ScheduleSlot ; rdfs:range xsd:integer .
+mfgm:remainingCapacity a owl:DatatypeProperty ; rdfs:domain mfgm:ScheduleSlot ; rdfs:range xsd:integer .
+mfgm:shiftId a owl:DatatypeProperty ; rdfs:domain mfgm:ScheduleSlot ; rdfs:range xsd:string .
+mfgm:workCenterRole a owl:DatatypeProperty ; rdfs:domain mfgm:ScheduleSlot ; rdfs:range xsd:string .
+
+mfgm:lifecycleStage a owl:DatatypeProperty ; rdfs:domain mfgm:WorkOrder ; rdfs:range xsd:string .
+
+mfgm:operator a owl:DatatypeProperty ; rdfs:domain mfgm:ProductionEvent ; rdfs:range xsd:string .
+mfgm:shift a owl:DatatypeProperty ; rdfs:domain mfgm:ProductionEvent ; rdfs:range xsd:string .
+mfgm:reasonCode a owl:DatatypeProperty ; rdfs:domain mfgm:ProductionEvent ; rdfs:range xsd:string .
+mfgm:eventType a owl:DatatypeProperty ; rdfs:domain mfgm:ProductionEvent ; rdfs:range xsd:string .
+
+### Supplier Risk Category Class
+mfgm:SupplierRiskCategory a owl:Class ;
+  rdfs:label "Supplier Risk Category"@en ;
+  rdfs:comment "Categorical procurement risk classification for suppliers."@en .
+
+### Object property linking Supplier → Risk Category
+mfgm:hasRiskCategory a owl:ObjectProperty ;
+  rdfs:domain mfgm:Supplier ;
+  rdfs:range mfgm:SupplierRiskCategory ;
+  rdfs:label "has risk category"@en ;
+  rdfs:comment "Assigns a procurement-defined risk category to a supplier."@en .
+
+### Enumerated risk categories
+mfgm:LowRisk a mfgm:SupplierRiskCategory ;
+  rdfs:label "Low Risk Supplier"@en .
+
+mfgm:MediumRisk a mfgm:SupplierRiskCategory ;
+  rdfs:label "Medium Risk Supplier"@en .
+
+mfgm:HighRisk a mfgm:SupplierRiskCategory ;
+  rdfs:label "High Risk Supplier"@en .
+
+### Optional aerospace-specific categories
+mfgm:CriticalRisk a mfgm:SupplierRiskCategory ;
+  rdfs:label "Critical Risk Supplier"@en .
+
+mfgm:Watchlist a mfgm:SupplierRiskCategory ;
+  rdfs:label "Watchlist Supplier"@en .
+
+mfgm:ApprovedVendor a mfgm:SupplierRiskCategory ;
+  rdfs:label "Approved Vendor"@en .
+
+mfgm:DisallowedVendor a mfgm:SupplierRiskCategory ;
+  rdfs:label "Disallowed Vendor"@en .

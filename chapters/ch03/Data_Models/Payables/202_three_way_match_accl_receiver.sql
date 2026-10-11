@@ -1,0 +1,18 @@
+declare @START_DATE datetime = '2026-04-01';
+declare @PURC_ORDER_ID nvarchar(15) = '190887';
+
+SELECT PURC_ORDER_ID, PURC_ORDER_LINE_NO, RECEIVER_ID, LINE_NO, USER_RECEIVED_QTY
+FROM RECEIVER_LINE WHERE RECEIVER_ID = '229340'
+
+SELECT VOUCHER_ID, PURC_ORDER_ID, PURC_ORDER_LINE_NO, RECEIVER_ID, RECEIVER_LINE_NO, QTY
+FROM PAYABLE_LINE WHERE RECEIVER_ID = '229340'
+
+
+SELECT VOUCHER_ID, PAY_STATUS, LANDED_COST_INV FROM PAYABLE WHERE VOUCHER_ID IN 
+(SELECT VOUCHER_ID FROM PAYABLE_LINE WHERE RECEIVER_ID = '229340')
+
+-- what are the pay_status for the PAYABLE table
+   -- H = Hold
+   -- X = Canceled  
+   -- P = Paid
+   -- L = Landed Cost Invoice (an invoice used to capture extra landed costs such as freight, duty, or brokerage)
