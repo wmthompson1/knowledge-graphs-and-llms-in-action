@@ -1,0 +1,70 @@
+@prefix mfg:   <https://wmthompson1.github.io/create-context-graph/mfg#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+mfg: a owl:Ontology ;
+  rdfs:label "Manufacturing SHACL eligibility constraints"@en ;
+  rdfs:comment "Shapes for POR demand-fence eligibility and exception-message conditions."@en .
+
+mfg:DemandFenceShape a sh:NodeShape ;
+  sh:targetClass mfg:DemandFence ;
+  sh:property [
+    sh:path mfg:leadTimeDays ;
+    sh:datatype xsd:integer ;
+    sh:minInclusive 0 ;
+    sh:maxCount 1 ;
+    sh:message "Demand fence lead time must be a non-negative integer value."@en
+  ] .
+
+mfg:PlannedOrderReceiptShape a sh:NodeShape ;
+  sh:targetClass mfg:PlannedOrderReceipt ;
+  sh:property [
+    sh:path mfg:isInsideDemandFence ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:message "A PlannedOrderReceipt may declare whether it is inside a demand fence, but only as a boolean flag."@en
+  ] ;
+  sh:property [
+    sh:path mfg:isFirm ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:message "Firmness is represented as a boolean indicator."@en
+  ] ;
+  sh:property [
+    sh:path mfg:releaseDateMayBeAdjustedByMRP ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:message "Release-date adjustability is modeled as a boolean capability indicator."@en
+  ] ;
+  sh:property [
+    sh:path mfg:eligibleForExceptionMessage ;
+    sh:class mfg:MRPExceptionMessage ;
+    sh:maxCount 1 ;
+    sh:message "A POR may be eligible for at most one exception-message type in the semantic layer."@en
+  ] ;
+  sh:or (
+    [
+      sh:property [
+        sh:path mfg:isInsideDemandFence ;
+        sh:hasValue false
+      ]
+    ]
+    [
+      sh:property [
+        sh:path mfg:eligibleForExceptionMessage ;
+        sh:class mfg:RescheduleOutSuggestion
+      ]
+    ]
+  ) ;
+  sh:message "When a POR is inside the demand fence, it is eligible for a reschedule-out exception suggestion; the ontology does not require actual exception generation."@en .
+
+mfg:PlannedOrderReleaseShape a sh:NodeShape ;
+  sh:targetClass mfg:PlannedOrderRelease ;
+  sh:property [
+    sh:path mfg:releaseDate ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1 ;
+    sh:message "A planned release date must be an xsd:dateTime value when present."@en
+  ] .
