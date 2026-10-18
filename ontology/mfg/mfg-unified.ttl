@@ -3,6 +3,7 @@
 @prefix mfgq:  <https://wmthompson1.github.io/create-context-graph/mfgq#> .
 @prefix sapo:  <https://sap-ontology.deloitte.com/schema#> .
 @prefix salt:  <https://wmthompson1.github.io/create-context-graph/salt#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 
@@ -107,23 +108,39 @@ mfg:RootCause mfg:explainsDefect mfg:Defect ;
 
 mfg:hasEvent a owl:ObjectProperty ;
     rdfs:label "has event" ;
-    rdfs:domain mfg:WorkOrder ;
     rdfs:range mfg:ProductionEvent .
 
 mfg:hasQualityEvent a owl:ObjectProperty ;
     rdfs:label "has quality event" ;
-    rdfs:domain mfg:WorkOrder ;
     rdfs:range mfg:QualityEvent .
 
 mfg:hasInspection a owl:ObjectProperty ;
     rdfs:label "has inspection" ;
-    rdfs:domain mfg:Part ;
     rdfs:range mfg:Inspection .
 
 mfg:hasNCR a owl:ObjectProperty ;
     rdfs:label "has NCR" ;
-    rdfs:domain mfg:Part ;
     rdfs:range mfg:NonConformanceReport .
+
+mfg:WorkOrder rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mfg:hasEvent ;
+      owl:allValuesFrom mfg:ProductionEvent
+    ],
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mfg:hasQualityEvent ;
+      owl:allValuesFrom mfg:QualityEvent
+    ] .
+
+mfg:Part rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mfg:hasInspection ;
+      owl:allValuesFrom mfg:Inspection
+    ],
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mfg:hasNCR ;
+      owl:allValuesFrom mfg:NonConformanceReport
+    ] .
 
 #################################################################
 # Deloitte Alignment Hooks
