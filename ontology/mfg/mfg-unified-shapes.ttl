@@ -48,13 +48,20 @@ mfg:PlannedOrderReceiptShape a sh:NodeShape ;
     [
       sh:property [
         sh:path mfg:isInsideDemandFence ;
-        sh:hasValue false
+        sh:hasValue false ;
+        sh:minCount 1
       ]
     ]
     [
       sh:property [
+        sh:path mfg:isInsideDemandFence ;
+        sh:hasValue true ;
+        sh:minCount 1
+      ] ;
+      sh:property [
         sh:path mfg:eligibleForExceptionMessage ;
-        sh:class mfg:RescheduleOutSuggestion
+        sh:class mfg:RescheduleOutSuggestion ;
+        sh:minCount 1
       ]
     ]
   ) ;

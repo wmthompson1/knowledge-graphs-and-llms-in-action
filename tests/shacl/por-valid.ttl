@@ -1,0 +1,18 @@
+@prefix mfg: <https://wmthompson1.github.io/create-context-graph/mfg#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+mfg:POR_001 a mfg:PlannedOrderReceipt ;
+    mfg:forItem mfg:Item_ABC ;
+    mfg:hasDemandFence mfg:DF_14D ;
+    mfg:isInsideDemandFence true ;
+    mfg:isFirm false ;
+    mfg:eligibleForExceptionMessage mfg:POR_001_RescheduleOutSuggestion ;
+    mfg:releaseDateMayBeAdjustedByMRP true ;
+    mfg:releaseDate "2026-11-05T00:00:00"^^xsd:dateTime .
+
+mfg:Item_ABC a mfg:Part .
+
+mfg:DF_14D a mfg:DemandFence ;
+    mfg:leadTimeDays 14 .
+
+mfg:POR_001_RescheduleOutSuggestion a mfg:RescheduleOutSuggestion .

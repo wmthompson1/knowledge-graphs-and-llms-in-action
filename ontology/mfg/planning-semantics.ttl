@@ -1,0 +1,76 @@
+@prefix mfg:   <https://wmthompson1.github.io/create-context-graph/mfg#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+mfg:PlanningSemantics a owl:Ontology ;
+    rdfs:label "Planning Semantics"@en ;
+    rdfs:comment "Shared planning concepts for demand fences, planned order receipts, and reschedule eligibility."@en .
+
+mfg:PlannedOrderReceipt a owl:Class ;
+    rdfs:label "Planned Order Receipt"@en ;
+    rdfs:comment "A planned material receipt candidate that is considered near-term but is not necessarily firm."@en .
+
+mfg:PlannedOrderRelease a owl:Class ;
+    rdfs:label "Planned Order Release"@en ;
+    rdfs:comment "The release state associated with a planned order receipt."@en .
+
+mfg:LeadTimeOffset a owl:Class ;
+    rdfs:label "Lead Time Offset"@en ;
+    rdfs:comment "Offset used to determine whether the order falls inside the demand fence."@en .
+
+mfg:DemandFence a owl:Class ;
+    rdfs:label "Demand Fence"@en ;
+    rdfs:comment "Time boundary inside which demand is near-term but may remain non-firm."@en .
+
+mfg:MRPExceptionMessage a owl:Class ;
+    rdfs:label "MRP Exception Message"@en ;
+    rdfs:comment "Exception concept captured in the semantic layer for planning guidance."@en .
+
+mfg:RescheduleOutSuggestion a owl:Class ;
+    rdfs:subClassOf mfg:MRPExceptionMessage ;
+    rdfs:label "Reschedule Out Suggestion"@en .
+
+mfg:forItem a owl:ObjectProperty ;
+    rdfs:label "for item"@en ;
+    rdfs:range mfg:Part .
+
+mfg:hasDemandFence a owl:ObjectProperty ;
+    rdfs:label "has demand fence"@en ;
+    rdfs:range mfg:DemandFence .
+
+mfg:offsetByLeadTime a owl:ObjectProperty ;
+    rdfs:label "offset by lead time"@en ;
+    rdfs:range mfg:LeadTimeOffset .
+
+mfg:eligibleForExceptionMessage a owl:ObjectProperty ;
+    rdfs:label "eligible for exception message"@en ;
+    rdfs:range mfg:MRPExceptionMessage .
+
+mfg:hasMRPExceptionTable a owl:ObjectProperty ;
+    rdfs:label "has MRP exception table"@en ;
+    rdfs:range mfg:MRPExceptionTable .
+
+mfg:isInsideDemandFence a owl:DatatypeProperty ;
+    rdfs:label "is inside demand fence"@en ;
+    rdfs:range xsd:boolean .
+
+mfg:isFirm a owl:DatatypeProperty ;
+    rdfs:label "is firm"@en ;
+    rdfs:range xsd:boolean .
+
+mfg:leadTimeDays a owl:DatatypeProperty ;
+    rdfs:label "lead time days"@en ;
+    rdfs:range xsd:integer .
+
+mfg:releaseDateMayBeAdjustedByMRP a owl:DatatypeProperty ;
+    rdfs:label "release date may be adjusted by MRP"@en ;
+    rdfs:range xsd:boolean .
+
+mfg:releaseDate a owl:DatatypeProperty ;
+    rdfs:label "release date"@en ;
+    rdfs:range xsd:dateTime .
+
+mfg:MRPExceptionTable a owl:Class ;
+    rdfs:label "MRP Exception Table"@en ;
+    rdfs:comment "Operational exception log where MRP may record reschedule and quantity exceptions."@en .

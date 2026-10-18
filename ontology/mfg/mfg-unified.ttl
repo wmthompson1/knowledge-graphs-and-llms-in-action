@@ -6,6 +6,12 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+mfg: a owl:Ontology ;
+    rdfs:label "Unified Manufacturing + Quality Ontology"@en ;
+    rdfs:comment "Combines manufacturing and quality semantics and imports the planning semantics vocabulary."@en ;
+    owl:imports <https://wmthompson1.github.io/create-context-graph/ontology/mfg/planning-semantics.ttl> .
 
 #################################################################
 # Unified Manufacturing + Quality Ontology
