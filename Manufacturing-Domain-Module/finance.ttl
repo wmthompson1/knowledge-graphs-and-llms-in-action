@@ -1,0 +1,224 @@
+@prefix finance: <https://purl.org/wmthompson/finance#> .
+@prefix mfg:     <https://purl.org/wmthompson/mfg#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://purl.org/wmthompson/finance>
+    a                owl:Ontology ;
+    dcterms:title    "Finance Domain Ontology" ;
+    dcterms:description
+        "OWL DL ontology for manufacturing finance: GL accounts, inventory valuation, WIP valuation, finished-goods valuation, and cost buckets." ;
+    dcterms:creator  "wmthompson1" ;
+    dcterms:created  "2026-10-21"^^xsd:date ;
+    dcterms:license  <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionIRI   <https://purl.org/wmthompson/finance/1.0.0> .
+
+finance:postedToAccount
+    a            owl:ObjectProperty ;
+    rdfs:label   "posted to account" ;
+    rdfs:comment "Links any financial value entity to the GLAccount it is posted against." ;
+    rdfs:domain  [ owl:unionOf ( finance:InventoryValue finance:WIPValue finance:FinishedGoodsValue finance:CostBucket ) ] ;
+    rdfs:range   finance:GLAccount .
+
+finance:hasCostBucket
+    a            owl:ObjectProperty ;
+    rdfs:label   "has cost bucket" ;
+    rdfs:comment "Decomposes a value entity into individual CostBuckets." ;
+    rdfs:domain  [ owl:unionOf ( finance:InventoryValue finance:WIPValue finance:FinishedGoodsValue ) ] ;
+    rdfs:range   finance:CostBucket .
+
+finance:valuesItem
+    a            owl:ObjectProperty ;
+    rdfs:label   "values item" ;
+    rdfs:comment "The Item whose stock quantity underlies this InventoryValue record." ;
+    rdfs:domain  finance:InventoryValue ;
+    rdfs:range   mfg:Item .
+
+finance:valuesWorkOrder
+    a            owl:ObjectProperty ;
+    rdfs:label   "values work order" ;
+    rdfs:comment "The WorkOrder whose in-progress production underlies this WIPValue record." ;
+    rdfs:domain  finance:WIPValue ;
+    rdfs:range   mfg:WorkOrder .
+
+finance:valuesFinishedItem
+    a            owl:ObjectProperty ;
+    rdfs:label   "values finished item" ;
+    rdfs:comment "The finished-good Item whose completed stock underlies this FinishedGoodsValue record." ;
+    rdfs:domain  finance:FinishedGoodsValue ;
+    rdfs:range   mfg:Item .
+
+finance:parentAccount
+    a              owl:ObjectProperty ;
+    rdfs:label     "parent account" ;
+    rdfs:comment   "Hierarchical rollup relationship between GL accounts (child to parent)." ;
+    rdfs:domain    finance:GLAccount ;
+    rdfs:range     finance:GLAccount .
+
+finance:accountNumber
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "account number" ;
+    rdfs:comment "Unique GL account code in the chart of accounts." ;
+    rdfs:domain  finance:GLAccount ;
+    rdfs:range   xsd:string .
+
+finance:accountName
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "account name" ;
+    rdfs:domain  finance:GLAccount ;
+    rdfs:range   xsd:string .
+
+finance:accountType
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "account type" ;
+    rdfs:comment "High-level account classification: Asset | Liability | Equity | Revenue | Expense." ;
+    rdfs:domain  finance:GLAccount ;
+    rdfs:range   xsd:string .
+
+finance:currencyCode
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "currency code" ;
+    rdfs:comment "ISO 4217 three-letter currency code (e.g. USD, EUR, GBP)." ;
+    rdfs:domain  [ owl:unionOf ( finance:GLAccount finance:InventoryValue finance:WIPValue finance:FinishedGoodsValue finance:CostBucket ) ] ;
+    rdfs:range   xsd:string .
+
+finance:valuationDate
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "valuation date" ;
+    rdfs:domain  [ owl:unionOf ( finance:InventoryValue finance:WIPValue finance:FinishedGoodsValue ) ] ;
+    rdfs:range   xsd:date .
+
+finance:totalValue
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "total value" ;
+    rdfs:domain  [ owl:unionOf ( finance:InventoryValue finance:WIPValue finance:FinishedGoodsValue ) ] ;
+    rdfs:range   xsd:decimal .
+
+finance:quantityOnHand
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "quantity on hand" ;
+    rdfs:domain  finance:InventoryValue ;
+    rdfs:range   xsd:decimal .
+
+finance:unitCost
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "unit cost" ;
+    rdfs:comment "Standard or weighted-average cost per unit of the Item." ;
+    rdfs:domain  finance:InventoryValue ;
+    rdfs:range   xsd:decimal .
+
+finance:wipQuantityComplete
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "WIP quantity complete" ;
+finance:costBucketType
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "cost bucket type" ;
+    rdfs:comment "Cost element category: Material | DirectLabour | MachineOverhead | FixedOverhead | Subcontract." ;
+    rdfs:domain  finance:CostBucket ;
+    rdfs:range   xsd:string .
+
+finance:bucketAmount
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "bucket amount" ;
+    rdfs:domain  finance:CostBucket ;
+    rdfs:range   xsd:decimal .
+
+finance:costRate
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "cost rate" ;
+    rdfs:domain  finance:CostBucket ;
+    rdfs:range   xsd:decimal .
+
+finance:costQuantity
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "cost quantity" ;
+    rdfs:domain  finance:CostBucket ;
+    rdfs:range   xsd:decimal .
+
+finance:GLAccount
+    a               owl:Class ;
+    rdfs:label      "GL Account" ;
+    rdfs:comment    "A General Ledger account in the chart of accounts." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty finance:accountNumber ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:accountName ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:accountType ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:currencyCode ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:parentAccount ; owl:maxCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:parentAccount ; owl:allValuesFrom finance:GLAccount ] .
+
+finance:InventoryValue
+    a               owl:Class ;
+    rdfs:label      "Inventory Value" ;
+    rdfs:comment    "A point-in-time financial valuation of raw-material or purchased-component stock for a specific Item." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty finance:valuationDate ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:totalValue ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:currencyCode ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:quantityOnHand ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:unitCost ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:valuesItem ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:valuesItem ; owl:allValuesFrom mfg:Item ] ,
+        [ a owl:Restriction ; owl:onProperty finance:postedToAccount ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:postedToAccount ; owl:allValuesFrom finance:GLAccount ] ,
+        [ a owl:Restriction ; owl:onProperty finance:hasCostBucket ; owl:allValuesFrom finance:CostBucket ] .
+
+finance:WIPValue
+    a               owl:Class ;
+    rdfs:label      "WIP Value" ;
+    rdfs:comment    "Work-in-process valuation for an open WorkOrder, accumulating material, labour, and overhead costs." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty finance:valuationDate ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:totalValue ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:currencyCode ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:valuesWorkOrder ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:valuesWorkOrder ; owl:allValuesFrom mfg:WorkOrder ] ,
+        [ a owl:Restriction ; owl:onProperty finance:postedToAccount ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:postedToAccount ; owl:allValuesFrom finance:GLAccount ] ,
+        [ a owl:Restriction ; owl:onProperty finance:hasCostBucket ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:hasCostBucket ; owl:allValuesFrom finance:CostBucket ] .
+
+finance:FinishedGoodsValue
+    a               owl:Class ;
+    rdfs:label      "Finished Goods Value" ;
+    rdfs:comment    "Valuation of completed finished-good stock for an Item received from a closed WorkOrder." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty finance:valuationDate ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:totalValue ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:currencyCode ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:fgQuantity ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:valuesFinishedItem ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:valuesFinishedItem ; owl:allValuesFrom mfg:Item ] ,
+        [ a owl:Restriction ; owl:onProperty finance:postedToAccount ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:postedToAccount ; owl:allValuesFrom finance:GLAccount ] ,
+        [ a owl:Restriction ; owl:onProperty finance:hasCostBucket ; owl:allValuesFrom finance:CostBucket ] .
+
+finance:CostBucket
+    a               owl:Class ;
+    rdfs:label      "Cost Bucket" ;
+    rdfs:comment    "A granular cost element (material, direct labour, machine overhead, fixed overhead, subcontract) composing the total cost of a valuation record." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty finance:costBucketType ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:bucketAmount ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:currencyCode ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:costRate ; owl:maxCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:costQuantity ; owl:maxCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:postedToAccount ; owl:maxCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty finance:postedToAccount ; owl:allValuesFrom finance:GLAccount ] .
+    rdfs:domain  finance:WIPValue ;
+    rdfs:range   xsd:decimal .
+
+finance:wipQuantityRemaining
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "WIP quantity remaining" ;
+    rdfs:domain  finance:WIPValue ;
+    rdfs:range   xsd:decimal .
+
+finance:fgQuantity
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "finished goods quantity" ;
+    rdfs:domain  finance:FinishedGoodsValue ;
+    rdfs:range   xsd:decimal .
