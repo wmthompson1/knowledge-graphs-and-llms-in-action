@@ -1,0 +1,245 @@
+@prefix quality: <https://purl.org/wmthompson/quality#> .
+@prefix mfg:     <https://purl.org/wmthompson/mfg#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://purl.org/wmthompson/quality>
+    a                owl:Ontology ;
+    dcterms:title    "Quality Domain Ontology" ;
+    dcterms:description
+        "OWL DL ontology for manufacturing quality management: inspections, quality events, NCRs, defects, and corrective actions." ;
+    dcterms:creator  "wmthompson1" ;
+    dcterms:created  "2026-10-21"^^xsd:date ;
+    dcterms:license  <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionIRI   <https://purl.org/wmthompson/quality/1.0.0> .
+
+quality:hasQualityEvent
+    a            owl:ObjectProperty ;
+    rdfs:label   "has quality event" ;
+    rdfs:comment "Links an Inspection to the QualityEvent(s) it generates." ;
+    rdfs:domain  quality:Inspection ;
+    rdfs:range   quality:QualityEvent .
+
+quality:relatedToDefect
+    a            owl:ObjectProperty ;
+    rdfs:label   "related to defect" ;
+    rdfs:comment "Associates a QualityEvent with one or more Defects observed." ;
+    rdfs:domain  quality:QualityEvent ;
+    rdfs:range   quality:Defect .
+
+quality:documentsNCR
+    a            owl:ObjectProperty ;
+    rdfs:label   "documents NCR" ;
+    rdfs:comment "Links a QualityEvent to the formal Non-Conformance Report raised from it." ;
+    rdfs:domain  quality:QualityEvent ;
+    rdfs:range   quality:NCR .
+
+quality:hasCorrectiveAction
+    a            owl:ObjectProperty ;
+    rdfs:label   "has corrective action" ;
+    rdfs:comment "Associates an NCR with the CorrectiveAction(s) that address it." ;
+    rdfs:domain  quality:NCR ;
+    rdfs:range   quality:CorrectiveAction .
+
+quality:addresses
+    a            owl:ObjectProperty ;
+    rdfs:label   "addresses" ;
+    rdfs:comment "Links a CorrectiveAction back to the Defect(s) it is designed to resolve." ;
+    rdfs:domain  quality:CorrectiveAction ;
+    rdfs:range   quality:Defect .
+
+quality:inspects
+    a            owl:ObjectProperty ;
+    rdfs:label   "inspects" ;
+    rdfs:comment "The ProductionEvent that an Inspection covers." ;
+    rdfs:domain  quality:Inspection ;
+    rdfs:range   mfg:ProductionEvent .
+
+quality:raisedAgainst
+    a            owl:ObjectProperty ;
+    rdfs:label   "raised against" ;
+    rdfs:comment "The WorkOrder or Item against which an NCR is raised." ;
+    rdfs:domain  quality:NCR ;
+    rdfs:range   [ owl:unionOf ( mfg:WorkOrder mfg:Item ) ] .
+
+quality:inspectionId
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "inspection ID" ;
+    rdfs:domain  quality:Inspection ;
+    rdfs:range   xsd:string .
+
+quality:inspectionDate
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "inspection date" ;
+    rdfs:domain  quality:Inspection ;
+    rdfs:range   xsd:date .
+
+quality:inspectionResult
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "inspection result" ;
+    rdfs:comment "Outcome: Pass | Fail | ConditionalPass." ;
+    rdfs:domain  quality:Inspection ;
+    rdfs:range   xsd:string .
+
+quality:sampleSize
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "sample size" ;
+    rdfs:domain  quality:Inspection ;
+    rdfs:range   xsd:integer .
+
+quality:quantityInspected
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "quantity inspected" ;
+    rdfs:domain  quality:Inspection ;
+    rdfs:range   xsd:decimal .
+
+quality:qualityEventId
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "quality event ID" ;
+    rdfs:domain  quality:QualityEvent ;
+    rdfs:range   xsd:string .
+
+quality:eventTimestamp
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "event timestamp" ;
+    rdfs:domain  quality:QualityEvent ;
+    rdfs:range   xsd:dateTime .
+
+quality:eventSeverity
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "event severity" ;
+    rdfs:comment "Severity: Critical | Major | Minor." ;
+    rdfs:domain  quality:QualityEvent ;
+    rdfs:range   xsd:string .
+
+quality:ncrNumber
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "NCR number" ;
+    rdfs:domain  quality:NCR ;
+    rdfs:range   xsd:string .
+
+quality:ncrStatus
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "NCR status" ;
+    rdfs:comment "Status: Open | UnderReview | Closed | Voided." ;
+quality:defectCode
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "defect code" ;
+    rdfs:comment "Coded classification of the defect type." ;
+    rdfs:domain  quality:Defect ;
+    rdfs:range   xsd:string .
+
+quality:defectDescription
+    a            owl:DatatypeProperty ;
+    rdfs:label   "defect description" ;
+    rdfs:domain  quality:Defect ;
+    rdfs:range   xsd:string .
+
+quality:defectQuantity
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "defect quantity" ;
+    rdfs:domain  quality:Defect ;
+    rdfs:range   xsd:decimal .
+
+quality:caNumber
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "corrective action number" ;
+    rdfs:domain  quality:CorrectiveAction ;
+    rdfs:range   xsd:string .
+
+quality:caDescription
+    a            owl:DatatypeProperty ;
+    rdfs:label   "corrective action description" ;
+    rdfs:domain  quality:CorrectiveAction ;
+    rdfs:range   xsd:string .
+
+quality:caTargetDate
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "corrective action target date" ;
+    rdfs:domain  quality:CorrectiveAction ;
+    rdfs:range   xsd:date .
+
+quality:caCompletedDate
+    a            owl:DatatypeProperty ;
+    rdfs:label   "corrective action completed date" ;
+    rdfs:domain  quality:CorrectiveAction ;
+    rdfs:range   xsd:date .
+
+quality:caStatus
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "corrective action status" ;
+    rdfs:comment "Status: Open | InProgress | Verified | Closed." ;
+    rdfs:domain  quality:CorrectiveAction ;
+    rdfs:range   xsd:string .
+
+quality:Inspection
+    a               owl:Class ;
+    rdfs:label      "Inspection" ;
+    rdfs:comment    "A formal quality inspection activity performed against a production lot or work-order output." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty quality:inspectionId ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:inspectionDate ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:inspectionResult ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:quantityInspected ; owl:maxCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:inspects ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:inspects ; owl:allValuesFrom mfg:ProductionEvent ] .
+
+quality:QualityEvent
+    a               owl:Class ;
+    rdfs:label      "Quality Event" ;
+    rdfs:comment    "A timestamped occurrence of a quality-related finding raised during or after an Inspection." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty quality:qualityEventId ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:eventTimestamp ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:eventSeverity ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:relatedToDefect ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:relatedToDefect ; owl:allValuesFrom quality:Defect ] .
+
+quality:Defect
+    a               owl:Class ;
+    rdfs:label      "Defect" ;
+    rdfs:comment    "A specific non-conformance instance characterised by a defect code, description, and quantity affected." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty quality:defectCode ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:defectDescription ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:defectQuantity ; owl:cardinality 1 ] .
+
+quality:NCR
+    a               owl:Class ;
+    rdfs:label      "Non-Conformance Report" ;
+    rdfs:comment    "A formal document recording a non-conforming condition, linking it to the affected WorkOrder or Item." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty quality:ncrNumber ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:ncrStatus ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:ncrRaisedDate ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:raisedAgainst ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:hasCorrectiveAction ; owl:allValuesFrom quality:CorrectiveAction ] .
+
+quality:CorrectiveAction
+    a               owl:Class ;
+    rdfs:label      "Corrective Action" ;
+    rdfs:comment    "A planned and tracked remediation activity that addresses one or more Defects identified in an NCR." ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty quality:caNumber ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:caDescription ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:caStatus ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:caTargetDate ; owl:cardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:addresses ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty quality:addresses ; owl:allValuesFrom quality:Defect ] .
+    rdfs:domain  quality:NCR ;
+    rdfs:range   xsd:string .
+
+quality:ncrRaisedDate
+    a            owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label   "NCR raised date" ;
+    rdfs:domain  quality:NCR ;
+    rdfs:range   xsd:date .
+
+quality:ncrClosedDate
+    a            owl:DatatypeProperty ;
+    rdfs:label   "NCR closed date" ;
+    rdfs:domain  quality:NCR ;
+    rdfs:range   xsd:date .
