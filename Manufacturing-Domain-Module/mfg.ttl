@@ -6,14 +6,12 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 
-# Ontology header
 <https://purl.org/wmthompson/mfg>
     a                owl:Ontology ;
     dcterms:title    "Manufacturing Domain Ontology" ;
     dcterms:description
-        "OWL DL ontology for manufacturing planning and execution: items, bills of material, routing, work orders, planned order receipts, production events, and lead-time offsets." ;
+        "OWL DL ontology for manufacturing planning and execution: items, BOMs, routing, work orders, planned order receipts, production events, and lead-time offsets." ;
     dcterms:creator  "wmthompson1" ;
     dcterms:created  "2026-10-21"^^xsd:date ;
     dcterms:license  <https://creativecommons.org/licenses/by/4.0/> ;
@@ -21,220 +19,154 @@
     owl:imports      <https://purl.org/wmthompson/quality> ,
                      <https://purl.org/wmthompson/finance> .
 
-mfg:hasBOM
-    a            owl:ObjectProperty ;
-    rdfs:label   "has bill of material" ;
+### OBJECT PROPERTIES (NO rdfs:domain)
+mfg:hasBOM a owl:ObjectProperty ;
+    rdfs:label "has bill of material" ;
     rdfs:comment "Associates an Item with its Bill of Material definition." ;
-    rdfs:domain  mfg:Item ;
-    rdfs:range   mfg:BOM .
+    rdfs:range mfg:BOM .
 
-mfg:hasComponent
-    a              owl:ObjectProperty ;
-    rdfs:label     "has component" ;
-    rdfs:comment   "Links a BOM to one of its component Items." ;
-    rdfs:domain    mfg:BOM ;
-    rdfs:range     mfg:Item .
+mfg:hasComponent a owl:ObjectProperty ;
+    rdfs:label "has component" ;
+    rdfs:comment "Links a BOM to one of its component Items." ;
+    rdfs:range mfg:Item .
 
-mfg:hasRoutingStep
-    a            owl:ObjectProperty ;
-    rdfs:label   "has routing step" ;
+mfg:hasRoutingStep a owl:ObjectProperty ;
+    rdfs:label "has routing step" ;
     rdfs:comment "Associates a WorkOrder or BOM with an ordered RoutingStep." ;
-    rdfs:domain  [ owl:unionOf ( mfg:WorkOrder mfg:BOM ) ] ;
-    rdfs:range   mfg:RoutingStep .
+    rdfs:range mfg:RoutingStep .
 
-mfg:hasLeadTimeOffset
-    a            owl:ObjectProperty ;
-    rdfs:label   "has lead-time offset" ;
-    rdfs:comment "Associates a planning entity with a LeadTimeOffset that shifts its schedule." ;
-    rdfs:domain  [ owl:unionOf ( mfg:PlannedOrderReceipt mfg:WorkOrder ) ] ;
-    rdfs:range   mfg:LeadTimeOffset .
+mfg:hasLeadTimeOffset a owl:ObjectProperty ;
+    rdfs:label "has lead-time offset" ;
+    rdfs:comment "Associates a planning entity with a LeadTimeOffset." ;
+    rdfs:range mfg:LeadTimeOffset .
 
-mfg:producesItem
-    a            owl:ObjectProperty ;
-    rdfs:label   "produces item" ;
-    rdfs:comment "The Item that a WorkOrder or PlannedOrderReceipt is intended to produce." ;
-    rdfs:domain  [ owl:unionOf ( mfg:WorkOrder mfg:PlannedOrderReceipt ) ] ;
-    rdfs:range   mfg:Item .
+mfg:producesItem a owl:ObjectProperty ;
+    rdfs:label "produces item" ;
+    rdfs:comment "The Item produced by a WorkOrder or PlannedOrderReceipt." ;
+    rdfs:range mfg:Item .
 
-mfg:fulfilledBy
-    a            owl:ObjectProperty ;
-    rdfs:label   "fulfilled by" ;
+mfg:fulfilledBy a owl:ObjectProperty ;
+    rdfs:label "fulfilled by" ;
     rdfs:comment "Links a PlannedOrderReceipt to the WorkOrder that satisfies it." ;
-    rdfs:domain  mfg:PlannedOrderReceipt ;
-    rdfs:range   mfg:WorkOrder .
+    rdfs:range mfg:WorkOrder .
 
-mfg:triggeredBy
-    a            owl:ObjectProperty ;
-    rdfs:label   "triggered by" ;
+mfg:triggeredBy a owl:ObjectProperty ;
+    rdfs:label "triggered by" ;
     rdfs:comment "Links a ProductionEvent to the WorkOrder that caused it." ;
-    rdfs:domain  mfg:ProductionEvent ;
-    rdfs:range   mfg:WorkOrder .
+    rdfs:range mfg:WorkOrder .
 
-mfg:recordedAt
-    a            owl:ObjectProperty ;
-    rdfs:label   "recorded at routing step" ;
+mfg:recordedAt a owl:ObjectProperty ;
+    rdfs:label "recorded at routing step" ;
     rdfs:comment "The RoutingStep at which a ProductionEvent was recorded." ;
-    rdfs:domain  mfg:ProductionEvent ;
-    rdfs:range   mfg:RoutingStep .
+    rdfs:range mfg:RoutingStep .
 
-mfg:precedesStep
-    a              owl:ObjectProperty , owl:TransitiveProperty ;
-    rdfs:label     "precedes step" ;
-    rdfs:comment   "Ordering relation between RoutingSteps within the same routing." ;
-    rdfs:domain    mfg:RoutingStep ;
-    rdfs:range     mfg:RoutingStep .
+mfg:precedesStep a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "precedes step" ;
+    rdfs:comment "Ordering relation between RoutingSteps." ;
+    rdfs:range mfg:RoutingStep .
 
-mfg:hasQualityEvent
-    a            owl:ObjectProperty ;
-    rdfs:label   "has quality event" ;
-    rdfs:comment "Links a ProductionEvent to any associated QualityEvent." ;
-    rdfs:domain  mfg:ProductionEvent ;
-    rdfs:range   quality:QualityEvent .
+mfg:hasQualityEvent a owl:ObjectProperty ;
+    rdfs:label "has quality event" ;
+    rdfs:comment "Links a ProductionEvent to associated QualityEvent(s)." ;
+    rdfs:range quality:QualityEvent .
 
-mfg:hasInventoryValue
-    a            owl:ObjectProperty ;
-    rdfs:label   "has inventory value" ;
-    rdfs:comment "Associates an Item with its financial InventoryValue record." ;
-    rdfs:domain  mfg:Item ;
-    rdfs:range   finance:InventoryValue .
+mfg:hasInventoryValue a owl:ObjectProperty ;
+    rdfs:label "has inventory value" ;
+    rdfs:comment "Associates an Item with its InventoryValue record." ;
+    rdfs:range finance:InventoryValue .
 
-mfg:hasWIPValue
-    a            owl:ObjectProperty ;
-    rdfs:label   "has WIP value" ;
-    rdfs:comment "Associates a WorkOrder with its WIP valuation record." ;
-    rdfs:domain  mfg:WorkOrder ;
-    rdfs:range   finance:WIPValue .
+mfg:hasWIPValue a owl:ObjectProperty ;
+    rdfs:label "has WIP value" ;
+    rdfs:comment "Associates a WorkOrder with its WIPValue record." ;
+    rdfs:range finance:WIPValue .
 
-mfg:itemNumber
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "item number" ;
-    rdfs:comment "Unique business key for an Item." ;
-    rdfs:domain  mfg:Item ;
-    rdfs:range   xsd:string .
+### DATATYPE PROPERTIES (NO rdfs:domain)
+mfg:itemNumber a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:string .
 
-mfg:itemDescription
-    a            owl:DatatypeProperty ;
-    rdfs:label   "item description" ;
-    rdfs:domain  mfg:Item ;
-    rdfs:range   xsd:string .
+mfg:itemDescription a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
 
-mfg:leadTimeDays
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "lead time (days)" ;
-    rdfs:comment "Manufacturing lead time expressed in calendar days." ;
-    rdfs:domain  [ owl:unionOf ( mfg:Item mfg:LeadTimeOffset ) ] ;
-    rdfs:range   xsd:decimal .
+mfg:leadTimeDays a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:decimal .
 
-mfg:offsetDays
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "offset days" ;
-    rdfs:comment "Positive or negative day offset applied to a planned schedule date." ;
-    rdfs:domain  mfg:LeadTimeOffset ;
-    rdfs:range   xsd:integer .
+mfg:offsetDays a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer .
 
-mfg:plannedStartDate
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "planned start date" ;
-    rdfs:domain  [ owl:unionOf ( mfg:WorkOrder mfg:PlannedOrderReceipt ) ] ;
-    rdfs:range   xsd:date .
+mfg:plannedStartDate a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:date .
 
-mfg:plannedEndDate
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "planned end date" ;
-    rdfs:domain  [ owl:unionOf ( mfg:WorkOrder mfg:PlannedOrderReceipt ) ] ;
-    rdfs:range   xsd:date .
+mfg:plannedEndDate a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:date .
 
-mfg:plannedQuantity
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "planned quantity" ;
-    rdfs:domain  [ owl:unionOf ( mfg:WorkOrder mfg:PlannedOrderReceipt ) ] ;
-    rdfs:range   xsd:decimal .
+mfg:plannedQuantity a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:decimal .
 
-mfg:workOrderNumber
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "work order number" ;
-    rdfs:domain  mfg:WorkOrder ;
-mfg:stepDescription
-    a            owl:DatatypeProperty ;
-    rdfs:label   "step description" ;
-    rdfs:domain  mfg:RoutingStep ;
-    rdfs:range   xsd:string .
+mfg:workOrderNumber a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:string .
 
-mfg:runTimeHours
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "run time (hours)" ;
-    rdfs:domain  mfg:RoutingStep ;
-    rdfs:range   xsd:decimal .
+mfg:stepDescription a owl:DatatypeProperty ;
+    rdfs:range xsd:string .
 
-mfg:eventTimestamp
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "event timestamp" ;
-    rdfs:domain  mfg:ProductionEvent ;
-    rdfs:range   xsd:dateTime .
+mfg:runTimeHours a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:decimal .
 
-mfg:eventType
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "event type" ;
-    rdfs:comment "Categorical type: MachineStart | MachineStop | QuantityComplete | Scrap | Setup." ;
-    rdfs:domain  mfg:ProductionEvent ;
-    rdfs:range   xsd:string .
+mfg:eventTimestamp a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:dateTime .
 
-mfg:quantityReported
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "quantity reported" ;
-    rdfs:domain  mfg:ProductionEvent ;
-    rdfs:range   xsd:decimal .
+mfg:eventType a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:string .
 
-mfg:bomRevision
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "BOM revision" ;
-    rdfs:domain  mfg:BOM ;
-    rdfs:range   xsd:string .
+mfg:quantityReported a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:decimal .
 
-mfg:bomEffectiveDate
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "BOM effective date" ;
-    rdfs:domain  mfg:BOM ;
-    rdfs:range   xsd:date .
+mfg:bomRevision a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:string .
 
-mfg:Item
-    a               owl:Class ;
-    rdfs:label      "Item" ;
-    rdfs:comment    "A discrete part, component, sub-assembly, or finished good managed in the manufacturing system." ;
+mfg:bomEffectiveDate a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:date .
+
+mfg:stepSequence a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:integer .
+
+mfg:workOrderStatus a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:range xsd:string .
+
+### CLASSES WITH LOCAL RESTRICTIONS (OWL DL SAFE)
+mfg:Item a owl:Class ;
+    rdfs:label "Item" ;
+    rdfs:comment "A discrete part, component, sub-assembly, or finished good." ;
     rdfs:subClassOf
         [ a owl:Restriction ; owl:onProperty mfg:itemNumber ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:itemDescription ; owl:minCardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:leadTimeDays ; owl:maxCardinality 1 ] .
 
-mfg:BOM
-    a               owl:Class ;
-    rdfs:label      "Bill of Material" ;
-    rdfs:comment    "A versioned, effective-dated list of components and quantities required to produce one unit of a parent Item." ;
+mfg:BOM a owl:Class ;
+    rdfs:label "Bill of Material" ;
+    rdfs:comment "Versioned list of components required to produce a parent Item." ;
     rdfs:subClassOf
         [ a owl:Restriction ; owl:onProperty mfg:bomRevision ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:bomEffectiveDate ; owl:cardinality 1 ] ,
-        [ a owl:Restriction ; owl:onProperty mfg:hasComponent ; owl:minCardinality 1 ] .
+        [ a owl:Restriction ; owl:onProperty mfg:hasComponent ; owl:minCardinality 1 ] ,
+        [ a owl:Restriction ; owl:onProperty mfg:hasComponent ; owl:allValuesFrom mfg:Item ] .
 
-mfg:RoutingStep
-    a               owl:Class ;
-    rdfs:label      "Routing Step" ;
-    rdfs:comment    "An individual operation in the manufacturing routing (work centre, sequence, run time)." ;
+mfg:RoutingStep a owl:Class ;
+    rdfs:label "Routing Step" ;
+    rdfs:comment "An operation in the manufacturing routing." ;
     rdfs:subClassOf
         [ a owl:Restriction ; owl:onProperty mfg:stepSequence ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:stepDescription ; owl:minCardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:runTimeHours ; owl:maxCardinality 1 ] .
 
-mfg:LeadTimeOffset
-    a               owl:Class ;
-    rdfs:label      "Lead-Time Offset" ;
-    rdfs:comment    "A signed day-offset applied to a planned receipt or work-order date to account for queue time, move time, or safety lead time." ;
+mfg:LeadTimeOffset a owl:Class ;
+    rdfs:label "Lead-Time Offset" ;
+    rdfs:comment "A signed day-offset applied to planned dates." ;
     rdfs:subClassOf
         [ a owl:Restriction ; owl:onProperty mfg:offsetDays ; owl:cardinality 1 ] .
 
-mfg:WorkOrder
-    a               owl:Class ;
-    rdfs:label      "Work Order" ;
-    rdfs:comment    "A shop-floor manufacturing order authorising production of a specific quantity of an Item against a BOM and routing." ;
+mfg:WorkOrder a owl:Class ;
+    rdfs:label "Work Order" ;
+    rdfs:comment "A manufacturing order authorizing production of an Item." ;
     rdfs:subClassOf
         [ a owl:Restriction ; owl:onProperty mfg:workOrderNumber ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:workOrderStatus ; owl:cardinality 1 ] ,
@@ -246,10 +178,9 @@ mfg:WorkOrder
         [ a owl:Restriction ; owl:onProperty mfg:hasRoutingStep ; owl:minCardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:hasRoutingStep ; owl:allValuesFrom mfg:RoutingStep ] .
 
-mfg:PlannedOrderReceipt
-    a               owl:Class ;
-    rdfs:label      "Planned Order Receipt" ;
-    rdfs:comment    "An MRP-generated supply recommendation representing a planned inbound quantity of an Item at a future date." ;
+mfg:PlannedOrderReceipt a owl:Class ;
+    rdfs:label "Planned Order Receipt" ;
+    rdfs:comment "An MRP-generated supply recommendation." ;
     rdfs:subClassOf
         [ a owl:Restriction ; owl:onProperty mfg:producesItem ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:producesItem ; owl:allValuesFrom mfg:Item ] ,
@@ -258,10 +189,9 @@ mfg:PlannedOrderReceipt
         [ a owl:Restriction ; owl:onProperty mfg:fulfilledBy ; owl:maxCardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:fulfilledBy ; owl:allValuesFrom mfg:WorkOrder ] .
 
-mfg:ProductionEvent
-    a               owl:Class ;
-    rdfs:label      "Production Event" ;
-    rdfs:comment    "A timestamped shop-floor occurrence (machine start/stop, quantity complete, scrap) associated with a WorkOrder and RoutingStep." ;
+mfg:ProductionEvent a owl:Class ;
+    rdfs:label "Production Event" ;
+    rdfs:comment "A timestamped shop-floor occurrence associated with a WorkOrder and RoutingStep." ;
     rdfs:subClassOf
         [ a owl:Restriction ; owl:onProperty mfg:eventTimestamp ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:eventType ; owl:cardinality 1 ] ,
@@ -270,17 +200,3 @@ mfg:ProductionEvent
         [ a owl:Restriction ; owl:onProperty mfg:recordedAt ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty mfg:recordedAt ; owl:allValuesFrom mfg:RoutingStep ] ,
         [ a owl:Restriction ; owl:onProperty mfg:quantityReported ; owl:maxCardinality 1 ] .
-    rdfs:range   xsd:string .
-
-mfg:workOrderStatus
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "work order status" ;
-    rdfs:comment "Lifecycle status: Released | In-Progress | Complete | Closed." ;
-    rdfs:domain  mfg:WorkOrder ;
-    rdfs:range   xsd:string .
-
-mfg:stepSequence
-    a            owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:label   "step sequence number" ;
-    rdfs:domain  mfg:RoutingStep ;
-    rdfs:range   xsd:integer .
