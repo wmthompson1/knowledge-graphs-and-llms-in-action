@@ -1,3 +1,8 @@
+<https://purl.org/wmthompson/quality>
+    a owl:Ontology ;
+    owl:versionIRI <https://purl.org/wmthompson/quality/1.0.0> .
+
+
 @prefix quality: <https://purl.org/wmthompson/quality#> .
 @prefix mfg:     <https://purl.org/wmthompson/mfg#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
@@ -129,7 +134,8 @@ quality:QualityEvent a owl:Class ;
     rdfs:label "Quality Event" ;
     rdfs:comment "A timestamped occurrence of a quality-related finding raised during or after an Inspection." ;
     rdfs:subClassOf
-        [ a owl:Restriction ; owl:onProperty quality:qualityEventId ; owl:cardinality 1 ] ,
+        [ a owl:Re
+        striction ; owl:onProperty quality:qualityEventId ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty quality:eventTimestamp ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty quality:eventSeverity ; owl:cardinality 1 ] ,
         [ a owl:Restriction ; owl:onProperty quality:relatedToDefect ; owl:minCardinality 1 ] ,

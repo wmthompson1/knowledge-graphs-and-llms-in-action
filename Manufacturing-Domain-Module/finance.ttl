@@ -1,3 +1,9 @@
+<https://purl.org/wmthompson/finance>
+    a owl:Ontology ;
+    owl:versionIRI <https://purl.org/wmthompson/finance/1.0.0> ;
+    owl:imports <https://purl.org/wmthompson/mfg> .
+
+
 @prefix finance: <https://purl.org/wmthompson/finance#> .
 @prefix mfg:     <https://purl.org/wmthompson/mfg#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .

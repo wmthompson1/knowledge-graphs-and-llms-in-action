@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog"
+         prefer="public">
+
+    <!-- Quality Domain -->
+    <uri id="quality"
+         name="https://purl.org/wmthompson/quality"
+         uri="quality.ttl"/>
+
+    <!-- Finance Domain -->
+    <uri id="finance"
+         name="https://purl.org/wmthompson/finance"
+         uri="finance.ttl"/>
+
+    <!-- Manufacturing Domain -->
+    <uri id="mfg"
+         name="https://purl.org/wmthompson/mfg"
+         uri="mfg.ttl"/>
+
+</catalog>

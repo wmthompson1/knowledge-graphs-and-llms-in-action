@@ -1,0 +1,5 @@
+# Load order for OWL tools (Protégé, ROBOT, OWLAPI, Ontop)
+
+1. quality.ttl
+2. finance.ttl
+3. mfg.ttl   # entry point
