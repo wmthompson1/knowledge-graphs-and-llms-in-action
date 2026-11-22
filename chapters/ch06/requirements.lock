@@ -4,3 +4,4 @@ tqdm==4.66.1
 requests==2.31.0
 spacy==3.6.1
 pytextrank==3.2.5
+numpy<2

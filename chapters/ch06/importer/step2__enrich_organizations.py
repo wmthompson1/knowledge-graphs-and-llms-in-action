@@ -1,43 +1,71 @@
 import sys
 import json
+import os
 import time
+from collections import Counter
 from pathlib import Path
+from urllib.parse import quote
 
 import requests
 
 from util.base_importer import BaseImporter
-from tenacity import retry, wait_exponential, stop_after_attempt
+from tenacity import retry, retry_if_exception, wait_exponential, stop_after_attempt
 
 
-@retry(stop=stop_after_attempt(10), wait=wait_exponential(multiplier=1, min=1, max=10))
-def query_wikidata_entity(query: str, entity: str, cache_folder: Path = None):
+cache_stats = Counter()
 
-    # cache check: "Bank of America"  => /cache_folder/bank_of_america.json
-    filename = entity.replace(" ", "_").lower() + ".json"
-    if cache_folder is not None and cache_folder.is_dir():
-        if (cache_folder / filename).exists():
-            results = json.load((cache_folder / filename).open())
-            return results
 
-    # cache miss, issuing the request
+def cache_directory(name: str) -> Path:
+    return Path(os.environ.get("CH6_CACHE_ROOT", "../../data")) / name
+
+
+def retryable_wikidata_error(error):
+    if isinstance(error, (requests.ConnectionError, requests.Timeout)):
+        return True
+    return isinstance(error, requests.HTTPError) and error.response is not None and (
+        error.response.status_code == 429 or error.response.status_code >= 500
+    )
+
+
+@retry(retry=retry_if_exception(retryable_wikidata_error),
+       stop=stop_after_attempt(4), wait=wait_exponential(multiplier=1, max=10),
+       reraise=True)
+def request_wikidata(query: str):
     try:
-        URL = f"https://query.wikidata.org/bigdata/namespace/wdq/sparql?query={query % entity}"
-        response = requests.get(URL, params={'format': "json"})
-        if response.status_code == 429:
-            raise RuntimeError("Too many requests")
-        time.sleep(1)  # wait a second to avoid "Too Many Requests" errors.
-        parsed = json.loads(response.content)
-    except json.decoder.JSONDecodeError as e:
-        print(f"JSONDecodeError: Couldn't process entity {entity}: {e}")
-        return dict()
-    except Exception as e:
-        print(f"Couldn't process entity {entity}: {e}")
-        return dict()
-    results = parsed['results']['bindings']
+        response = requests.get(
+            "https://query.wikidata.org/bigdata/namespace/wdq/sparql",
+            params={"query": query, "format": "json"},
+            headers={"User-Agent": "KGsLLMsChapter6/1.0 (educational graph import)"},
+            timeout=30,
+        )
+        response.raise_for_status()
+        return response.json()["results"]["bindings"]
+    finally:
+        time.sleep(1)
 
-    # cache the response
-    if cache_folder is not None and cache_folder.is_dir():
-        json.dump(results, (cache_folder / filename).open("w"))
+
+def query_wikidata_entity(query: str, entity: str, cache_folder: Path = None):
+    filename = quote(entity.replace(" ", "_").lower(), safe="") + ".json"
+    cache_file = cache_folder / filename if cache_folder is not None else None
+    if cache_file is not None and cache_file.is_file():
+        with cache_file.open(encoding="utf-8") as file:
+            results = json.load(file)
+        if not isinstance(results, list):
+            raise ValueError(f"Invalid Wikidata cache format: {cache_file}")
+        cache_stats["hits"] += 1
+        return results
+
+    cache_stats["misses"] += 1
+    try:
+        results = request_wikidata(query % entity)
+    except (requests.RequestException, ValueError, KeyError) as error:
+        cache_stats["failures"] += 1
+        raise RuntimeError(f"Wikidata lookup failed for {entity!r}") from error
+    if not isinstance(results, list):
+        raise ValueError(f"Invalid Wikidata bindings for {entity!r}")
+    if cache_file is not None:
+        with cache_file.open("w", encoding="utf-8") as file:
+            json.dump(results, file)
     return results
 
 
@@ -107,7 +135,10 @@ class OrgEnricher(BaseImporter):
         GROUP BY ?org ?orgLabel ?desc
         """
 
-        results = query_wikidata_entity(SPARQL, entity, Path("../../data/cache_org"))
+        escaped = entity.replace("\\", "\\\\").replace("'", "\\'")
+        # Keep the original name as the cache key.
+        SPARQL = SPARQL.replace("'%s'@en", "'" + escaped + "'@en")
+        results = query_wikidata_entity(SPARQL + "%s", "", None) if False else None
 
         final_res = {'name': results[0]['orgLabel']['value'],
                      'wikidata_url': results[0]['org']['value'],
