@@ -60,15 +60,16 @@ class BBCImporter(BaseImporter):
         for file in data_path.glob("*/*.txt"):
             # file: xyz/topic1/123.txt => id: topic1_123
             id_ = f"{file.parent.name}_{file.name[:-4]}"
-            with file.open('r') as f:
-                try:
-                    lines = [x.strip() for x in f if len(x.strip()) > 1]
-                    document = {"topic": file.parent.name, "id": id_, "title": lines[0],
-                                "text": "\n".join(lines[1:])}
-                    self.enrich_document(document)
-                    yield document
-                except UnicodeDecodeError:
-                    print(f"UnicodeDecodeError for {id}")
+            try:
+                text = file.read_text(encoding="utf-8")
+            except UnicodeDecodeError:
+                print(f"Reading {file} as Latin-1 after UTF-8 decoding failed")
+                text = file.read_text(encoding="latin-1")
+            lines = [x.strip() for x in text.splitlines() if len(x.strip()) > 1]
+            document = {"topic": file.parent.name, "id": id_, "title": lines[0],
+                        "text": "\n".join(lines[1:])}
+            self.enrich_document(document)
+            yield document
 
     def enrich_document(self, document: dict):
         processed = self.nlp(document['title'] + ".\n\n" + document['text'])
@@ -194,9 +195,15 @@ if __name__ == "__main__":
 
     base_path = Path(base_path)
 
-    # Ingest articles & run NLP processing
-    importer.import_documents(base_path)
+    try:
+        if not base_path.is_dir() or importer.count_documents(base_path) == 0:
+            raise ValueError(f"No BBC documents found in {base_path}")
+        importer.import_documents(base_path)
+    finally:
+        importer.close()
 
     importerKW = BBCKeywordImporter(argv=sys.argv[1:])
-    # for each article, extract keywords and key-phrases (enrichment of the KG created in previous step)
-    importerKW.import_keyword()
+    try:
+        importerKW.import_keyword()
+    finally:
+        importerKW.close()

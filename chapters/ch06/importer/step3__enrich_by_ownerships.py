@@ -7,7 +7,7 @@ import spacy
 from tqdm.auto import tqdm
 
 from util.base_importer import BaseImporter
-from step2__enrich_organizations import query_wikidata_entity
+from step2__enrich_organizations import cache_directory, cache_stats, query_wikidata_entity
 
 
 class OwnershipEnricher(BaseImporter):
@@ -47,18 +47,16 @@ class OwnershipEnricher(BaseImporter):
           SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
         }"""
         results = query_wikidata_entity(SPARQL, entity["wikidata_id"], self.cache_folder)
-        owned_by_org = []
-        owned_by_per = []
+        owners = {}
         for r in results:
-            if r["owner_instance_of"] == "https://www.wikidata.org/entity/Q5":  # owner is person
-                owned_by_org.append(r["owned_byLabel"]["value"])
-            else:
-                owned_by_per.append(r["owned_byLabel"]["value"])
+            owner_id = r["owned_by"]["value"]
+            owner = owners.setdefault(owner_id, {"name": r["owned_byLabel"]["value"], "person": False})
+            if r["owner_instance_of"]["value"].rstrip("/").endswith("/Q5"):
+                owner["person"] = True
         if len(results) > 0:
             return {'id': entity["id"],
-                    'owned_by_org': owned_by_org,
-                    'owned_by_per': owned_by_per}
-        pass
+                    'owned_by_org': [o["name"] for o in owners.values() if not o["person"]],
+                    'owned_by_per': [o["name"] for o in owners.values() if o["person"]]}
 
     @staticmethod
     def get_owners(entities: list):
@@ -149,7 +147,12 @@ if __name__ == "__main__":
     enricher = OwnershipEnricher(argv=sys.argv[1:])
 
     # set up a cache folder for wikidata responses
-    enricher.cache_folder = Path("../../data/cache_owners")
-    enricher.cache_folder.mkdir(exist_ok=True)
+    enricher.cache_folder = cache_directory("cache_owners")
+    enricher.cache_folder.mkdir(parents=True, exist_ok=True)
 
-    enricher.run()
+    try:
+        enricher.run()
+    finally:
+        print(f"Wikidata cache: {cache_stats['hits']} hits, {cache_stats['misses']} misses, "
+              f"{cache_stats['empty']} empty results, {cache_stats['failures']} failed lookups")
+        enricher.close()

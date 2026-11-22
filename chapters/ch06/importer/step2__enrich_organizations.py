@@ -44,7 +44,8 @@ def request_wikidata(query: str):
         time.sleep(1)
 
 
-def query_wikidata_entity(query: str, entity: str, cache_folder: Path = None):
+def query_wikidata_entity(query: str, entity: str, cache_folder: Path = None,
+                          query_entity: str = None):
     filename = quote(entity.replace(" ", "_").lower(), safe="") + ".json"
     cache_file = cache_folder / filename if cache_folder is not None else None
     if cache_file is not None and cache_file.is_file():
@@ -53,19 +54,24 @@ def query_wikidata_entity(query: str, entity: str, cache_folder: Path = None):
         if not isinstance(results, list):
             raise ValueError(f"Invalid Wikidata cache format: {cache_file}")
         cache_stats["hits"] += 1
+        if not results:
+            cache_stats["empty"] += 1
         return results
 
     cache_stats["misses"] += 1
     try:
-        results = request_wikidata(query % entity)
+        results = request_wikidata(query % (query_entity if query_entity is not None else entity))
     except (requests.RequestException, ValueError, KeyError) as error:
         cache_stats["failures"] += 1
         raise RuntimeError(f"Wikidata lookup failed for {entity!r}") from error
     if not isinstance(results, list):
+        cache_stats["failures"] += 1
         raise ValueError(f"Invalid Wikidata bindings for {entity!r}")
     if cache_file is not None:
         with cache_file.open("w", encoding="utf-8") as file:
             json.dump(results, file)
+    if not results:
+        cache_stats["empty"] += 1
     return results
 
 
@@ -135,18 +141,16 @@ class OrgEnricher(BaseImporter):
         GROUP BY ?org ?orgLabel ?desc
         """
 
-        escaped = entity.replace("\\", "\\\\").replace("'", "\\'")
-        # Keep the original name as the cache key.
-        SPARQL = SPARQL.replace("'%s'@en", "'" + escaped + "'@en")
-        results = query_wikidata_entity(SPARQL + "%s", "", None) if False else None
+        escaped = entity.replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n").replace("\r", "\\r")
+        results = query_wikidata_entity(SPARQL, entity, self.cachePath, query_entity=escaped)
 
         final_res = {'name': results[0]['orgLabel']['value'],
                      'wikidata_url': results[0]['org']['value'],
                      'wikidata_id': results[0]['org']['value'].split("/")[-1].strip(),
                      'description': results[0]['desc']['value'],
-                     'subsidiary': list(set(results[0]['subsidiaries']['value'].split(";"))),
-                     'member_of': list(set(results[0]['members']['value'].split(";"))),
-                     'industry': list(set(results[0]['industries']['value'].split(";"))),
+                     'subsidiary': sorted({x.strip() for x in results[0]['subsidiaries']['value'].split(";") if x.strip()}),
+                     'member_of': sorted({x.strip() for x in results[0]['members']['value'].split(";") if x.strip()}),
+                     'industry': sorted({x.strip() for x in results[0]['industries']['value'].split(";") if x.strip()}),
                      } if len(results) > 0 else dict()
 
         return final_res
@@ -175,7 +179,12 @@ if __name__ == "__main__":
     enricher = OrgEnricher(argv=sys.argv[1:])
 
     # set up a cache folder for wikidata responses
-    enricher.cachePath = Path("../../data/cache_org")
-    enricher.cachePath.mkdir(exist_ok=True)
+    enricher.cachePath = cache_directory("cache_org")
+    enricher.cachePath.mkdir(parents=True, exist_ok=True)
 
-    enricher.run()
+    try:
+        enricher.run()
+    finally:
+        print(f"Wikidata cache: {cache_stats['hits']} hits, {cache_stats['misses']} misses, "
+              f"{cache_stats['empty']} empty results, {cache_stats['failures']} failed lookups")
+        enricher.close()

@@ -1,0 +1,65 @@
+@prefix mrp: <https://example.org/mrp#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://example.org/mrp> a owl:Ontology ;
+    rdfs:label "Draft minimal MRP ontology vocabulary" ;
+    rdfs:comment "Provisional design for review; no operational assertions or approved identity mappings." .
+
+# Evidence and mentions
+mrp:SourceDocument a owl:Class .
+mrp:SourcePassage a owl:Class .
+mrp:Mention a owl:Class .
+mrp:RelationshipAssertion a owl:Class .
+
+# Product, process, planning and supply
+mrp:Item a owl:Class .
+mrp:Product a owl:Class ; rdfs:subClassOf mrp:Item .
+mrp:BillOfMaterials a owl:Class .
+mrp:BOMLine a owl:Class .
+mrp:Unit a owl:Class .
+mrp:Routing a owl:Class .
+mrp:Operation a owl:Class .
+mrp:WorkCenter a owl:Class .
+mrp:ProductionOrder a owl:Class .
+mrp:PlannedOrder a owl:Class .
+mrp:MaterialRequirementsPlanning a owl:Class .
+mrp:MasterProductionSchedule a owl:Class .
+mrp:InventoryPosition a owl:Class .
+mrp:NetRequirement a owl:Class .
+mrp:RoleAssignment a owl:Class .
+mrp:Supplier a owl:Class ; rdfs:subClassOf mrp:RoleAssignment .
+
+# Object properties
+mrp:hasPassage a owl:ObjectProperty .
+mrp:supportedBy a owl:ObjectProperty .
+mrp:subjectMention a owl:ObjectProperty .
+mrp:objectMention a owl:ObjectProperty .
+mrp:refersTo a owl:ObjectProperty .
+mrp:hasBOM a owl:ObjectProperty .
+mrp:hasBOMLine a owl:ObjectProperty .
+mrp:parentItem a owl:ObjectProperty .
+mrp:componentItem a owl:ObjectProperty .
+mrp:unitOfMeasure a owl:ObjectProperty .
+mrp:hasRouting a owl:ObjectProperty .
+mrp:hasOperation a owl:ObjectProperty .
+mrp:performedAt a owl:ObjectProperty .
+mrp:hasNextOperation a owl:ObjectProperty .
+mrp:usesSchedule a owl:ObjectProperty .
+mrp:usesBOM a owl:ObjectProperty .
+mrp:usesInventory a owl:ObjectProperty .
+mrp:fulfillsRequirement a owl:ObjectProperty .
+mrp:heldBy a owl:ObjectProperty .
+mrp:suppliesMaterial a owl:ObjectProperty .
+
+# Datatype properties
+mrp:sourceText a owl:DatatypeProperty .
+mrp:sourceLocator a owl:DatatypeProperty .
+mrp:mentionText a owl:DatatypeProperty .
+mrp:assertionStatus a owl:DatatypeProperty .
+mrp:sku a owl:DatatypeProperty .
+mrp:quantityPerParent a owl:DatatypeProperty .
+mrp:orderQuantity a owl:DatatypeProperty .
+mrp:onHandQuantity a owl:DatatypeProperty .
+mrp:setupTime a owl:DatatypeProperty .
+mrp:runTime a owl:DatatypeProperty .

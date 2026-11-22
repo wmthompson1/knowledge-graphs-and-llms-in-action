@@ -1,0 +1,492 @@
+[
+  {
+    "evidence_id": "E01",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 135,
+    "source_sentence_without_markdown_bold": "Manufacturing is the transformation of raw materials, components, or semi-finished goods into finished products through physical, chemical, or assembly processes.",
+    "surrounding_context": {
+      "previous_nonempty_line": "## 2.2 Core Manufacturing Process Terms",
+      "source_line": "**Manufacturing** is the transformation of raw materials, components, or semi-finished goods into finished products through physical, chemical, or assembly processes. In semantic models, Manufacturing is typically represented as an OWL superclass with subclasses for discrete manufacturing (individual unit production), process manufacturing (batch or continuous flow), and additive manufacturing (layer-by-layer fabrication).",
+      "next_nonempty_line": "**Production Planning** is the process of determining what to manufacture, in what quantities, and on what schedule, balancing demand forecasts against capacity constraints and inventory levels. It is the bridge between market demand signals (customer orders, forecasts) and shop-floor execution instructions (production orders, work center schedules)."
+    },
+    "confidence_notes": "Exact text; general definition."
+  },
+  {
+    "evidence_id": "E02",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 137,
+    "source_sentence_without_markdown_bold": "Production Planning is the process of determining what to manufacture, in what quantities, and on what schedule, balancing demand forecasts against capacity constraints and inventory levels.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Manufacturing** is the transformation of raw materials, components, or semi-finished goods into finished products through physical, chemical, or assembly processes. In semantic models, Manufacturing is typically represented as an OWL superclass with subclasses for discrete manufacturing (individual unit production), process manufacturing (batch or continuous flow), and additive manufacturing (layer-by-layer fabrication).",
+      "source_line": "**Production Planning** is the process of determining what to manufacture, in what quantities, and on what schedule, balancing demand forecasts against capacity constraints and inventory levels. It is the bridge between market demand signals (customer orders, forecasts) and shop-floor execution instructions (production orders, work center schedules).",
+      "next_nonempty_line": "**Shop Floor** refers to the physical area where manufacturing operations are executed — where machines, operators, tooling, and materials converge to produce goods. In ISA-95 ontology terms, the shop floor corresponds to the Work Center and Work Unit levels of the equipment hierarchy. It is the primary domain of MES systems and the source of real-time operational event data."
+    },
+    "confidence_notes": "Exact text; general process description."
+  },
+  {
+    "evidence_id": "E03",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 141,
+    "source_sentence_without_markdown_bold": "Work Center is a defined grouping of machines, tools, or labor resources used to perform specific manufacturing operations.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Shop Floor** refers to the physical area where manufacturing operations are executed — where machines, operators, tooling, and materials converge to produce goods. In ISA-95 ontology terms, the shop floor corresponds to the Work Center and Work Unit levels of the equipment hierarchy. It is the primary domain of MES systems and the source of real-time operational event data.",
+      "source_line": "**Work Center** is a defined grouping of machines, tools, or labor resources used to perform specific manufacturing operations. Work centers are the fundamental unit of capacity planning: available capacity is expressed as hours available per work center per planning period. In OWL ontologies, WorkCenter is a class with properties for capacity, shift calendar, efficiency rating, and location within the ISA-95 hierarchy.",
+      "next_nonempty_line": "**Routing** is the defined sequence of operations, work centers, and time standards required to manufacture one unit of a product. A routing is the process analogue of a Bill of Materials: where the BOM defines the material structure of a product, the routing defines its process structure. In semantic models, a routing is represented as an ordered sequence of Operation individuals, linked by hasNextOperation ObjectProperties."
+    },
+    "confidence_notes": "Exact text; definition rather than instance."
+  },
+  {
+    "evidence_id": "E04",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 143,
+    "source_sentence_without_markdown_bold": "Routing is the defined sequence of operations, work centers, and time standards required to manufacture one unit of a product.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Work Center** is a defined grouping of machines, tools, or labor resources used to perform specific manufacturing operations. Work centers are the fundamental unit of capacity planning: available capacity is expressed as hours available per work center per planning period. In OWL ontologies, WorkCenter is a class with properties for capacity, shift calendar, efficiency rating, and location within the ISA-95 hierarchy.",
+      "source_line": "**Routing** is the defined sequence of operations, work centers, and time standards required to manufacture one unit of a product. A routing is the process analogue of a Bill of Materials: where the BOM defines the material structure of a product, the routing defines its process structure. In semantic models, a routing is represented as an ordered sequence of Operation individuals, linked by hasNextOperation ObjectProperties.",
+      "next_nonempty_line": "**Operation** is a single step within a manufacturing routing. Each operation specifies the work center where it is performed, the standard setup time (time to prepare the work center), the standard run time per unit produced, and any tooling or resource requirements. Operations are the granular building blocks of production scheduling and cost accumulation."
+    },
+    "confidence_notes": "Exact text; definition."
+  },
+  {
+    "evidence_id": "E05",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 145,
+    "source_sentence_without_markdown_bold": "Each operation specifies the work center where it is performed, the standard setup time (time to prepare the work center), the standard run time per unit produced, and any tooling or resource requirements.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Routing** is the defined sequence of operations, work centers, and time standards required to manufacture one unit of a product. A routing is the process analogue of a Bill of Materials: where the BOM defines the material structure of a product, the routing defines its process structure. In semantic models, a routing is represented as an ordered sequence of Operation individuals, linked by hasNextOperation ObjectProperties.",
+      "source_line": "**Operation** is a single step within a manufacturing routing. Each operation specifies the work center where it is performed, the standard setup time (time to prepare the work center), the standard run time per unit produced, and any tooling or resource requirements. Operations are the granular building blocks of production scheduling and cost accumulation.",
+      "next_nonempty_line": "**Production Order (Work Order)** is a formal shop-floor document — in paper or electronic form — that authorizes the manufacture of a specified quantity of a product by a target completion date. It links together the material (what is being made), the BOM (what materials are needed), the routing (how it is made), the quantities, and the time schedule. In semantic models, ProductionOrder is a central hub class connected by ObjectProperties to Product, BOM, Routing, WorkCenter, Personnel, QualityInspection, and MaterialMovement individuals."
+    },
+    "confidence_notes": "Exact text; general specification."
+  },
+  {
+    "evidence_id": "E06",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 147,
+    "source_sentence_without_markdown_bold": "Production Order (Work Order) is a formal shop-floor document — in paper or electronic form — that authorizes the manufacture of a specified quantity of a product by a target completion date.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Operation** is a single step within a manufacturing routing. Each operation specifies the work center where it is performed, the standard setup time (time to prepare the work center), the standard run time per unit produced, and any tooling or resource requirements. Operations are the granular building blocks of production scheduling and cost accumulation.",
+      "source_line": "**Production Order (Work Order)** is a formal shop-floor document — in paper or electronic form — that authorizes the manufacture of a specified quantity of a product by a target completion date. It links together the material (what is being made), the BOM (what materials are needed), the routing (how it is made), the quantities, and the time schedule. In semantic models, ProductionOrder is a central hub class connected by ObjectProperties to Product, BOM, Routing, WorkCenter, Personnel, QualityInspection, and MaterialMovement individuals.",
+      "next_nonempty_line": "**Capacity Planning** is the process of determining the production capacity needed to meet demand, expressed in machine hours or labor hours per work center per planning period. It compares required capacity (derived from planned production orders and routing time standards) against available capacity (derived from shift calendars and work center ratings) to identify over- or under-load conditions."
+    },
+    "confidence_notes": "Exact text; parenthesized label occurs in this source context."
+  },
+  {
+    "evidence_id": "E07",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 149,
+    "source_sentence_without_markdown_bold": "Capacity Planning is the process of determining the production capacity needed to meet demand, expressed in machine hours or labor hours per work center per planning period.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Production Order (Work Order)** is a formal shop-floor document — in paper or electronic form — that authorizes the manufacture of a specified quantity of a product by a target completion date. It links together the material (what is being made), the BOM (what materials are needed), the routing (how it is made), the quantities, and the time schedule. In semantic models, ProductionOrder is a central hub class connected by ObjectProperties to Product, BOM, Routing, WorkCenter, Personnel, QualityInspection, and MaterialMovement individuals.",
+      "source_line": "**Capacity Planning** is the process of determining the production capacity needed to meet demand, expressed in machine hours or labor hours per work center per planning period. It compares required capacity (derived from planned production orders and routing time standards) against available capacity (derived from shift calendars and work center ratings) to identify over- or under-load conditions.",
+      "next_nonempty_line": "**Throughput** is the rate at which a manufacturing system produces finished goods, typically expressed in units per hour or units per shift. It is a primary operational performance metric and a key concept in Theory of Constraints (TOC) manufacturing philosophy, where the goal is to maximize throughput while reducing inventory and operating expense."
+    },
+    "confidence_notes": "Exact text; general definition."
+  },
+  {
+    "evidence_id": "E08",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 155,
+    "source_sentence_without_markdown_bold": "Stock Keeping Unit (SKU) is the lowest-level unique identifier for a product variant — the atomic unit of inventory management.",
+    "surrounding_context": {
+      "previous_nonempty_line": "## 2.3 Inventory and Material Terms",
+      "source_line": "**Stock Keeping Unit (SKU)** is the lowest-level unique identifier for a product variant — the atomic unit of inventory management. Every distinct product configuration, color, size, or packaging type receives its own SKU. In semantic models, SKU is typically a DatatypeProperty of the Product class, linked to a specific instance of a product variant individual.",
+      "next_nonempty_line": "**Raw Material** is unprocessed input material consumed in manufacturing operations but not itself a manufactured product. Raw materials sit at the deepest levels of the Bill of Materials hierarchy (Level N) and are typically sourced from external suppliers rather than produced internally."
+    },
+    "confidence_notes": "Exact text; scope of uniqueness needs review."
+  },
+  {
+    "evidence_id": "E09",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 157,
+    "source_sentence_without_markdown_bold": "Raw materials sit at the deepest levels of the Bill of Materials hierarchy (Level N) and are typically sourced from external suppliers rather than produced internally.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Stock Keeping Unit (SKU)** is the lowest-level unique identifier for a product variant — the atomic unit of inventory management. Every distinct product configuration, color, size, or packaging type receives its own SKU. In semantic models, SKU is typically a DatatypeProperty of the Product class, linked to a specific instance of a product variant individual.",
+      "source_line": "**Raw Material** is unprocessed input material consumed in manufacturing operations but not itself a manufactured product. Raw materials sit at the deepest levels of the Bill of Materials hierarchy (Level N) and are typically sourced from external suppliers rather than produced internally.",
+      "next_nonempty_line": "**Work in Process (WIP)** refers to partially manufactured goods currently in production — units for which manufacturing has begun but not yet completed. WIP represents accumulated material and labor value. Tracking WIP in semantic models requires linking ProductionOrder individuals to OperationCompletion events, accumulating cost and quantity at each operation step."
+    },
+    "confidence_notes": "Exact text; “typically” is not universal."
+  },
+  {
+    "evidence_id": "E10",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 159,
+    "source_sentence_without_markdown_bold": "Work in Process (WIP) refers to partially manufactured goods currently in production — units for which manufacturing has begun but not yet completed.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Raw Material** is unprocessed input material consumed in manufacturing operations but not itself a manufactured product. Raw materials sit at the deepest levels of the Bill of Materials hierarchy (Level N) and are typically sourced from external suppliers rather than produced internally.",
+      "source_line": "**Work in Process (WIP)** refers to partially manufactured goods currently in production — units for which manufacturing has begun but not yet completed. WIP represents accumulated material and labor value. Tracking WIP in semantic models requires linking ProductionOrder individuals to OperationCompletion events, accumulating cost and quantity at each operation step.",
+      "next_nonempty_line": "**Finished Goods** are completed products that have passed quality inspection and are ready for sale or distribution. In the BOM hierarchy, finished goods occupy Level 0 — the top of the product structure. Their inventory value includes all accumulated material, labor, and overhead costs from the manufacturing routing."
+    },
+    "confidence_notes": "Exact text; general definition."
+  },
+  {
+    "evidence_id": "E11",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 163,
+    "source_sentence_without_markdown_bold": "It is a quantity expressed in units and is a property of the Material–Location combination in ERP systems.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Finished Goods** are completed products that have passed quality inspection and are ready for sale or distribution. In the BOM hierarchy, finished goods occupy Level 0 — the top of the product structure. Their inventory value includes all accumulated material, labor, and overhead costs from the manufacturing routing.",
+      "source_line": "**Safety Stock** is buffer inventory maintained above the expected demand level to guard against demand uncertainty or supply variability. It is a quantity expressed in units and is a property of the Material–Location combination in ERP systems. In semantic models, safetyStockQuantity is a DatatypeProperty of the MaterialLocation class.",
+      "next_nonempty_line": "**Reorder Point** is the inventory level at which a replenishment order must be triggered to avoid stockout before the next replenishment arrives. It is calculated as: average demand during lead time plus safety stock. In MRP-managed items, the reorder point concept is superseded by time-phased net requirements calculations, but it remains relevant for min-max inventory management of C-class items."
+    },
+    "confidence_notes": "Exact text; “It” refers to safety stock in preceding sentence."
+  },
+  {
+    "evidence_id": "E12",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 165,
+    "source_sentence_without_markdown_bold": "It is calculated as: average demand during lead time plus safety stock.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Safety Stock** is buffer inventory maintained above the expected demand level to guard against demand uncertainty or supply variability. It is a quantity expressed in units and is a property of the Material–Location combination in ERP systems. In semantic models, safetyStockQuantity is a DatatypeProperty of the MaterialLocation class.",
+      "source_line": "**Reorder Point** is the inventory level at which a replenishment order must be triggered to avoid stockout before the next replenishment arrives. It is calculated as: average demand during lead time plus safety stock. In MRP-managed items, the reorder point concept is superseded by time-phased net requirements calculations, but it remains relevant for min-max inventory management of C-class items.",
+      "next_nonempty_line": "# Section 3 — Manufacturing Resource Planning (MRP / MRP II) Terminology"
+    },
+    "confidence_notes": "Exact text; “It” refers to reorder point in preceding sentence."
+  },
+  {
+    "evidence_id": "E13",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 171,
+    "source_sentence_without_markdown_bold": "It is, at its core, a deterministic calculation engine: given a Master Production Schedule (what finished goods to produce and when), a set of Bills of Materials (what components are needed), and current inventory levels, MRP calculates the time-phased quantities of each component that must be either manufactured or purchased to support the production plan.",
+    "surrounding_context": {
+      "previous_nonempty_line": "## 3.1 Origins and Evolution",
+      "source_line": "**Material Requirements Planning (MRP)** was developed in the 1960s and 1970s by Joseph Orlicky at IBM, building on earlier work by George Plossl and Oliver Wight. It is, at its core, a deterministic calculation engine: given a Master Production Schedule (what finished goods to produce and when), a set of Bills of Materials (what components are needed), and current inventory levels, MRP calculates the time-phased quantities of each component that must be either manufactured or purchased to support the production plan. MRP transformed manufacturing planning from intuition-based ordering to systematic, computer-driven calculation of dependent demand.",
+      "next_nonempty_line": "**MRP II (Manufacturing Resource Planning)** extended MRP beyond material requirements into the broader domain of manufacturing resource management. Coined and developed by Oliver Wight in the 1980s, MRP II added capacity requirements planning (to validate that the production plan is feasible given work center capacities), shop-floor control (to manage the execution of production orders), demand management (to coordinate customer orders and forecasts), and financial simulation (to project the cost of the production plan). MRP II was a closed-loop planning system: execution data fed back into planning, enabling continuous replanning as reality diverged from plan."
+    },
+    "confidence_notes": "Exact text; “It” refers to Material Requirements Planning."
+  },
+  {
+    "evidence_id": "E14",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 173,
+    "source_sentence_without_markdown_bold": "MRP II (Manufacturing Resource Planning) extended MRP beyond material requirements into the broader domain of manufacturing resource management.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Material Requirements Planning (MRP)** was developed in the 1960s and 1970s by Joseph Orlicky at IBM, building on earlier work by George Plossl and Oliver Wight. It is, at its core, a deterministic calculation engine: given a Master Production Schedule (what finished goods to produce and when), a set of Bills of Materials (what components are needed), and current inventory levels, MRP calculates the time-phased quantities of each component that must be either manufactured or purchased to support the production plan. MRP transformed manufacturing planning from intuition-based ordering to systematic, computer-driven calculation of dependent demand.",
+      "source_line": "**MRP II (Manufacturing Resource Planning)** extended MRP beyond material requirements into the broader domain of manufacturing resource management. Coined and developed by Oliver Wight in the 1980s, MRP II added capacity requirements planning (to validate that the production plan is feasible given work center capacities), shop-floor control (to manage the execution of production orders), demand management (to coordinate customer orders and forecasts), and financial simulation (to project the cost of the production plan). MRP II was a closed-loop planning system: execution data fed back into planning, enabling continuous replanning as reality diverged from plan.",
+      "next_nonempty_line": "The evolution to **ERP (Enterprise Resource Planning)** in the 1990s — most notably with the launch of SAP R/3 in 1992 — integrated MRP II with financial accounting, human resources, procurement, and sales into a single unified database architecture. ERP systems became the dominant paradigm for manufacturing management, encoding MRP II logic as core computational modules (Production Planning in SAP PP, Oracle Manufacturing) while adding enterprise-wide integration capabilities that MRP II standalone systems lacked."
+    },
+    "confidence_notes": "Exact text; distinguishes the two names in this context."
+  },
+  {
+    "evidence_id": "E15",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 181,
+    "source_sentence_without_markdown_bold": "Master Production Schedule (MPS) is the time-phased plan that states which end items (Level 0 BOM items — finished goods or major subassemblies) will be produced, in what quantities, and in which time periods.",
+    "surrounding_context": {
+      "previous_nonempty_line": "The following terms constitute the canonical vocabulary of MRP/MRP II as used in both ERP implementations and semantic manufacturing models. Each term is defined with its semantic modeling relevance noted where applicable.",
+      "source_line": "**Master Production Schedule (MPS)** is the time-phased plan that states which end items (Level 0 BOM items — finished goods or major subassemblies) will be produced, in what quantities, and in which time periods. The MPS is the primary driver of the entire MRP calculation chain. It represents the manufacturing enterprise's production commitment, balancing customer demand against capacity constraints and inventory targets.",
+      "next_nonempty_line": "| ◆ Semantic Modeling Note — Master Production Schedule In manufacturing ontologies, MasterProductionSchedule is an OWL class whose instances link to Product individuals (what is being scheduled), TimePeriod individuals (the planning bucket), and QuantityValue individuals (the planned production quantity). The MPS class sits at the apex of the planning hierarchy, with ObjectProperties connecting downward to PlannedOrder and ProductionOrder individuals generated by MRP explosion. Temporal properties (scheduleStart, scheduleEnd, bucketType) are DatatypeProperties on the MPS individual. |"
+    },
+    "confidence_notes": "Exact text; definition."
+  },
+  {
+    "evidence_id": "E16",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 186,
+    "source_sentence_without_markdown_bold": "Bill of Materials (BOM) is a hierarchical, structured list of all components, sub-assemblies, and raw materials required to manufacture one unit of a parent item, together with the quantities required per parent unit and the units of measure.",
+    "surrounding_context": {
+      "previous_nonempty_line": "| --- |",
+      "source_line": "**Bill of Materials (BOM)** is a hierarchical, structured list of all components, sub-assemblies, and raw materials required to manufacture one unit of a parent item, together with the quantities required per parent unit and the units of measure. The BOM is arguably the single most important data structure in discrete manufacturing — it is the foundation of MRP calculations, product costing, procurement planning, and quality traceability. A BOM may exist in multiple engineering variants (Engineering BOM or EBOM) and manufacturing-specific variants (Manufacturing BOM or MBOM), which may differ as the design is adapted for production efficiency.",
+      "next_nonempty_line": "**BOM Level** designates the position of a component within the BOM hierarchy. Level 0 is the finished product (the item being manufactured). Level 1 components are direct sub-assemblies or materials consumed directly in the final assembly operation. Deeper levels represent the sub-assemblies and components of those Level 1 items, recursing until raw materials are reached. BOM explosion — the recursive expansion of a BOM from Level 0 through all levels — is the central computational act of MRP."
+    },
+    "confidence_notes": "Exact text; generic structure, not a particular BOM."
+  },
+  {
+    "evidence_id": "E17",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 190,
+    "source_sentence_without_markdown_bold": "Net Requirements represent the uncovered demand for a component after accounting for on-hand inventory and scheduled receipts (open purchase orders and production orders).",
+    "surrounding_context": {
+      "previous_nonempty_line": "**BOM Level** designates the position of a component within the BOM hierarchy. Level 0 is the finished product (the item being manufactured). Level 1 components are direct sub-assemblies or materials consumed directly in the final assembly operation. Deeper levels represent the sub-assemblies and components of those Level 1 items, recursing until raw materials are reached. BOM explosion — the recursive expansion of a BOM from Level 0 through all levels — is the central computational act of MRP.",
+      "source_line": "**Net Requirements** represent the uncovered demand for a component after accounting for on-hand inventory and scheduled receipts (open purchase orders and production orders). MRP calculates net requirements for each component in each time bucket: Net Requirements = Gross Requirements − On-Hand Inventory − Scheduled Receipts. Net requirements drive planned order generation.",
+      "next_nonempty_line": "**Gross Requirements** represent the total demand for a component from all parent item production orders across all time buckets in the planning horizon. They are computed by multiplying planned quantities of each parent item by the BOM quantity of the component. Gross requirements represent demand before offsetting with available supply."
+    },
+    "confidence_notes": "Exact text; source's simplified description."
+  },
+  {
+    "evidence_id": "E18",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 192,
+    "source_sentence_without_markdown_bold": "They are computed by multiplying planned quantities of each parent item by the BOM quantity of the component.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Net Requirements** represent the uncovered demand for a component after accounting for on-hand inventory and scheduled receipts (open purchase orders and production orders). MRP calculates net requirements for each component in each time bucket: Net Requirements = Gross Requirements − On-Hand Inventory − Scheduled Receipts. Net requirements drive planned order generation.",
+      "source_line": "**Gross Requirements** represent the total demand for a component from all parent item production orders across all time buckets in the planning horizon. They are computed by multiplying planned quantities of each parent item by the BOM quantity of the component. Gross requirements represent demand before offsetting with available supply.",
+      "next_nonempty_line": "**Planned Order** is a system-generated recommendation — produced by the MRP engine — to manufacture or purchase a quantity of a component to satisfy net requirements. Planned orders are not yet released to the shop floor or to suppliers; they represent the MRP system's suggested action. They can be automatically converted to production orders or purchase orders, or reviewed and modified by planners before release."
+    },
+    "confidence_notes": "Exact text; “They” refers to gross requirements."
+  },
+  {
+    "evidence_id": "E19",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 194,
+    "source_sentence_without_markdown_bold": "Planned orders are not yet released to the shop floor or to suppliers; they represent the MRP system's suggested action.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Gross Requirements** represent the total demand for a component from all parent item production orders across all time buckets in the planning horizon. They are computed by multiplying planned quantities of each parent item by the BOM quantity of the component. Gross requirements represent demand before offsetting with available supply.",
+      "source_line": "**Planned Order** is a system-generated recommendation — produced by the MRP engine — to manufacture or purchase a quantity of a component to satisfy net requirements. Planned orders are not yet released to the shop floor or to suppliers; they represent the MRP system's suggested action. They can be automatically converted to production orders or purchase orders, or reviewed and modified by planners before release.",
+      "next_nonempty_line": "**Firm Planned Order (FPO)** is a planned order that has been manually reviewed and confirmed by a planner. Unlike a standard planned order, an FPO is protected from automatic rescheduling by the MRP engine — it will not be moved, split, or cancelled in the next MRP run without planner intervention. FPOs are used when planners need to override MRP's automatic logic to accommodate real-world constraints."
+    },
+    "confidence_notes": "Exact text; recommendation is not an executed order."
+  },
+  {
+    "evidence_id": "E20",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 196,
+    "source_sentence_without_markdown_bold": "Firm Planned Order (FPO) is a planned order that has been manually reviewed and confirmed by a planner.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Planned Order** is a system-generated recommendation — produced by the MRP engine — to manufacture or purchase a quantity of a component to satisfy net requirements. Planned orders are not yet released to the shop floor or to suppliers; they represent the MRP system's suggested action. They can be automatically converted to production orders or purchase orders, or reviewed and modified by planners before release.",
+      "source_line": "**Firm Planned Order (FPO)** is a planned order that has been manually reviewed and confirmed by a planner. Unlike a standard planned order, an FPO is protected from automatic rescheduling by the MRP engine — it will not be moved, split, or cancelled in the next MRP run without planner intervention. FPOs are used when planners need to override MRP's automatic logic to accommodate real-world constraints.",
+      "next_nonempty_line": "**Time Bucket** is the planning period unit over which MRP aggregates requirements and calculates planned orders. Common time buckets are one day (daily buckets) or one week (weekly buckets). The choice of time bucket affects planning precision: daily buckets provide finer control but generate larger data volumes; weekly buckets are computationally lighter but may obscure within-week demand patterns."
+    },
+    "confidence_notes": "Exact text; general definition."
+  },
+  {
+    "evidence_id": "E21",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 198,
+    "source_sentence_without_markdown_bold": "Time Bucket is the planning period unit over which MRP aggregates requirements and calculates planned orders.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Firm Planned Order (FPO)** is a planned order that has been manually reviewed and confirmed by a planner. Unlike a standard planned order, an FPO is protected from automatic rescheduling by the MRP engine — it will not be moved, split, or cancelled in the next MRP run without planner intervention. FPOs are used when planners need to override MRP's automatic logic to accommodate real-world constraints.",
+      "source_line": "**Time Bucket** is the planning period unit over which MRP aggregates requirements and calculates planned orders. Common time buckets are one day (daily buckets) or one week (weekly buckets). The choice of time bucket affects planning precision: daily buckets provide finer control but generate larger data volumes; weekly buckets are computationally lighter but may obscure within-week demand patterns.",
+      "next_nonempty_line": "**Lead Time** is the total elapsed time from when an order is placed to when the ordered goods are available for use. For manufactured items, lead time is composed of: queue time (time waiting before an operation begins), setup time (time to prepare the work center), run time (time to complete the production quantity), move time (time to transport between operations), and wait time (time after an operation before the next begins). For purchased items, lead time is the vendor's delivery time. Lead time is used by MRP to offset planned order release dates from their required dates."
+    },
+    "confidence_notes": "Exact text; general definition."
+  },
+  {
+    "evidence_id": "E22",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 200,
+    "source_sentence_without_markdown_bold": "For purchased items, lead time is the vendor's delivery time.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Time Bucket** is the planning period unit over which MRP aggregates requirements and calculates planned orders. Common time buckets are one day (daily buckets) or one week (weekly buckets). The choice of time bucket affects planning precision: daily buckets provide finer control but generate larger data volumes; weekly buckets are computationally lighter but may obscure within-week demand patterns.",
+      "source_line": "**Lead Time** is the total elapsed time from when an order is placed to when the ordered goods are available for use. For manufactured items, lead time is composed of: queue time (time waiting before an operation begins), setup time (time to prepare the work center), run time (time to complete the production quantity), move time (time to transport between operations), and wait time (time after an operation before the next begins). For purchased items, lead time is the vendor's delivery time. Lead time is used by MRP to offset planned order release dates from their required dates.",
+      "next_nonempty_line": "**Lot Sizing** is the rule that determines the quantity of a planned order. MRP does not inherently dictate lot sizes — various policies may be applied. Common lot-sizing methods include:"
+    },
+    "confidence_notes": "Exact text; not a measured delivery for a named supplier."
+  },
+  {
+    "evidence_id": "E23",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 202,
+    "source_sentence_without_markdown_bold": "Lot Sizing is the rule that determines the quantity of a planned order.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Lead Time** is the total elapsed time from when an order is placed to when the ordered goods are available for use. For manufactured items, lead time is composed of: queue time (time waiting before an operation begins), setup time (time to prepare the work center), run time (time to complete the production quantity), move time (time to transport between operations), and wait time (time after an operation before the next begins). For purchased items, lead time is the vendor's delivery time. Lead time is used by MRP to offset planned order release dates from their required dates.",
+      "source_line": "**Lot Sizing** is the rule that determines the quantity of a planned order. MRP does not inherently dictate lot sizes — various policies may be applied. Common lot-sizing methods include:",
+      "next_nonempty_line": "- **Lot-for-Lot (LFL):** Order exactly the net requirement quantity in each period; minimizes inventory but may maximize order frequency and setup costs."
+    },
+    "confidence_notes": "Exact text; no particular policy selected."
+  },
+  {
+    "evidence_id": "E24",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 210,
+    "source_sentence_without_markdown_bold": "It is a time-based buffer (measured in days), as distinct from safety stock, which is a quantity-based buffer.",
+    "surrounding_context": {
+      "previous_nonempty_line": "- **Minimum Order Quantity (MOQ):** Enforces a supplier-defined minimum purchase quantity.",
+      "source_line": "**Safety Lead Time** is an artificial buffer added to the calculated lead time to protect against supply uncertainty and variability in production or delivery times. It is a time-based buffer (measured in days), as distinct from safety stock, which is a quantity-based buffer. Both may be applied simultaneously for critical components.",
+      "next_nonempty_line": "**Pegging** is the ability to trace a component requirement back through the BOM hierarchy to the original demand source — typically a customer order or forecast. Pegging enables planners to understand the impact of supply problems: if a critical component is short, pegging identifies which customer orders are at risk. In semantic models, pegging is a natural capability of graph traversal: a SPARQL query traverses the hasPart and dependsOnOrder ObjectProperties upward through the BOM graph to the originating SalesOrder individual."
+    },
+    "confidence_notes": "Exact text; “It” refers to safety lead time."
+  },
+  {
+    "evidence_id": "E25",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 212,
+    "source_sentence_without_markdown_bold": "Pegging is the ability to trace a component requirement back through the BOM hierarchy to the original demand source — typically a customer order or forecast.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Safety Lead Time** is an artificial buffer added to the calculated lead time to protect against supply uncertainty and variability in production or delivery times. It is a time-based buffer (measured in days), as distinct from safety stock, which is a quantity-based buffer. Both may be applied simultaneously for critical components.",
+      "source_line": "**Pegging** is the ability to trace a component requirement back through the BOM hierarchy to the original demand source — typically a customer order or forecast. Pegging enables planners to understand the impact of supply problems: if a critical component is short, pegging identifies which customer orders are at risk. In semantic models, pegging is a natural capability of graph traversal: a SPARQL query traverses the hasPart and dependsOnOrder ObjectProperties upward through the BOM graph to the originating SalesOrder individual.",
+      "next_nonempty_line": "## 3.3 Capacity Planning Terms"
+    },
+    "confidence_notes": "Exact text; “typically” qualifies examples."
+  },
+  {
+    "evidence_id": "E26",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 216,
+    "source_sentence_without_markdown_bold": "Rough-Cut Capacity Planning (RCCP) is a high-level, pre-MRP check of whether the Master Production Schedule is feasible against key resource capacities — the production lines, machines, or labor pools that are most likely to constrain output.",
+    "surrounding_context": {
+      "previous_nonempty_line": "## 3.3 Capacity Planning Terms",
+      "source_line": "**Rough-Cut Capacity Planning (RCCP)** is a high-level, pre-MRP check of whether the Master Production Schedule is feasible against key resource capacities — the production lines, machines, or labor pools that are most likely to constrain output. RCCP uses simplified resource profiles (units of capacity consumed per MPS item) rather than detailed routings, enabling fast feasibility assessment before the computationally intensive full MRP explosion is executed.",
+      "next_nonempty_line": "**Capacity Requirements Planning (CRP)** is the detailed calculation of the capacity required at each work center in each time period, derived from MRP planned orders and their associated routings. CRP computes the load profile for each work center: the total machine-hours or labor-hours required, operation by operation, across all open and planned production orders. CRP output is compared against available capacity to identify bottlenecks."
+    },
+    "confidence_notes": "Exact text; general planning method."
+  },
+  {
+    "evidence_id": "E27",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 218,
+    "source_sentence_without_markdown_bold": "Capacity Requirements Planning (CRP) is the detailed calculation of the capacity required at each work center in each time period, derived from MRP planned orders and their associated routings.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Rough-Cut Capacity Planning (RCCP)** is a high-level, pre-MRP check of whether the Master Production Schedule is feasible against key resource capacities — the production lines, machines, or labor pools that are most likely to constrain output. RCCP uses simplified resource profiles (units of capacity consumed per MPS item) rather than detailed routings, enabling fast feasibility assessment before the computationally intensive full MRP explosion is executed.",
+      "source_line": "**Capacity Requirements Planning (CRP)** is the detailed calculation of the capacity required at each work center in each time period, derived from MRP planned orders and their associated routings. CRP computes the load profile for each work center: the total machine-hours or labor-hours required, operation by operation, across all open and planned production orders. CRP output is compared against available capacity to identify bottlenecks.",
+      "next_nonempty_line": "| ⚠ Key Distinction: RCCP vs. CRP RCCP operates at the MPS level — it checks whether the overall production plan is feasible before MRP runs. CRP operates at the MRP output level — it validates detailed work center loads after MRP has generated planned orders. RCCP is fast and approximate; CRP is slow and precise. In semantic models, both are expressed as capacity constraint classes with ObjectProperties linking to WorkCenter, TimePeriod, and ProductionPlan individuals — but with different levels of granularity in routing resolution. |"
+    },
+    "confidence_notes": "Exact text; general planning method."
+  },
+  {
+    "evidence_id": "E28",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 374,
+    "source_sentence_without_markdown_bold": "Overall Equipment Effectiveness (OEE) is the product of three component factors: Availability (actual runtime divided by planned production time), Performance (actual output rate divided by ideal output rate), and Quality (good units produced divided by total units started).",
+    "surrounding_context": {
+      "previous_nonempty_line": "The following metrics and dimensions constitute the core semantic layer vocabulary for manufacturing analytics. Each is defined as a semantic model concept with its graph structure described.",
+      "source_line": "**Overall Equipment Effectiveness (OEE)** is the product of three component factors: Availability (actual runtime divided by planned production time), Performance (actual output rate divided by ideal output rate), and Quality (good units produced divided by total units started). OEE is the primary KPI for manufacturing equipment productivity and benchmarks well against industry standards. In a semantic model, OEE is a *DerivedMeasure* class with ObjectProperties linking to Equipment, TimeInterval, ProductionRun, and three ComponentMeasure individuals (one each for Availability, Performance, and Quality). OEE calculation is expressed as a SPARQL CONSTRUCT query that aggregates SensorObservation and ProductionEvent individuals for a given equipment and time interval.",
+      "next_nonempty_line": "**On-Time Delivery (OTD)** is the percentage of customer orders delivered on or before the contractually committed delivery date. It is the primary external-facing supply chain performance metric. In the knowledge graph, OTD is computed by joining SalesOrder individuals (carrying the CommittedDeliveryDate DatatypeProperty) with ShipmentEvent individuals (carrying the ActualShipDate DatatypeProperty) via the *fulfilledBy* ObjectProperty."
+    },
+    "confidence_notes": "Exact text; definition, not an observed KPI value."
+  },
+  {
+    "evidence_id": "E29",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 415,
+    "source_sentence_without_markdown_bold": "The BOM and routing graphs are connected via an associatedOperation ObjectProperty linking each MaterialComponent individual (in the BOM graph) to the Operation individuals (in the routing graph) that consume it.",
+    "surrounding_context": {
+      "previous_nonempty_line": "## 8.3 Pattern 3 — Hybrid BOM + Routing Graph (Most Common in Practice)",
+      "source_line": "The Hybrid BOM + Routing Graph pattern is the most commonly implemented approach in industrial manufacturing semantic model projects. It models the Bill of Materials as an OWL-based component graph (using hasPart, quantityOf, and effectiveFrom properties) and models the routing as an ordered sequence of OWL Operation individuals linked by hasNextOperation ObjectProperties. The BOM and routing graphs are connected via an associatedOperation ObjectProperty linking each MaterialComponent individual (in the BOM graph) to the Operation individuals (in the routing graph) that consume it.",
+      "next_nonempty_line": "This pattern supports a rich set of downstream applications: production planning engines can use SPARQL queries to perform BOM explosion and generate material requirements; digital twin platforms link ProductionOrder individuals to both BOM and routing graphs for process simulation; root cause analysis traverses from QualityInspection events through the routing to the specific Operation and WorkCenter where the defect was produced, and from there through the BOM to the specific MaterialBatch consumed. A representative example: a \"Widget Assembly\" ProductionOrder individual links to a BOM graph (10 component individuals across 3 BOM levels) plus a Routing graph (5 Operation individuals across 3 WorkCenter individuals) plus a set of QualityInspection event individuals — all traversable in a single connected SPARQL query."
+    },
+    "confidence_notes": "Exact text; proposed modeling pattern."
+  },
+  {
+    "evidence_id": "E30",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 429,
+    "source_sentence_without_markdown_bold": "Each Supplier individual is linked to the MaterialClass individuals it supplies via the suppliesMaterial ObjectProperty, and to PurchasingContract individuals via the governedBy ObjectProperty.",
+    "surrounding_context": {
+      "previous_nonempty_line": "## 8.5 Pattern 5 — Supply Chain and Supplier Ontology",
+      "source_line": "The Supply Chain and Supplier Ontology pattern models the external supply chain as an extension of the internal manufacturing knowledge graph. Supplier, SupplierSite, PurchasingContract, and DeliveredMaterial are modeled as OWL classes. Each Supplier individual is linked to the MaterialClass individuals it supplies via the suppliesMaterial ObjectProperty, and to PurchasingContract individuals via the governedBy ObjectProperty. Delivery performance — actual lead times, on-time delivery rates, quality reject rates — is accumulated through DeliveryEvent individuals linked to PurchaseOrder individuals.",
+      "next_nonempty_line": "Supply risk classifications (geopolitical risk, financial stability risk, single-source risk, geographic concentration risk) are encoded as a SKOS taxonomy aligned to standard supply chain risk frameworks. External authority data is linked via owl:sameAs assertions to D&B (Dun & Bradstreet) company identifiers and GS1 GLN (Global Location Numbers), enabling enrichment from external data sources and multi-enterprise supply chain interoperability. This pattern is foundational for ESG (Environmental, Social, Governance) supply chain reporting — tracing carbon emissions, labor practices, and material provenance through the supplier graph."
+    },
+    "confidence_notes": "Exact text; describes a proposed schema, not a specific supply transaction."
+  },
+  {
+    "evidence_id": "E31",
+    "source_file": "Manufacturing and MRP Terminology in Semantic Models.md",
+    "source_sha256": "549f86459463923ce96e1c1cc9f6c6300c11b83116a0152af7aa2737b5441ec7",
+    "page_number": null,
+    "source_markdown_line": 443,
+    "source_sentence_without_markdown_bold": "Data Architect: responsible for ontology design, OWL class hierarchy decisions, property definitions, and alignment to external standards (ISA-95, eCl@ss, SKOS)",
+    "surrounding_context": {
+      "previous_nonempty_line": "Semantic models are strategic data assets that require structured governance to remain accurate, consistent, and aligned with evolving manufacturing operations. Effective governance assigns clear stewardship roles:",
+      "source_line": "- **Data Architect:** responsible for ontology design, OWL class hierarchy decisions, property definitions, and alignment to external standards (ISA-95, eCl@ss, SKOS)",
+      "next_nonempty_line": "- **Domain Subject Matter Expert (SME):** shop-floor engineers, process engineers, and production planners who validate that semantic model concepts accurately reflect operational reality"
+    },
+    "confidence_notes": "Exact list item, not a complete sentence; role description."
+  },
+  {
+    "evidence_id": "E32",
+    "source_file": "My MRP 501.001 Outline - Core - Parts.md",
+    "source_sha256": "01769cd28c9a2780c113749d0000e5684ba92406dc3a2454a74aa836661daea1",
+    "page_number": null,
+    "source_markdown_line": 5,
+    "source_sentence_without_markdown_bold": "In manufacturing, a detail part is a custom-engineered component manufactured specifically for a unique assembly, often made to order via custom drawings.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Detail and Standards (not raw material)**",
+      "source_line": "**In manufacturing, a detail part is a custom-engineered component manufactured specifically for a unique assembly, often made to order via custom drawings. Conversely, a standard part (or \"off-the-shelf\" item) is a pre-manufactured, interchangeable component (like bolts, bearings, or resistors) designed for general use, high-volume consistency, and ease of sourcing. [**[1](https://www.wileymetal.com/standard-vs-custom-fabrication-whats-the-right-choice-for-your-business/)**,**[ ](https://engineering.stackexchange.com/questions/21848/difference-between-a-part-and-a-detail#:~:text=Yes%2C%20sometimes%20a%20%22detail%22%20can%20refer%20to,as%20details%20as%20they%20typically%20are%20%22details%22.)[2](https://engineering.stackexchange.com/questions/21848/difference-between-a-part-and-a-detail#:~:text=Yes%2C%20sometimes%20a%20%22detail%22%20can%20refer%20to,as%20details%20as%20they%20typically%20are%20%22details%22.)**,**[ ](https://hontrel.com/blog/standard-and-custom-products-a-manufacturing-perspective/)[3](https://hontrel.com/blog/standard-and-custom-products-a-manufacturing-perspective/)**,**[ ](https://medium.com/@yoyike/the-difference-between-standard-parts-and-non-standard-parts-8b2649a91b80#:~:text=Non%2Dstandard%20parts%20are%20precision%20parts%20that%20are,and%20finish%20*%20Complex%20and%20variable%20process)[4](https://medium.com/@yoyike/the-difference-between-standard-parts-and-non-standard-parts-8b2649a91b80#:~:text=Non%2Dstandard%20parts%20are%20precision%20parts%20that%20are,and%20finish%20*%20Complex%20and%20variable%20process)**,**[ ](https://www.sciencedirect.com/topics/engineering/standard-part)[5](https://www.sciencedirect.com/topics/engineering/standard-part)**]**",
+      "next_nonempty_line": "**Key Differences:**"
+    },
+    "confidence_notes": "Exact text; source warns of possible AI mistakes."
+  },
+  {
+    "evidence_id": "E33",
+    "source_file": "My MRP 501.001 Outline - Core - Parts.md",
+    "source_sha256": "01769cd28c9a2780c113749d0000e5684ba92406dc3a2454a74aa836661daea1",
+    "page_number": null,
+    "source_markdown_line": 5,
+    "source_sentence_without_markdown_bold": "Conversely, a standard part (or \"off-the-shelf\" item) is a pre-manufactured, interchangeable component (like bolts, bearings, or resistors) designed for general use, high-volume consistency, and ease of sourcing.",
+    "surrounding_context": {
+      "previous_nonempty_line": "**Detail and Standards (not raw material)**",
+      "source_line": "**In manufacturing, a detail part is a custom-engineered component manufactured specifically for a unique assembly, often made to order via custom drawings. Conversely, a standard part (or \"off-the-shelf\" item) is a pre-manufactured, interchangeable component (like bolts, bearings, or resistors) designed for general use, high-volume consistency, and ease of sourcing. [**[1](https://www.wileymetal.com/standard-vs-custom-fabrication-whats-the-right-choice-for-your-business/)**,**[ ](https://engineering.stackexchange.com/questions/21848/difference-between-a-part-and-a-detail#:~:text=Yes%2C%20sometimes%20a%20%22detail%22%20can%20refer%20to,as%20details%20as%20they%20typically%20are%20%22details%22.)[2](https://engineering.stackexchange.com/questions/21848/difference-between-a-part-and-a-detail#:~:text=Yes%2C%20sometimes%20a%20%22detail%22%20can%20refer%20to,as%20details%20as%20they%20typically%20are%20%22details%22.)**,**[ ](https://hontrel.com/blog/standard-and-custom-products-a-manufacturing-perspective/)[3](https://hontrel.com/blog/standard-and-custom-products-a-manufacturing-perspective/)**,**[ ](https://medium.com/@yoyike/the-difference-between-standard-parts-and-non-standard-parts-8b2649a91b80#:~:text=Non%2Dstandard%20parts%20are%20precision%20parts%20that%20are,and%20finish%20*%20Complex%20and%20variable%20process)[4](https://medium.com/@yoyike/the-difference-between-standard-parts-and-non-standard-parts-8b2649a91b80#:~:text=Non%2Dstandard%20parts%20are%20precision%20parts%20that%20are,and%20finish%20*%20Complex%20and%20variable%20process)**,**[ ](https://www.sciencedirect.com/topics/engineering/standard-part)[5](https://www.sciencedirect.com/topics/engineering/standard-part)**]**",
+      "next_nonempty_line": "**Key Differences:**"
+    },
+    "confidence_notes": "Exact text; examples are not named inventory instances."
+  },
+  {
+    "evidence_id": "E34",
+    "source_file": "My MRP - Deterministic Semantic Architecture.md",
+    "source_sha256": "cb4613f3e37f5f19a3671569c3934cd6fdf536f4b8a30937f6bb9e7cfe87c1fb",
+    "page_number": null,
+    "source_markdown_line": 22,
+    "source_sentence_without_markdown_bold": "Identify relationships between entities (verbs, prepositions).",
+    "surrounding_context": {
+      "previous_nonempty_line": "  - Extract key phrases and domain-specific terms.",
+      "source_line": "  - Identify relationships between entities (verbs, prepositions).",
+      "next_nonempty_line": "## 3. Concept and Relationship Mapping"
+    },
+    "confidence_notes": "Exact list item; proposed workflow instruction."
+  },
+  {
+    "evidence_id": "E35",
+    "source_file": "My MRP - Deterministic Semantic Architecture.md",
+    "source_sha256": "cb4613f3e37f5f19a3671569c3934cd6fdf536f4b8a30937f6bb9e7cfe87c1fb",
+    "page_number": null,
+    "source_markdown_line": 45,
+    "source_sentence_without_markdown_bold": "Validate ontology consistency using reasoners.",
+    "surrounding_context": {
+      "previous_nonempty_line": "- **Actions:**",
+      "source_line": "  - Validate ontology consistency using reasoners.",
+      "next_nonempty_line": "  - Infer new knowledge through logical reasoning."
+    },
+    "confidence_notes": "Exact list item; validation has not been performed here."
+  }
+]
