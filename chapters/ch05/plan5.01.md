@@ -86,3 +86,35 @@ source counts do not sum to the number of distinct nodes. These biomedical
 datasets are a separate structured-data example from the archival diary.
 Verification of `REPRESENTS` links remains blocked until reconciliation can
 run; no normalized disease links were produced in the attempted run.
+
+## Exercise: Listing 5.9 graph projections
+
+[Listing 5.9](./listings/5.9%20-%20In-memory%20graphs%20creation) creates
+two named in-memory Neo4j Graph Data Science (GDS) projections:
+
+- `not-normalized` selects `MiRNA` and `Disease` nodes and their
+  `REGULATES` and `RELATED_TO` relationships.
+- `normalized` also selects `NormalizedDisease` nodes and `REPRESENTS`
+  relationships, allowing later analysis to account for reconciled names.
+
+A projection is a selected analytical view of the stored graph, not a copy
+of the entire database. Its node labels and relationship types determine what
+subsequent algorithms can see; selected nodes can be isolated. Projections
+consume memory and are separate from the persisted database.
+
+GDS is not installed in the current Neo4j instance, so the listing itself
+was not executed and no named GDS graph was created. Instead, a temporary
+read-only Python projection of the unreconciled graph produced:
+
+| Measure | Result |
+| --- | ---: |
+| Selected nodes | 5,046 |
+| `RELATED_TO` relationships | 18,732 |
+| `REGULATES` relationships | 99,681 |
+| Total directed relationships | 118,413 |
+| Selected nodes without a projected relationship | 31 |
+
+This confirms the selected graph's size, but does not measure GDS memory
+requirements or execute a GDS algorithm. The normalized projection and
+before-and-after comparison are skipped: the database has no normalized
+disease nodes or `REPRESENTS` links.
