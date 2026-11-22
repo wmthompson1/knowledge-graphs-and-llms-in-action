@@ -6,3 +6,22 @@ chapters/ch03/librarian/anchors.db
 kb/
 chapters/ch03/agent/kb_pack.json
 *:Zone.Identifier
+
+# Python environments and caches
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+
+# Large downloaded miRDB prediction artifacts
+dataset/hmdd/miRDB/miRDB_v6.0_prediction_result.txt
+dataset/hmdd/miRDB/miRDB_v6.0_prediction_result.txt.gz

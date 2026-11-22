@@ -118,3 +118,28 @@ This confirms the selected graph's size, but does not measure GDS memory
 requirements or execute a GDS algorithm. The normalized projection and
 before-and-after comparison are skipped: the database has no normalized
 disease nodes or `REPRESENTS` links.
+
+## Exercise: Listing 5.10 weakly connected components
+
+[Listing 5.10](./listings/5.10%20-%20WCC%20over%20the%20not%20normalized%20graph%20representation)
+groups nodes of the unreconciled projection into weakly connected components
+(WCCs). Two nodes belong to the same component if a path connects them when
+relationship direction is ignored. An isolated node forms a component of one.
+
+Because GDS is not installed, the listing was not run directly. A temporary
+read-only Python union-find calculation over the same selected nodes and
+relationships yielded:
+
+| Component size | Number of components |
+| ---: | ---: |
+| 5,010 | 1 |
+| 3 | 1 |
+| 2 | 1 |
+| 1 | 31 |
+
+The 34 components account for all 5,046 projected nodes; the largest contains
+99.29% of them. A large weakly connected component shows broad connectivity,
+not that every node has a directed path to every other node, nor that its
+relationships establish a causal or clinically validated connection.
+Counts depend on the selected labels and relationships; other database
+relationships were not included. No comparison to reconciled data was made.
